@@ -1,0 +1,52 @@
+- !<AssetImportMetadata/69673b5b-bb68-48fe-8a2e-da27775c5942>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 47598f34-fb8f-4d83-8bbe-ddffad1aab8c
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 47598f34-fb8f-4d83-8bbe-ddffad1aab8c
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> d4fe51e1-75b0-4cc8-9411-9009a00890f5
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/d4fe51e1-75b0-4cc8-9411-9009a00890f5>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 013391d2-647c-4274-adae-771f6614872f
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    clockwise: false
+    orbitSpeed: false
+    visibilityRoot: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - orbitSpeed: !<float> 18.000000
+      clockwise: true
+      visibilityRoot: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"group_start", "label":"Orbit"}'
+    - '// @input float orbitSpeed = 18 {"hint":"Orbit speed in degrees per second", "widget":"slider", "min":1, "max":120, "step":1}'
+    - '// @input bool clockwise = true {"hint":"When enabled, orbits clockwise (viewed from above)"}'
+    - '// @input SceneObject visibilityRoot {"hint":"Optional: pause orbit while this object is disabled (e.g. VisualParent)"}'
+    - '// @ui {"widget":"group_end"}'

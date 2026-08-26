@@ -1,0 +1,43 @@
+---
+description: 
+alwaysApply: true
+---
+
+# Editor Screenshots Context
+
+## Overview
+
+The `@editor-screenshots/` folder contains automatic screenshots of the **Lens Studio window**, captured every 10 seconds.
+
+## When to Check Screenshots
+
+**ALWAYS check the latest 2-3 screenshots when:**
+
+- User mentions something they're seeing in the UI
+- User reports unexpected visual behavior
+- User asks about layout, positioning, or appearance
+- User describes a problem that might be visible on screen
+- You need to understand the current state of Lens Studio's UI
+
+## How to Access Screenshots
+
+1. **List recent screenshots:** Use list_dir tool on `@editor-screenshots/`
+2. **Read the latest 2-3 images:** Screenshots are named `screenshot_YYYYMMDD_HHMMSS.png`
+3. **Analyze the screenshots:**
+   - Look for UI state, selected objects, inspector panels
+   - Check for error messages or warnings
+   - Verify scene hierarchy state
+   - Observe preview window contents
+
+## Integration with Existing Rules
+
+This complements the `.context/` folder reference system:
+
+- **`.context/`**: Reference documentation, packages, and sample code
+- **`@editor-screenshots/`**: Current visual state of the user's workspace
+
+Use both together for complete context:
+
+1. Check documentation/code in `.context/` for API patterns
+2. Check screenshots in `@editor-screenshots/` for current UI state
+3. Combine insights to provide accurate, context-aware assistance

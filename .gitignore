@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Optional: skip huge samples (recommended)
+.context/spectacles-samples/
+
+# Lens Studio (inside Equilibrium/)
+Equilibrium/Cache/**
+Equilibrium/PluginsUserPreferences/**
+Equilibrium/Support/**
+Equilibrium/BackUp/**
+Equilibrium/Workspaces/**
+Equilibrium/.vscode/
+Equilibrium/jsconfig.json
+Equilibrium/tsconfig.json
+Equilibrium/*.lock

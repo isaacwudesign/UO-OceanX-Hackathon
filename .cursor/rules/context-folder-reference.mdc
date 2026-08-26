@@ -1,0 +1,97 @@
+---
+description: 
+alwaysApply: true
+---
+
+# Context Folder Reference Guide
+
+## MANDATORY: Check Context Folder FIRST
+
+**Before answering ANY question about Lens Studio APIs, packages, components, or implementation patterns:**
+
+1. **ALWAYS search the `.context/` folder RECURSIVELY** for relevant examples, package code, and sample implementations
+   - Search through ALL subdirectories and nested folders
+   - Don't limit searches to top-level directories
+2. **Use `codebase_search` or `grep`** to find relevant TypeScript files, components, or patterns
+   - Both tools search recursively by default through all nested directories
+3. **Reference actual code** from these folders when providing guidance
+   - Include full file paths from nested directories
+
+---
+
+## Context Folder Structure
+
+### `.context/spectacles-docs/`
+
+**What it contains:** Official Spectacles documentation in MDX format
+
+These are the **complete documentation files** for Spectacles features, APIs, frameworks, and best practices.
+
+**Use these to:**
+
+- Find official documentation and explanations
+- See complete code examples for each API
+- Understand framework features and capabilities
+- Learn best practices and design guidelines
+
+---
+
+### `.context/spectacles-packages/`
+
+**What it contains:** Unpacked Lens Studio packages (`.lspkg` files unpacked for reference)
+
+**Use these to:**
+
+- Understand how official Snap packages are structured
+- See real TypeScript component patterns
+- Learn proper decorator usage (`@component`, `@input`, `@ui.*`)
+- Find correct import paths and API usage
+
+---
+
+### `.context/spectacles-samples/`
+
+**What it contains:** Complete, working Lens Studio project examples organized by topic
+
+**Use these to:**
+
+- Find complete, working examples of specific features
+- See how different APIs and packages work together
+- Understand project structure and organization
+- Reference similar implementations when building new features
+
+---
+
+## Workflow: Context-First Approach
+
+### When the user asks about a feature, API, or implementation:
+
+**Step 1: Search Context RECURSIVELY**
+Use codebase_search or grep to find relevant examples in:
+
+- .context/spectacles-docs/ (search ALL subdirectories)
+- .context/spectacles-packages/ (search ALL subdirectories)
+- .context/spectacles-samples/ (search ALL subdirectories)
+
+**Step 2: Reference Actual Code**
+
+- Provide file paths from the context folder
+- Show actual TypeScript implementations
+- Reference real decorator usage and patterns
+
+**Step 3: Adapt to User's Project**
+
+- Use the patterns found in context
+- Apply them to the user's specific needs
+- Maintain consistency with official Snap implementations
+
+---
+
+## Key Principles
+
+1. **Context is your primary learning resource** - these are official, working implementations
+2. **Never guess** - if you're unsure, search the context folder RECURSIVELY first
+3. **Search deeply** - always search through ALL nested subdirectories
+4. **Reference real code** - cite actual files with full paths
+5. **Maintain consistency** - use the same patterns and styles found in context
+6. **Trust the source** - context folder contains official Snap code, it's authoritative

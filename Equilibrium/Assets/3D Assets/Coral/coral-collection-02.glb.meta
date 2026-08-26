@@ -1,0 +1,240 @@
+- !<AssetImportMetadata/bcc5ea49-7013-46d0-a163-c0739118b75d>
+  ImportedAssetIds:
+    .hidden/Coral_13_15_16: !<reference> a4db3f07-f85f-47cf-a0bd-8c9ff59ee1ee
+    0fcb164b9c01d4a0: !<reference> 0aa7acdd-de64-47f7-b14f-6b4ee1e25ee7
+    274411cf0d5643d2: !<reference> a4b497d9-e269-4014-a8d4-c95065870eb6
+    338139007a6b5c61: !<reference> 4bf1c71e-ac6b-4cce-b961-457b6b9800c6
+    4a3e924fad0e2f27: !<reference> db072af7-ce52-4023-86d9-f1d837273010
+    4d7e53ab4a9e1e67: !<reference> 433dfd70-8fb7-42f3-abb1-293dfad73515
+    57e09e9d33847a79: !<reference> 7913e96c-79cc-47f4-81dd-798afb0e18f2
+    66780cf3a4dcb2b8: !<reference> 2d8ff495-581d-4592-af43-5d12d3765166
+    96f664b015fcd573: !<reference> e9e8bf31-7528-46ef-9049-563a86439eed
+    Materials/Coral_13_15_16: !<reference> 21d6819a-be83-4124-b194-8da37b48da50
+    Materials/Coral_13_15_16|Coral_13_15_16|GraphPassInfo: !<reference> 4f67ffa8-1ae5-4947-a046-71d3fe30ce2c
+    Materials/Material: !<reference> 350591fc-48d8-489a-a748-a9ff2f56d16e
+    Materials/Material|Material|GraphPassInfo: !<reference> 224225ad-ce74-4798-912a-d6cc98ceecd8
+    Meshes/Coral_13_1_Coral_13_15_16_0: !<reference> c27a08dd-8226-43ab-a8a6-42a9121a4410
+    Meshes/Cube: !<reference> 783046d2-dbe2-488b-bd84-f79c053085c2
+    Scene: !<reference> ee198771-d1da-4886-9257-ae7639ca3089
+    Textures/Image_3: !<reference> 64501042-12d1-4faf-9f0f-828758888181
+    a2f18864d38dac34: !<reference> 0090391a-3df0-46f3-bfaf-d765de9bfd53
+    afff5e92fadf6903: !<reference> da7456d3-aee4-4782-b703-4d757b9bd7b4
+    e48d07a54fe95807: !<reference> 9a77f1ee-c4de-418a-adf3-10e668a2e11a
+  ImporterName: GltfImporter
+  PrimaryAsset: !<reference> ee198771-d1da-4886-9257-ae7639ca3089
+  PackageType: LegacyPackage
+  LegacyPackagePolicy: CanBeUnpackedTransparent
+  ExtraData:
+    {}
+  AssetDataMap:
+    Scene: !<own> ff11a992-e0fd-4502-80d2-8eb81b47c581
+  DependentFiles:
+    []
+  ImporterSettings: !<GltfImporterSettings>
+    UseLegacyImporter: false
+    WithMaterials: true
+    NamingConvention: ByCategorySanitizeV2
+    PersistentIdGenerationAlgorithm: DescriptorBased
+    AnimationCurveOptimization: true
+    CustomAnimationSamplingRate: 30.000000
+    ImportVertexColor: true
+    ImportTangents: true
+    ImportMorphTargetAnimation: true
+    ConvertMetersToCentimeters: true
+    RegenerateTangents: false
+  CompressionSettings: !<ComplexCompressionSettings>
+    Presets:
+      None Compression: !<SingleCompressionSettings>
+        CompressorName: None
+        CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+      Performance Compression: !<SingleCompressionSettings>
+        CompressorName: Performance
+        CompressionSettings: !<TextureCompressionMipmapSettings>
+          Level: Medium
+          Mipmap: false
+    ExtensionMappings:
+      mesh: None Compression
+      png: Performance Compression
+    Overrides:
+      {}
+- !<RenderMeshVisual/0090391a-3df0-46f3-4050-289a216402ac>
+  PrefabRemaps:
+    []
+  Name: Coral_13_1_Coral_13_15_16_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 21d6819a-be83-4124-b194-8da37b48da50
+  Mesh: !<reference> c27a08dd-8226-43ab-a8a6-42a9121a4410
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/0aa7acdd-de64-47f7-4eb0-94b11e1da118>
+  PrefabRemaps:
+    []
+  Name: Coral_13_1
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 364.510895, y: -347.917236, z: -709.183838}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 10.270001, y: 10.270000, z: 10.270000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 9a77f1ee-c4de-418a-520c-ef19975d1ee5
+  Components:
+    []
+- !<SceneObject/2d8ff495-581d-4592-50bc-a2ed2c89ae99>
+  PrefabRemaps:
+    []
+  Name: coral-collection-02
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 100.000000, y: 100.000000, z: 100.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> db072af7-ce52-4023-7926-0e27c8d8cfef
+  Components:
+    []
+- !<RenderMeshVisual/433dfd70-8fb7-42f3-544e-d6c20528caea>
+  PrefabRemaps:
+    []
+  Name: Cube
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 350591fc-48d8-489a-a748-a9ff2f56d16e
+  Mesh: !<reference> 783046d2-dbe2-488b-bd84-f79c053085c2
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/4bf1c71e-ac6b-4cce-469e-ba849467ff39>
+  PrefabRemaps:
+    []
+  Name: RootNode
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000061, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 0aa7acdd-de64-47f7-4eb0-94b11e1da118
+  Components:
+    []
+- !<SceneObject/7913e96c-79cc-47f4-7e22-867504f1e70d>
+  PrefabRemaps:
+    []
+  Name: Coral4_3.fbx
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 90.000023, y: -0.000000, z: 0.000000}
+    Scale: {x: 0.010000, y: 0.010000, z: 0.010000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 4bf1c71e-ac6b-4cce-469e-ba849467ff39
+  Components:
+    []
+- !<SceneObject/9a77f1ee-c4de-418a-520c-ef19975d1ee5>
+  PrefabRemaps:
+    []
+  Name: Coral_13_1_Coral_13_15_16_0
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -42.803635, y: 0.000000, z: -32.625740}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 0090391a-3df0-46f3-4050-289a216402ac
+- !<SceneObject/a4b497d9-e269-4014-572b-36af9a78f149>
+  PrefabRemaps:
+    []
+  Name: Sketchfab_model
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.919124, z: 2.660487}
+    Rotation: {x: -90.000023, y: 0.000000, z: 0.000000}
+    Scale: {x: 0.258447, y: 0.258447, z: 0.258447}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 7913e96c-79cc-47f4-7e22-867504f1e70d
+  Components:
+    []
+- !<SceneObject/da7456d3-aee4-4782-48fc-b28a8464284b>
+  PrefabRemaps:
+    []
+  Name: Cube
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 433dfd70-8fb7-42f3-544e-d6c20528caea
+- !<SceneObject/db072af7-ce52-4023-7926-0e27c8d8cfef>
+  PrefabRemaps:
+    []
+  Name: Scenes
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> e9e8bf31-7528-46ef-6fb6-a9c579bc6112
+  Components:
+    []
+- !<SceneObject/e9e8bf31-7528-46ef-6fb6-a9c579bc6112>
+  PrefabRemaps:
+    []
+  Name: Scene
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> da7456d3-aee4-4782-48fc-b28a8464284b
+    - !<own> a4b497d9-e269-4014-572b-36af9a78f149
+  Components:
+    []
+- !<ObjectPrefabAssetData/ff11a992-e0fd-4502-80d2-8eb81b47c581>
+  Prototype: !<ObjectOwner/8ef64384-b6b2-4484-af68-1469c8e487a9>
+    PackagePath: ""
+    objects:
+      - !<own> 2d8ff495-581d-4592-50bc-a2ed2c89ae99

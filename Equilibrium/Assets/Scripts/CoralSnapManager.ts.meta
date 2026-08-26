@@ -1,0 +1,60 @@
+- !<AssetImportMetadata/9fb9bf6a-2906-4a9b-897d-c7d7c26f5892>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 294db7ff-3a2f-4c90-aa0f-29bfbebd2823
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 294db7ff-3a2f-4c90-aa0f-29bfbebd2823
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> b67e9b72-066a-4cc5-8150-3b5d5f026128
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/b67e9b72-066a-4cc5-8150-3b5d5f026128>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 30a4f685-5e24-4b72-94fe-2178482ce2bb
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    sceneManager: false
+    snapBubbleSfx: false
+    snapDistance: false
+    snapDuration: false
+    waterBase: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - waterBase: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      sceneManager: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      snapBubbleSfx: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      snapDistance: !<float> 30.000000
+      snapDuration: 0.350000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"group_start", "label":"References"}'
+    - '// @input SceneObject waterBase {"hint":"Parent object whose children are SnapPoint_1 … SnapPoint_4"}'
+    - '// @input AssignableType sceneManager {"hint":"Notifies SceneManager when snap slot occupancy changes"}'
+    - '// @input Component.AudioComponent snapBubbleSfx {"hint":"Bubble SFX played when a coral snaps onto a snap point"}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Snap Settings"}'
+    - '// @input float snapDistance = 12 {"hint":"Max world-space distance from a snap point to accept placement"}'
+    - '// @input float snapDuration = 0.35 {"hint":"Seconds for the coral to ease into the slot"}'
+    - '// @ui {"widget":"group_end"}'

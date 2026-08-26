@@ -1,0 +1,141 @@
+- !<AssetImportMetadata/a3f485db-6cc1-524c-ca48-f8702215cf5a>
+  ImportedAssetIds:
+    ObjectPrefab: !<reference> 4392b5a5-7043-4d7e-96c7-c56f7d68c427
+  ImporterName: ObjectPrefabImporter
+  PrimaryAsset: !<reference> 4392b5a5-7043-4d7e-96c7-c56f7d68c427
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    AssetLibraryId: lRqJuBDEsKe1dtratQSeW
+  AssetDataMap:
+    ObjectPrefab: !<own> 26efe658-3625-431c-bf91-f91bc373f84b
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ObjectPrefabAssetData/26efe658-3625-431c-bf91-f91bc373f84b>
+  Prototype: !<ObjectOwner/0f7092fb-9915-4685-8e65-64ac029cdfcd>
+    PackagePath: ""
+    objects:
+      - !<own> dd5b2e8f-21e0-4cd8-4344-8809881202b1
+- !<RenderMeshVisual/3ae44e96-f434-4f05-448f-218c0d6f36c3>
+  PrefabRemaps:
+    []
+  Name: component_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 59e6b382-c6fa-4226-80bf-1bf5147653ad
+  Mesh: !<reference> f3b0ff59-e94e-43a1-8c77-793d3db34cef
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+  RayTracing: !<RayTracingVisualSettings>
+    Reflections:
+      caster: false
+      receiver: false
+      receiverLayers: 1
+      planar:
+        enabled: false
+        roughHarden: -1.000000
+        roughCurve: -1.000000
+    GlobalIllumination:
+      caster: false
+      receiver: false
+      receiverLayers: 1
+    Shadows:
+      caster: false
+      receiver: false
+      receiverLayers: 1
+    Material: !<reference> 00000000-0000-0000-0000-000000000000
+    HideFromCamera: false
+- !<SceneObject/5f002c25-1b80-45ca-5e4e-28ff8094b5c7>
+  PrefabRemaps:
+    []
+  Name: Sphere
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> f8b51936-f441-4d91-4707-e75e6060b940
+- !<SceneObject/a98dfacb-fec5-49cc-6ac8-d6a29d3bcdc4>
+  PrefabRemaps:
+    []
+  Name: Suzanne.001
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: -90.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 5.000000, y: 5.000000, z: 5.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 3ae44e96-f434-4f05-448f-218c0d6f36c3
+- !<SceneObject/caec3042-593e-41b2-6b51-f69bf7f9b999>
+  PrefabRemaps:
+    []
+  Name: Chujang
+  Enabled: false
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> a98dfacb-fec5-49cc-6ac8-d6a29d3bcdc4
+  Components:
+    []
+- !<SceneObject/dd5b2e8f-21e0-4cd8-4344-8809881202b1>
+  PrefabRemaps:
+    []
+  Name: Dissolve Shader Examples__PLACE_IN_SCENE
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: -5.102005}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 5f002c25-1b80-45ca-5e4e-28ff8094b5c7
+    - !<own> caec3042-593e-41b2-6b51-f69bf7f9b999
+  Components:
+    []
+- !<RenderMeshVisual/f8b51936-f441-4d91-4707-e75e6060b940>
+  PrefabRemaps:
+    []
+  Name: Render Mesh Visual
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 7494578e-2eeb-4d91-88fb-661d6fdebffb
+  Mesh: !<reference> 54bd9ba8-823a-4305-a16e-6ab0c28d8b47
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}

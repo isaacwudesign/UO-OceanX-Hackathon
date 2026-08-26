@@ -1,0 +1,78 @@
+- !<AssetImportMetadata/9ac1207b-d652-4637-8b92-a4f6852c25cc>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 02a84204-1fd3-46aa-a3e5-6bc9885889a5
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 02a84204-1fd3-46aa-a3e5-6bc9885889a5
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 0f5155d4-1a21-4126-b94f-98472d570bf2
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/0f5155d4-1a21-4126-b94f-98472d570bf2>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 126b4198-bd05-42e3-818d-cea3daa8bca6
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    afterPlacingAudio: false
+    clownfishCircling: false
+    introFrame: false
+    placedVisuals: false
+    placingAudio: false
+    platform: false
+    surfacePlacement: false
+    temperatureExplainAudio: false
+    temperatureSlider: false
+    temperatureWater: false
+    welcomeAudio: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - introFrame: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      surfacePlacement: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      placedVisuals: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      clownfishCircling: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      platform: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      temperatureSlider: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      temperatureWater: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
+      welcomeAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      placingAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      afterPlacingAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      temperatureExplainAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"group_start", "label":"Scene Flow"}'
+    - '// @input SceneObject introFrame {"hint":"Intro UI frame shown at lens start"}'
+    - '// @input AssignableType surfacePlacement {"hint":"SurfacePlacement Example component (autoStart should be off)"}'
+    - '// @input SceneObject placedVisuals {"hint":"Content root enabled after successful placement (VisualParent)"}'
+    - '// @input SceneObject clownfishCircling {"hint":"Clownfish orbit group, hidden until all corals are placed"}'
+    - '// @input SceneObject platform {"hint":"Placement surface hidden after After Placing VO finishes"}'
+    - '// @input SceneObject temperatureSlider {"hint":"Temperature UI shown after After Placing VO finishes"}'
+    - '// @input AssignableType_1 temperatureWater {"hint":"Drives WaterBase color from the temperature slider"}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Audio"}'
+    - '// @input Component.AudioComponent welcomeAudio {"hint":"Welcome voice-over played during intro"}'
+    - '// @input Component.AudioComponent placingAudio {"hint":"Instruction VO played after the user places the surface"}'
+    - '// @input Component.AudioComponent afterPlacingAudio {"hint":"VO played once all four corals are placed on snap points"}'
+    - '// @input Component.AudioComponent temperatureExplainAudio {"hint":"VO played when the temperature slider appears"}'
+    - '// @ui {"widget":"group_end"}'

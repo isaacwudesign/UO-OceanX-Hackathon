@@ -1,0 +1,69 @@
+- !<AssetImportMetadata/9b5a0c43-1d6e-4f80-c134-5e0f7a9b1c23>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 7f3e8a21-9b4c-4d6e-af12-3c8d5e7f9a01
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 7f3e8a21-9b4c-4d6e-af12-3c8d5e7f9a01
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 8a4f9b32-0c5d-4e7f-b023-4d9e6f8a0b12
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/8a4f9b32-0c5d-4e7f-b023-4d9e6f8a0b12>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 0c6b1d54-2e7f-4a91-d245-6f1a8b0c2d34
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    clownfishCircling: false
+    endingAudio: false
+    middleTolerance: false
+    temperatureSlider: false
+    temperatureSliderObject: false
+    temperatureSolveVo: false
+    waterMesh: false
+    welldoneSfx: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - waterMesh: !<reference.RenderMeshVisual> 00000000-0000-0000-0000-000000000000
+      temperatureSliderObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      clownfishCircling: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      temperatureSlider: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      welldoneSfx: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      temperatureSolveVo: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      middleTolerance: 0.080000
+      endingAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"group_start", "label":"References"}'
+    - '// @input Component.RenderMeshVisual waterMesh {"hint":"WaterBase mesh whose material color will be driven by the slider"}'
+    - '// @input SceneObject temperatureSliderObject {"hint":"Scene object that has the UIKit Slider (TemperatureSliderControl)"}'
+    - '// @input SceneObject clownfishCircling {"hint":"Clownfish orbit group shown again when temperature is corrected"}'
+    - '// @input SceneObject temperatureSlider {"hint":"TempatureSlider root hidden after the solve VO finishes"}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Correct Temperature Feedback"}'
+    - '// @input Component.AudioComponent welldoneSfx {"hint":"SFX played when the slider reaches the middle (correct) range"}'
+    - '// @input Component.AudioComponent temperatureSolveVo {"hint":"VO played immediately after WelldoneSFX finishes"}'
+    - '// @input float middleTolerance = 0.15 {"hint":"How close to center (0.5) counts as correct, e.g. 0.15 = 0.35–0.65", "widget":"slider", "min":0.05, "max":0.25, "step":0.01}'
+    - '// @input Component.AudioComponent endingAudio {"hint":"Ending VO played after TempatureIssueSolveVO finishes"}'
+    - '// @ui {"widget":"group_end"}'

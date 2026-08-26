@@ -1,0 +1,50 @@
+- !<AssetImportMetadata/8494717b-347d-4e83-9699-3d84d80182d8>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 2fbe1828-007e-4ee7-8827-c86122cfa7a8
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 2fbe1828-007e-4ee7-8827-c86122cfa7a8
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> 3b27dde4-dc7b-44e8-bd42-34484bfcae1c
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/3b27dde4-dc7b-44e8-bd42-34484bfcae1c>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 16e48394-9510-4621-a7e1-62aae9888043
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    coralHolder: false
+    manipulation: false
+    snapManager: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - snapManager: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
+      manipulation: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
+      coralHolder: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @input AssignableType snapManager {"hint":"Shared manager on WaterBase"}'
+    - '// @input AssignableType_1 manipulation {"hint":"Drag component on this coral"}'
+    - '// @input SceneObject coralHolder {"hint":"Re-parent here when picked up from a snap point (e.g. VisualParent — not Platform)"}'
