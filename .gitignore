@@ -3,6 +3,7 @@
 
 # Optional: skip huge samples (recommended)
 .context/spectacles-samples/
+.context/spectacles-package/
 
 # Lens Studio (inside Equilibrium/)
 Equilibrium/Cache/**
