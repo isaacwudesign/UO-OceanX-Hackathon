@@ -1,0 +1,96 @@
+- !<ObjectPrefab/8c196b7e-94c0-4a66-904b-ef685b1a312d>
+  PackagePath: ""
+  objects:
+    - !<own> d2efb886-173d-4105-85e7-167ac81949e3
+  LazyLoading: false
+  RetainAssets: true
+- !<RenderMeshVisual/6a237162-8f76-476b-928e-bad0588cd54a>
+  PrefabRemaps:
+    []
+  Name: component_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> ff01f935-36fd-4e0b-adf7-34074a80eb9d
+  Mesh: !<reference> 8dfbf91f-2203-4dbe-9906-4c73bfcc29c8
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/d2efb886-173d-4105-85e7-167ac81949e3>
+  PrefabRemaps:
+    - 6a237162-8f76-476b-928e-bad0588cd54a: 6a237162-8f76-476b-6d71-452fa7732ab5
+    - d2efb886-173d-4105-85e7-167ac81949e3: d2efb886-173d-4105-7a18-e98537e6b61c
+    - e80e0662-a04b-4137-a102-9d31b55bc0f2: e80e0662-a04b-4137-5efd-62ce4aa43f0d
+    - e81829d8-3e4a-4c99-a335-b827f1046825: e81829d8-3e4a-4c99-5cca-47d80efb97da
+    - ed00d01d-2c1a-414f-a2dd-b8a3ce964a15: ed00d01d-2c1a-414f-5d22-475c3169b5ea
+  Name: TouchTank
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> e81829d8-3e4a-4c99-a335-b827f1046825
+    - !<own> e80e0662-a04b-4137-a102-9d31b55bc0f2
+  Components:
+    []
+- !<SceneObject/e80e0662-a04b-4137-a102-9d31b55bc0f2>
+  PrefabRemaps:
+    []
+  Name: Tank_Lid
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> ed00d01d-2c1a-414f-a2dd-b8a3ce964a15
+- !<SceneObject/e81829d8-3e4a-4c99-a335-b827f1046825>
+  PrefabRemaps:
+    []
+  Name: Tank_Body
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: -30.000002, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 6a237162-8f76-476b-928e-bad0588cd54a
+- !<RenderMeshVisual/ed00d01d-2c1a-414f-a2dd-b8a3ce964a15>
+  PrefabRemaps:
+    []
+  Name: component_1
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> ff01f935-36fd-4e0b-adf7-34074a80eb9d
+  Mesh: !<reference> e5a581b3-001e-445a-9044-6485c09e9d5a
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}

@@ -26,14 +26,20 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
+    bleachedImage0: false
+    bleachedImage3: false
+    bleachedImage4: false
     clownfishCircling: false
-    endingAudio: false
+    coralReefs: false
     middleTolerance: false
+    tankGlass: false
+    temperatureFactsFrame: false
+    temperatureKnowledgeFrame: false
     temperatureSlider: false
     temperatureSliderObject: false
     temperatureSolveVo: false
-    waterMesh: false
     welldoneSfx: false
+    welldoneSfxTrack: false
   ScriptTypesHidden:
     {}
   ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
@@ -43,27 +49,41 @@
   Attachments:
     []
   DefaultScriptInputs:
-    - waterMesh: !<reference.RenderMeshVisual> 00000000-0000-0000-0000-000000000000
+    - tankGlass: !<reference.RenderMeshVisual> 00000000-0000-0000-0000-000000000000
       temperatureSliderObject: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       clownfishCircling: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       temperatureSlider: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      temperatureFactsFrame: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      temperatureKnowledgeFrame: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      coralReefs: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      bleachedImage0: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      bleachedImage3: !<reference.Texture> 00000000-0000-0000-0000-000000000000
+      bleachedImage4: !<reference.Texture> 00000000-0000-0000-0000-000000000000
       welldoneSfx: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      welldoneSfxTrack: !<reference.AudioTrackAsset> 00000000-0000-0000-0000-000000000000
       temperatureSolveVo: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
       middleTolerance: 0.080000
-      endingAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
       {}
   InputLines:
     - '// @ui {"widget":"group_start", "label":"References"}'
-    - '// @input Component.RenderMeshVisual waterMesh {"hint":"WaterBase mesh whose material color will be driven by the slider"}'
-    - '// @input SceneObject temperatureSliderObject {"hint":"Scene object that has the UIKit Slider (TemperatureSliderControl)"}'
+    - '// @input Component.RenderMeshVisual tankGlass {"hint":"Tank_Body RenderMeshVisual (TankGlass). Do not assign Ocean_Water_Wave."}'
+    - '// @input SceneObject temperatureSliderObject {"hint":"Optional: scene object that has the UIKit Slider"}'
     - '// @input SceneObject clownfishCircling {"hint":"Clownfish orbit group shown again when temperature is corrected"}'
-    - '// @input SceneObject temperatureSlider {"hint":"TempatureSlider root hidden after the solve VO finishes"}'
+    - '// @input SceneObject temperatureSlider {"hint":"Optional: slider root hidden after the solve VO finishes"}'
+    - '// @input SceneObject temperatureFactsFrame {"hint":"Facts panel shown and hidden with the temperature slider"}'
+    - '// @input SceneObject temperatureKnowledgeFrame {"hint":"Knowledge panel shown and hidden with the temperature slider"}'
+    - '// @input SceneObject coralReefs {"hint":"Coral_Reefs group under Coral_Platform. All reef meshes under it bleach with the slider."}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Bleached Coral Albedo"}'
+    - '// @input Asset.Texture bleachedImage0 {"hint":"Desaturated Image_0 (Corals_2_7_10_12 albedo)"}'
+    - '// @input Asset.Texture bleachedImage3 {"hint":"Desaturated Image_3 (Coral_13_15_16 albedo)"}'
+    - '// @input Asset.Texture bleachedImage4 {"hint":"Desaturated Image_4 (Corals_1_5_8_9 albedo)"}'
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"group_start", "label":"Correct Temperature Feedback"}'
     - '// @input Component.AudioComponent welldoneSfx {"hint":"SFX played when the slider reaches the middle (correct) range"}'
+    - '// @input Asset.AudioTrackAsset welldoneSfxTrack {"hint":"WelldoneSFX.mp3 assigned onto welldoneSfx at runtime if the Audio slot is empty."}'
     - '// @input Component.AudioComponent temperatureSolveVo {"hint":"VO played immediately after WelldoneSFX finishes"}'
     - '// @input float middleTolerance = 0.15 {"hint":"How close to center (0.5) counts as correct, e.g. 0.15 = 0.35–0.65", "widget":"slider", "min":0.05, "max":0.25, "step":0.01}'
-    - '// @input Component.AudioComponent endingAudio {"hint":"Ending VO played after TempatureIssueSolveVO finishes"}'
     - '// @ui {"widget":"group_end"}'

@@ -1,6 +1,8 @@
 /**
- * Per-coral snap behavior. Hooks SIK InteractableManipulation release to CoralSnapManager.
+ * Per-coral grab/release. Tank floor-stick first; otherwise ease back to the
+ * platform home pose so a missed drop does not hang in the air.
  */
+import animate, {CancelSet} from "SpectaclesInteractionKit.lspkg/Utils/animate"
 import {Interactable} from "SpectaclesInteractionKit.lspkg/Components/Interaction/Interactable/Interactable"
 import {InteractableManipulation} from "SpectaclesInteractionKit.lspkg/Components/Interaction/InteractableManipulation/InteractableManipulation"
 import {CoralSnapManager} from "./CoralSnapManager"
@@ -16,17 +18,30 @@ export class CoralSnapPiece extends BaseScriptComponent {
   manipulation: InteractableManipulation
 
   @input
-  @hint("Re-parent here when picked up from a snap point (e.g. VisualParent — not Platform)")
+  @hint("Re-parent here when picked up from the tank floor (e.g. VisualParent — not Platform)")
   coralHolder: SceneObject
+
+  @ui.group_start("Platform Home")
+  @input
+  @hint("If the drop misses the tank, always ease back to this coral's platform spot (no floating).")
+  alwaysReturnHome: boolean = true
+
+  @input
+  @hint("World-space range to snap home when Always Return Home is OFF. Ignored when that is ON.")
+  homeSnapDistance: number = 80
+  @ui.group_end
 
   private sceneObj: SceneObject
   private interactable: Interactable | null = null
   private isSnapped = false
   private interactionLocked = false
+  private homeParent: SceneObject | null = null
+  private homeLocalPosition: vec3 = vec3.zero()
   private homeLocalRotation: quat = quat.quatIdentity()
   private homeLocalScale: vec3 = new vec3(1, 1, 1)
   private homeWorldRotation: quat = quat.quatIdentity()
   private homeWorldScale: vec3 = new vec3(1, 1, 1)
+  private homeTweenCancel = new CancelSet()
 
   onAwake(): void {
     this.sceneObj = this.getSceneObject()
@@ -53,6 +68,8 @@ export class CoralSnapPiece extends BaseScriptComponent {
 
   private cacheHomeTransform(): void {
     const transform = this.sceneObj.getTransform()
+    this.homeParent = this.sceneObj.getParent()
+    this.homeLocalPosition = transform.getLocalPosition()
     this.homeLocalRotation = transform.getLocalRotation()
     this.homeLocalScale = transform.getLocalScale()
     this.homeWorldRotation = transform.getWorldRotation()
@@ -102,11 +119,17 @@ export class CoralSnapPiece extends BaseScriptComponent {
   }
 
   private onGrab(): void {
-    if (this.interactionLocked || !this.isSnapped) {
+    if (this.interactionLocked) {
       return
     }
 
-    this.snapManager?.cancelActiveSnapTween()
+    this.homeTweenCancel()
+    this.snapManager?.cancelActiveSnapTween(this.sceneObj)
+
+    if (!this.isSnapped) {
+      return
+    }
+
     this.snapManager?.releaseCoral(this.sceneObj)
     this.isSnapped = false
 
@@ -133,10 +156,101 @@ export class CoralSnapPiece extends BaseScriptComponent {
       this.homeWorldRotation,
       this.homeWorldScale,
       () => {
-      this.isSnapped = true
-    })
+        this.isSnapped = true
+      }
+    )
     if (snapped) {
       this.isSnapped = true
+      return
     }
+
+    this.tryReturnHome()
+  }
+
+  private tryReturnHome(): void {
+    if (!this.homeParent) {
+      return
+    }
+
+    const homeWorldPos = this.getHomeWorldPosition()
+    if (!this.alwaysReturnHome) {
+      const releasePos = this.sceneObj.getTransform().getWorldPosition()
+      if (releasePos.distance(homeWorldPos) > this.homeSnapDistance) {
+        return
+      }
+    }
+
+    const coralTransform = this.sceneObj.getTransform()
+    const startPos = coralTransform.getWorldPosition()
+    const startRot = coralTransform.getWorldRotation()
+    const startScale = coralTransform.getWorldScale()
+    const targetRot = this.getHomeWorldRotationLive()
+    const targetScale = this.getHomeWorldScaleLive()
+    const duration = this.snapManager ? this.snapManager.snapDuration : 0.35
+
+    this.homeTweenCancel()
+    animate({
+      duration: duration,
+      easing: "ease-out-cubic",
+      cancelSet: this.homeTweenCancel,
+      update: (t: number) => {
+        coralTransform.setWorldPosition(vec3.lerp(startPos, homeWorldPos, t))
+        coralTransform.setWorldRotation(quat.slerp(startRot, targetRot, t))
+        coralTransform.setWorldScale(
+          new vec3(
+            startScale.x + (targetScale.x - startScale.x) * t,
+            startScale.y + (targetScale.y - startScale.y) * t,
+            startScale.z + (targetScale.z - startScale.z) * t
+          )
+        )
+      },
+      ended: () => {
+        this.finalizeHome()
+      },
+    })
+  }
+
+  private finalizeHome(): void {
+    if (!this.homeParent) {
+      return
+    }
+    this.sceneObj.setParent(this.homeParent)
+    const transform = this.sceneObj.getTransform()
+    transform.setLocalPosition(this.homeLocalPosition)
+    transform.setLocalRotation(this.homeLocalRotation)
+    transform.setLocalScale(this.homeLocalScale)
+    this.isSnapped = false
+  }
+
+  private getHomeWorldPosition(): vec3 {
+    if (!this.homeParent) {
+      return this.homeLocalPosition
+    }
+    return this.homeParent
+      .getTransform()
+      .getWorldTransform()
+      .multiplyPoint(this.homeLocalPosition)
+  }
+
+  private getHomeWorldRotationLive(): quat {
+    if (!this.homeParent) {
+      return this.homeLocalRotation
+    }
+    return this.homeParent
+      .getTransform()
+      .getWorldRotation()
+      .multiply(this.homeLocalRotation)
+  }
+
+  private getHomeWorldScaleLive(): vec3 {
+    if (!this.homeParent) {
+      return this.homeLocalScale
+    }
+    const parentScale = this.homeParent.getTransform().getWorldScale()
+    return new vec3(
+      parentScale.x * this.homeLocalScale.x,
+      parentScale.y * this.homeLocalScale.y,
+      parentScale.z * this.homeLocalScale.z
+    )
   }
 }

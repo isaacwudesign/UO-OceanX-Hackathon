@@ -1,0 +1,356 @@
+- !<ObjectPrefab/b6b28a6c-287a-4226-a92f-a9ee79c67864>
+  PackagePath: ""
+  objects:
+    - !<own> 7b82664e-fdb4-408e-8177-0f9874405126
+  LazyLoading: false
+  RetainAssets: true
+- !<SceneObject/01b04e90-6a87-4627-8a7c-7f195c6357d0>
+  PrefabRemaps:
+    []
+  Name: Coral_4
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> b7aa77ab-d1c3-44bf-a94d-7f3fbb8bdfe9
+- !<SceneObject/0a061cf5-97fa-43b3-98d1-630caf817e95>
+  PrefabRemaps:
+    []
+  Name: Scenes
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 7c7462f5-de59-45c7-9323-72746400b446
+  Components:
+    []
+- !<SceneObject/21d2e9ac-7910-4483-abbd-f41063a7a7e7>
+  PrefabRemaps:
+    []
+  Name: Coral_5
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 8a3beadf-de66-4234-950f-ad2d1a068357
+- !<SceneObject/27375fb6-0fe5-47cf-b215-8212650c3994>
+  PrefabRemaps:
+    []
+  Name: Coral_6
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 8f428dc0-1be7-4468-ac5d-f83e74114875
+- !<SceneObject/2ff2a291-ce90-4f3a-8ed8-67d973703d37>
+  PrefabRemaps:
+    []
+  Name: Coral_1
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 45511d08-225f-40a5-9db4-b8795428f84b
+- !<SceneObject/3d34046d-12e6-4767-be91-e3c8ff00ae5c>
+  PrefabRemaps:
+    []
+  Name: Coral_2
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 9aec39ad-4354-4921-9b1f-0f6d59693950
+- !<RenderMeshVisual/45511d08-225f-40a5-9db4-b8795428f84b>
+  PrefabRemaps:
+    []
+  Name: Coral1_1_Corals_1_5_8_9_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 93cefe18-1362-4dcb-9a5d-94458c1bc97a
+  Mesh: !<reference> 56031538-1b81-4b2e-b2a0-ebab88e0a9aa
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<RenderMeshVisual/6b9a23e2-6015-436b-8485-dc8bc25d5ecf>
+  PrefabRemaps:
+    []
+  Name: Coral5_1_Corals_2_7_10_12_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 21284136-e518-485e-bbc7-2233f166ee96
+  Mesh: !<reference> 4b19652f-2723-4a4d-bbc9-3c05bcb5cf2e
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/778956fd-f4bf-4bfe-a7c1-128b59a465b3>
+  PrefabRemaps:
+    []
+  Name: Coral_7
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 7941cc28-f1b8-464c-aac4-292e52699821
+- !<RenderMeshVisual/7941cc28-f1b8-464c-aac4-292e52699821>
+  PrefabRemaps:
+    []
+  Name: Coral_15_2_Coral_13_15_16_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> cd939e86-198e-42ff-aef7-1aaca2295f18
+  Mesh: !<reference> af418aaf-1330-41d3-893d-d40bfff3f15c
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/7b82664e-fdb4-408e-8177-0f9874405126>
+  PrefabRemaps:
+    - 01b04e90-6a87-4627-8a7c-7f195c6357d0: 01b04e90-6a87-4627-7583-80e6a39ca82f
+    - 0a061cf5-97fa-43b3-98d1-630caf817e95: 0a061cf5-97fa-43b3-672e-9cf3507e816a
+    - 21d2e9ac-7910-4483-abbd-f41063a7a7e7: 21d2e9ac-7910-4483-5442-0bef9c585818
+    - 27375fb6-0fe5-47cf-b215-8212650c3994: 27375fb6-0fe5-47cf-4dea-7ded9af3c66b
+    - 2ff2a291-ce90-4f3a-8ed8-67d973703d37: 2ff2a291-ce90-4f3a-7127-98268c8fc2c8
+    - 3d34046d-12e6-4767-be91-e3c8ff00ae5c: 3d34046d-12e6-4767-416e-1c3700ff51a3
+    - 45511d08-225f-40a5-9db4-b8795428f84b: 45511d08-225f-40a5-624b-4786abd707b4
+    - 6b9a23e2-6015-436b-8485-dc8bc25d5ecf: 6b9a23e2-6015-436b-7b7a-23743da2a130
+    - 778956fd-f4bf-4bfe-a7c1-128b59a465b3: 778956fd-f4bf-4bfe-583e-ed74a65b9a4c
+    - 7941cc28-f1b8-464c-aac4-292e52699821: 7941cc28-f1b8-464c-553b-d6d1ad9667de
+    - 7b82664e-fdb4-408e-8177-0f9874405126: 7b82664e-fdb4-408e-7e88-f0678bbfaed9
+    - 7c7462f5-de59-45c7-9323-72746400b446: 7c7462f5-de59-45c7-6cdc-8d8b9bff4bb9
+    - 8a3beadf-de66-4234-950f-ad2d1a068357: 8a3beadf-de66-4234-6af0-52d2e5f97ca8
+    - 8f428dc0-1be7-4468-ac5d-f83e74114875: 8f428dc0-1be7-4468-53a2-07c18beeb78a
+    - 9462abd2-1c4d-4dc3-a686-b29492016f4c: 9462abd2-1c4d-4dc3-5979-4d6b6dfe90b3
+    - 9aec39ad-4354-4921-9b1f-0f6d59693950: 9aec39ad-4354-4921-64e0-f092a696c6af
+    - b7aa77ab-d1c3-44bf-a94d-7f3fbb8bdfe9: b7aa77ab-d1c3-44bf-56b2-80c044742016
+    - c45fcb4b-f838-4266-b035-19aedd77525d: c45fcb4b-f838-4266-4fca-e6512288ada2
+    - cc670845-b046-421a-9b77-40403d426720: cc670845-b046-421a-6488-bfbfc2bd98df
+  Name: Corals
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 100.000000, y: 100.000000, z: 100.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 0a061cf5-97fa-43b3-98d1-630caf817e95
+  Components:
+    []
+- !<SceneObject/7c7462f5-de59-45c7-9323-72746400b446>
+  PrefabRemaps:
+    []
+  Name: Scene
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 2ff2a291-ce90-4f3a-8ed8-67d973703d37
+    - !<own> 3d34046d-12e6-4767-be91-e3c8ff00ae5c
+    - !<own> 9462abd2-1c4d-4dc3-a686-b29492016f4c
+    - !<own> 01b04e90-6a87-4627-8a7c-7f195c6357d0
+    - !<own> 21d2e9ac-7910-4483-abbd-f41063a7a7e7
+    - !<own> 27375fb6-0fe5-47cf-b215-8212650c3994
+    - !<own> 778956fd-f4bf-4bfe-a7c1-128b59a465b3
+    - !<own> c45fcb4b-f838-4266-b035-19aedd77525d
+  Components:
+    []
+- !<RenderMeshVisual/8a3beadf-de66-4234-950f-ad2d1a068357>
+  PrefabRemaps:
+    []
+  Name: Coral7_2_Corals_2_7_10_12_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 21284136-e518-485e-bbc7-2233f166ee96
+  Mesh: !<reference> f18bb07b-c03d-46f8-98ea-028a449c2869
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<RenderMeshVisual/8f428dc0-1be7-4468-ac5d-f83e74114875>
+  PrefabRemaps:
+    []
+  Name: Coral_13_1_Coral_13_15_16_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> cd939e86-198e-42ff-aef7-1aaca2295f18
+  Mesh: !<reference> bc9b2b5d-c3cd-4dd2-a9b0-e08249acf5b4
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/9462abd2-1c4d-4dc3-a686-b29492016f4c>
+  PrefabRemaps:
+    []
+  Name: Coral_3
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 6b9a23e2-6015-436b-8485-dc8bc25d5ecf
+- !<RenderMeshVisual/9aec39ad-4354-4921-9b1f-0f6d59693950>
+  PrefabRemaps:
+    []
+  Name: Coral4_1_Corals_1_5_8_9_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 93cefe18-1362-4dcb-9a5d-94458c1bc97a
+  Mesh: !<reference> ce8233f2-2a02-45c8-a222-d2fcdcac9afb
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<RenderMeshVisual/b7aa77ab-d1c3-44bf-a94d-7f3fbb8bdfe9>
+  PrefabRemaps:
+    []
+  Name: Coral6_1_Corals_2_7_10_12_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 21284136-e518-485e-bbc7-2233f166ee96
+  Mesh: !<reference> 72ff3a16-f122-4747-b6ec-66306b7ed8d0
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/c45fcb4b-f838-4266-b035-19aedd77525d>
+  PrefabRemaps:
+    []
+  Name: Coral_8
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> cc670845-b046-421a-9b77-40403d426720
+- !<RenderMeshVisual/cc670845-b046-421a-9b77-40403d426720>
+  PrefabRemaps:
+    []
+  Name: Coral_16_1_Coral_13_15_16_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> cd939e86-198e-42ff-aef7-1aaca2295f18
+  Mesh: !<reference> d0143c36-353f-4d34-a958-4dfa22bc6063
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}

@@ -1,0 +1,77 @@
+- !<AssetImportMetadata/717a6f46-850f-4fb1-adf9-683ae1a0df85>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> 2b67c3aa-2bc1-4ae8-8f43-e330f023e1bb
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> 2b67c3aa-2bc1-4ae8-8f43-e330f023e1bb
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> fec1e11c-91b0-45ae-b7b3-77b0b48c5573
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/fec1e11c-91b0-45ae-b7b3-77b0b48c5573>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 5c99f884-322a-412f-a07c-20807d866b63
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    bobHeight: false
+    explainAudio: false
+    factsFrame: false
+    floatOnSurface: false
+    floatSpeed: false
+    knowledgeFrame: false
+    pickSfx: false
+    pickSfxTrack: false
+    rockAngle: false
+    solveAudio: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - explainAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      solveAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      pickSfx: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      pickSfxTrack: !<reference.AudioTrackAsset> 00000000-0000-0000-0000-000000000000
+      factsFrame: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      knowledgeFrame: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      floatOnSurface: true
+      bobHeight: !<float> 5.000000
+      rockAngle: !<float> 7.000000
+      floatSpeed: 0.400000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"group_start", "label":"Audio"}'
+    - '// @input Component.AudioComponent explainAudio {"hint":"TrashIssueExplain on the scene root. Do not stop()/pause()."}'
+    - '// @input Component.AudioComponent solveAudio {"hint":"TrashIssueSolveVO on the scene root. Plays after all pieces are collected."}'
+    - '// @input Component.AudioComponent pickSfx {"hint":"Drag the hierarchy Trash_Picking_SFX Audio component here."}'
+    - '// @input Asset.AudioTrackAsset pickSfxTrack {"hint":"Trash_Picking_SFX.mp3 — assigned onto pickSfx at runtime (one 2D voice)."}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Frames"}'
+    - '// @input SceneObject factsFrame {"hint":"Trash facts frame, hidden after Solve VO finishes"}'
+    - '// @input SceneObject knowledgeFrame {"hint":"Trash knowledge frame, hidden after Solve VO finishes"}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Surface Float"}'
+    - '// @input bool floatOnSurface = true {"hint":"Gentle bob and rock so trash reads as floating on the water."}'
+    - '// @input float bobHeight = 5 {"hint":"Local-Y bob height. 4–8 is a small ripple on this tank scale.", "widget":"slider", "min":0, "max":20, "step":0.5}'
+    - '// @input float rockAngle = 7 {"hint":"Pitch/roll in degrees. Keep under ~12 so pinch still feels stable.", "widget":"slider", "min":0, "max":20, "step":0.5}'
+    - '// @input float floatSpeed = 0.4 {"hint":"How fast the surface motion cycles, in waves per second.", "widget":"slider", "min":0.1, "max":1.5, "step":0.05}'
+    - '// @ui {"widget":"group_end"}'

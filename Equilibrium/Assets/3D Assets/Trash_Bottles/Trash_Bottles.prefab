@@ -1,0 +1,166 @@
+- !<ObjectPrefab/b07424a2-caf6-4295-a75e-81b20c667cbd>
+  PackagePath: ""
+  objects:
+    - !<own> 61fb6538-c91d-4159-931c-5638dbe5f33c
+  LazyLoading: false
+  RetainAssets: true
+- !<RenderMeshVisual/0f9e15d9-b5b8-4be3-976a-8d152642c0a1>
+  PrefabRemaps:
+    []
+  Name: Plastic_Bottle_01_GEO_Plastic_Bottles_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 558a45ef-6820-4fbf-ab12-5dacbf4b8441
+  Mesh: !<reference> 979dfa20-fb24-4288-a595-0020dbc44a29
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<RenderMeshVisual/0ff64404-7572-4b77-9397-7dae69e73655>
+  PrefabRemaps:
+    []
+  Name: Plastic_Bottle_03_GEO_Plastic_Bottles_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 558a45ef-6820-4fbf-ab12-5dacbf4b8441
+  Mesh: !<reference> dae935b0-36c6-496b-b42b-fb39c2cab7e6
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/17093bf8-2793-4e09-b647-ed7c5d55fa5f>
+  PrefabRemaps:
+    []
+  Name: Trash_Bottle_01
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 0f9e15d9-b5b8-4be3-976a-8d152642c0a1
+- !<SceneObject/3917dc36-411f-44ac-b091-696de1211c7a>
+  PrefabRemaps:
+    []
+  Name: Scenes
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> dadd09a6-a1ef-4cb3-9a9d-0b09fedd1e7c
+  Components:
+    []
+- !<SceneObject/4b366831-8763-4f90-93d2-fbde9a8aac52>
+  PrefabRemaps:
+    []
+  Name: Trash_Bottle_03
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 0ff64404-7572-4b77-9397-7dae69e73655
+- !<SceneObject/61fb6538-c91d-4159-931c-5638dbe5f33c>
+  PrefabRemaps:
+    - 0f9e15d9-b5b8-4be3-976a-8d152642c0a1: 0f9e15d9-b5b8-4be3-6895-72ead9bd3f5e
+    - 0ff64404-7572-4b77-9397-7dae69e73655: 0ff64404-7572-4b77-6c68-82519618c9aa
+    - 17093bf8-2793-4e09-b647-ed7c5d55fa5f: 17093bf8-2793-4e09-49b8-1283a2aa05a0
+    - 3917dc36-411f-44ac-b091-696de1211c7a: 3917dc36-411f-44ac-4f6e-96921edee385
+    - 4b366831-8763-4f90-93d2-fbde9a8aac52: 4b366831-8763-4f90-6c2d-0421657553ad
+    - 61fb6538-c91d-4159-931c-5638dbe5f33c: 61fb6538-c91d-4159-6ce3-a9c7241a0cc3
+    - 734d3908-260c-4f7e-a46b-2579ef982720: 734d3908-260c-4f7e-5b94-da861067d8df
+    - dadd09a6-a1ef-4cb3-9a9d-0b09fedd1e7c: dadd09a6-a1ef-4cb3-6562-f4f60122e183
+    - ef3fbc89-44c1-4a7f-9fa3-1223802792da: ef3fbc89-44c1-4a7f-605c-eddc7fd86d25
+  Name: Trash_Bottles
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 100.000000, y: 100.000000, z: 100.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 3917dc36-411f-44ac-b091-696de1211c7a
+  Components:
+    []
+- !<RenderMeshVisual/734d3908-260c-4f7e-a46b-2579ef982720>
+  PrefabRemaps:
+    []
+  Name: Plastic_Bottle_02_GEO_Plastic_Bottles_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 558a45ef-6820-4fbf-ab12-5dacbf4b8441
+  Mesh: !<reference> 6117ddb2-561f-42df-a1c7-7e80efc8c612
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/dadd09a6-a1ef-4cb3-9a9d-0b09fedd1e7c>
+  PrefabRemaps:
+    []
+  Name: Scene
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 4b366831-8763-4f90-93d2-fbde9a8aac52
+    - !<own> ef3fbc89-44c1-4a7f-9fa3-1223802792da
+    - !<own> 17093bf8-2793-4e09-b647-ed7c5d55fa5f
+  Components:
+    []
+- !<SceneObject/ef3fbc89-44c1-4a7f-9fa3-1223802792da>
+  PrefabRemaps:
+    []
+  Name: Trash_Bottle_02
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 734d3908-260c-4f7e-a46b-2579ef982720

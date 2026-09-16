@@ -1,26 +1,30 @@
 - !<AssetImportMetadata/4182b06f-e282-4223-afac-6cc6963a8e4a>
   ImportedAssetIds:
     .hidden/blinn2: !<reference> 62f631f0-cf19-4dc3-907a-916ebeb2e9e2
-    0e80daaba317b9f8: !<reference> 57cba92e-1eb4-41e5-8d7a-4f6f4c48021b
-    1332747b918bae2f: !<reference> f5526209-1d0d-44e4-8a95-90327a3f1482
-    21af82ce6462c58a: !<reference> a9330dc7-67fa-4f0a-8b32-ac3a561764be
-    34aac64e4c6cdbc9: !<reference> 16203576-21e7-4d4f-946a-5ab4016fec0a
-    3acb3eed321f4b1d: !<reference> 1f6a7214-ad80-43aa-928b-57c744adab3c
-    43eb543191bbb257: !<reference> 0699129b-d2bd-4864-be95-55e2786798f3
-    46474353a7acc2c0: !<reference> 4aa0b643-ab59-4dee-bd52-22f22574c652
-    49aea5f6bab3f548: !<reference> 34992733-b9da-404f-a9c4-716ee42f289c
-    4a3e924fad0e2f27: !<reference> 0d24328b-4921-4ad4-95a0-a982fadfb860
-    5456cd091e7655cc: !<reference> 0a2d3f9b-5593-403c-9ac7-af327f2f2815
-    5bdcff7a9bf76e34: !<reference> e78b9d13-51dd-40b1-86c8-55a7bb6faa8e
-    5f627f31ef667b66: !<reference> fab2e7a3-de96-4bc5-8655-652e17b1f7b0
-    64cd5e1f51e068e6: !<reference> 63c46aca-31eb-4969-a365-5203e059589e
-    650fde98e850a3ea: !<reference> 8756606f-163e-46ae-9061-909280880f18
-    66780cf3a4dcb2b8: !<reference> 7618f41b-795c-40c1-9fee-166e07e4647f
-    70130fc5baffa272: !<reference> 8f72fe0a-d268-40b3-b807-98778f2abd8f
-    78fe0726dcb6cf65: !<reference> 78fe94e7-7ee6-48b5-bc4e-101302c0cdaf
-    8cc004ff93d4b7dd: !<reference> f4280024-f7c3-4c6b-a3ca-818e4e21b865
-    92c233566175191a: !<reference> 42f41f6b-9497-4053-9740-581ba0777afe
-    9fac9a4f8546fe6f: !<reference> 97cec2ad-0332-4ea4-b1d6-f27345f9e06a
+    06df9524298f9c55: !<reference> bff1ddba-709a-42a1-81ac-2f9a485ece9e
+    10397d542004350c: !<reference> b349e5c4-5223-4628-9ced-7d44269a67c4
+    1fc8535f6381a10a: !<reference> 733539a7-52d4-4fac-b3de-e9e8bc19d157
+    21176fe94ca5218b: !<reference> 50e5ca22-5896-4aba-b59e-b783b413b7f0
+    276654947dec93ad: !<reference> 3dc76a18-55e7-41df-ad42-b0eaaaf394c3
+    3640f7839ff5a246: !<reference> 29e2cfc4-462d-4fc5-b74c-041f7e716e5b
+    38040d1d0160c6eb: !<reference> 679959af-604d-4a66-a29d-6a7b1ab43081
+    3b183f5674dd628c: !<reference> 37a2cf53-967c-4759-a69f-8bc66b0f8b55
+    4413f501e27829fd: !<reference> 54821e0d-a38e-41ac-996f-651aae752006
+    493e2b4bac3754cb: !<reference> 02387bcf-d174-452f-ba3c-5b3d4396a46b
+    4a1a43f1ff0d9e9c: !<reference> b20aa488-f725-46a3-bbd5-5626f8c58071
+    522acd40efb7ff62: !<reference> 3dcadd39-f729-4a93-8390-6c7b7bc9980a
+    60adb34a0ab54ab8: !<reference> 1410d667-f7fc-411c-abeb-2c74d41a5d24
+    60c5660f73c1e236: !<reference> 77cc0956-d4b7-476b-8534-193acf569d85
+    6219d73ae8e2a78e: !<reference> f30aa869-ae13-4f0d-b5eb-2eccae4ee6f0
+    624f6792bd6e379e: !<reference> b2bb1788-eb49-44fe-a56e-ae7cbe85d556
+    770f8310a653b303: !<reference> 4a82a819-24c9-433e-b3de-7273e5a1ce7e
+    7a0dd5cd69df73fa: !<reference> c9986816-4e40-48e9-b582-f4a364726260
+    80cd5f7f80779df0: !<reference> 0aa1387b-8797-448c-afdc-a2b72ac60dfd
+    83437620bbb97154: !<reference> fe6c5493-952e-45a3-b6f0-3348fcf16c54
+    836554558f1ca498: !<reference> 20f9ee6c-184b-4b4f-8562-d72538b5bf45
+    950f32a09a283bf5: !<reference> 4c4cc67b-4fd6-4f05-85be-7b7d6009d709
+    97ea1c6dc4314118: !<reference> 43b19eee-0442-42c3-99d5-91c6a0527ce4
+    9938f0deb3f75615: !<reference> f7c0492b-de20-4496-b21c-2ced87055070
     Animations/Take 001: !<reference> 831d1b6c-c63e-473c-8e7f-759b77c7a349
     Materials/blinn2: !<reference> 880798d7-9705-42e2-985f-330403b350e8
     Materials/blinn2|blinn2|GraphPassInfo: !<reference> 7ac83dee-1e72-4c25-b05d-3de1526590c8
@@ -29,21 +33,17 @@
     Textures/texture: !<reference> e4898f3c-e49a-48fd-a8b3-d36f62a26b47
     Textures/texture 3: !<reference> 16adc700-8adf-43b9-b329-7a2fe1a7ffb9
     Textures/texture 6: !<reference> cabb170c-2018-47e2-b5fe-52fed19c154d
-    a0a9adb23e52759e: !<reference> 7fa31143-9401-4737-accd-ad4b8bdae68b
-    b02fac8cdd8f6163: !<reference> 97ddc76d-f1de-47d8-8f98-53fcb0f326ed
-    b29524994acd538a: !<reference> 66df2e2f-e76e-4d48-9fe1-6e6e765595ba
-    b5c8ac0633305158: !<reference> 40f2634d-7b15-46b6-84f3-09853e1c9e1b
-    be4fc9bd78a6e5c2: !<reference> 2e1a9520-98b6-45ec-b31f-0f7fd0ef06ef
-    d8e83e641615e791: !<reference> 4a856899-8bdb-4c19-9ea3-1785eae5598e
-    d9ee2efb6cb284e2: !<reference> aad23c7f-5cdb-4445-a152-9a37a221a0d6
-    de4feb747b964a0d: !<reference> 4d9ad36b-8401-4fb1-930b-b39afa3e4df8
-    dfdca1ece334b87a: !<reference> 24be40a2-397e-4a41-91e9-684673580c7c
-    e81811b6e78328cc: !<reference> 6e277fb6-850e-4d1a-85fc-3be87aeab78d
-    e8b6633cec5942f9: !<reference> f8fd37cb-1173-44b3-84bd-b1d1181453b5
-    ebe4c70cda79ba92: !<reference> 566a7cb7-27e8-43aa-b88f-a80dc8181cdc
-    f26fb2e0cc53e7b4: !<reference> 9ba9754b-8ef7-4be9-a7b1-a9b69f642776
-    f43fd2413913ed8a: !<reference> d6659a82-45ed-4460-a2ac-533753b7b9e4
-    ff7936aad4ab157c: !<reference> 6f80b87b-6e47-488e-990e-edf80df04b12
+    aac35fc8837575d5: !<reference> 45968e4d-3e3b-46c3-945c-ebc52e5fc9a6
+    aadb8f94a91030e2: !<reference> 43345e8a-5dfd-42eb-ad88-585fc165f315
+    ad1a03b2f0f2fc9c: !<reference> 6ad8ad06-bac9-460f-8fde-925c25c96158
+    c950d892ef5f200b: !<reference> 0f0040e1-fd6f-4427-9d49-e9ed5325d958
+    d494be4da3e4eb1e: !<reference> 796a49c1-29d3-4d82-8525-f5b626881707
+    d755097311b41b4f: !<reference> 36ab6939-6f26-4b20-9c5b-961a331c9d7f
+    e54b7a765d8fbf98: !<reference> 874c3f68-8c21-4dac-8d98-5a5c5c2c148a
+    e5f595d0bfe67825: !<reference> 35206f18-ec75-4ca0-a111-1d3a6684c81f
+    e99d370e2cc54f86: !<reference> 4c3346bc-9c7e-4dd5-9709-fe79ff0c7f15
+    f64f18a7a2110301: !<reference> f79e6966-34a6-44f0-a7f6-7e26f19021bc
+    f8a879c822e78b2b: !<reference> 2b3995f1-2013-4f6d-b77f-610f391c8a31
   ImporterName: GltfImporter
   PrimaryAsset: !<reference> 0d6bbaab-72fd-4f19-b8f6-8503c1784320
   PackageType: LegacyPackage
@@ -81,87 +81,7 @@
       png: Performance Compression
     Overrides:
       {}
-- !<SceneObject/0699129b-d2bd-4864-416a-aa1d8798670c>
-  PrefabRemaps:
-    []
-  Name: Clownfish_joint8_06
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 1.731191, y: -3.054428, z: -6.245374}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    []
-- !<SceneObject/0a2d3f9b-5593-403c-6538-50cd80d0d7ea>
-  PrefabRemaps:
-    []
-  Name: Sketchfab_Scene
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 6f80b87b-6e47-488e-66f1-1207f20fb4ed
-  Components:
-    - !<own> f4280024-f7c3-4c6b-5c35-7e71b1de479a
-    - !<own> 16203576-21e7-4d4f-6b95-a54bfe9013f5
-- !<SceneObject/0d24328b-4921-4ad4-6a5f-567d0520479f>
-  PrefabRemaps:
-    []
-  Name: Scenes
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 0a2d3f9b-5593-403c-6538-50cd80d0d7ea
-  Components:
-    []
-- !<Skin/16203576-21e7-4d4f-6b95-a54bfe9013f5>
-  PrefabRemaps:
-    []
-  Name: component_2
-  Enabled: true
-  skinBones:
-    Clownfish_cv: !<reference> 566a7cb7-27e8-43aa-4770-57f237e7e323
-    Clownfish_cv1: !<reference> 2e1a9520-98b6-45ec-4ce0-f0802f10f910
-    Clownfish_cv2: !<reference> 8f72fe0a-d268-40b3-47f8-678870d54270
-    Clownfish_cv3: !<reference> 4aa0b643-ab59-4dee-42ad-dd0dda8b39ad
-    Clownfish_ikHandle1: !<reference> 7fa31143-9401-4737-5332-52b474251974
-    Clownfish_joint10_08: !<reference> 42f41f6b-9497-4053-68bf-a7e45f888501
-    Clownfish_joint11_09: !<reference> 24be40a2-397e-4a41-6e16-97b98ca7f383
-    Clownfish_joint12_010: !<reference> 97ddc76d-f1de-47d8-7067-ac034f0cd912
-    Clownfish_joint13_011: !<reference> a9330dc7-67fa-4f0a-74cd-53c5a9e89b41
-    Clownfish_joint2_01: !<reference> 34992733-b9da-404f-563b-8e911bd0d763
-    Clownfish_joint3_02: !<reference> f5526209-1d0d-44e4-756a-6fcd85c0eb7d
-    Clownfish_joint4_03: !<reference> e78b9d13-51dd-40b1-7937-aa5844905571
-    Clownfish_joint7_05: !<reference> 4d9ad36b-8401-4fb1-6cf4-4c6505c1b207
-    Clownfish_joint8_06: !<reference> 0699129b-d2bd-4864-416a-aa1d8798670c
-    Clownfish_joint9_07: !<reference> 40f2634d-7b15-46b6-7b0c-f67ac1e361e4
-    Clownfish_joint_00: !<reference> 8756606f-163e-46ae-6f9e-6f6d7f77f0e7
-    Clownfish_sine1Handle: !<reference> 4a856899-8bdb-4c19-615c-e87a151aa671
-    Clownfish_splineIK_CV: !<reference> 97cec2ad-0332-4ea4-4e29-0d8cba061f95
-    Clownfish_ver2_smooth: !<reference> f8fd37cb-1173-44b3-7b42-4e2ee7ebac4a
-    Object_2: !<reference> 6e277fb6-850e-4d1a-7a03-c41785154872
-    Object_6: !<reference> 9ba9754b-8ef7-4be9-584e-5649609bd889
-    Object_8: !<reference> fab2e7a3-de96-4bc5-79aa-9ad1e84e084f
-    Object_9: !<reference> 66df2e2f-e76e-4d48-601e-919189aa6a45
-    RootNode: !<reference> aad23c7f-5cdb-4445-5ead-65c85dde5f29
-    Sketchfab_model: !<reference> 6f80b87b-6e47-488e-66f1-1207f20fb4ed
-    _rootJoint: !<reference> d6659a82-45ed-4460-5d53-acc8ac48461b
-    ba2195af91d94830ae85d52f6e9d1d8f.fbx: !<reference> 78fe94e7-7ee6-48b5-43b1-efecfd3f3250
-    joint5_04: !<reference> 1f6a7214-ad80-43aa-6d74-a838bb5254c3
-- !<SceneObject/1f6a7214-ad80-43aa-6d74-a838bb5254c3>
+- !<SceneObject/02387bcf-d174-452f-45c3-a4c2bc695b94>
   PrefabRemaps:
     []
   Name: joint5_04
@@ -176,128 +96,38 @@
     []
   Components:
     []
-- !<SceneObject/24be40a2-397e-4a41-6e16-97b98ca7f383>
+- !<SceneObject/0aa1387b-8797-448c-5023-5d48d539f202>
   PrefabRemaps:
     []
-  Name: Clownfish_joint11_09
+  Name: _rootJoint
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
-    Position: {x: 1.126105, y: 2.369083, z: 4.489986}
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
     Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
   Children:
-    []
+    - !<own> f79e6966-34a6-44f0-5809-81d90e6fde43
   Components:
     []
-- !<SceneObject/2e1a9520-98b6-45ec-4ce0-f0802f10f910>
+- !<SceneObject/0f0040e1-fd6f-4427-62b6-1612acda26a7>
   PrefabRemaps:
     []
-  Name: Clownfish_cv1
+  Name: RootNode
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
-    Position: {x: -4.813250, y: 10.523496, z: 7.017756}
-    Rotation: {x: 0.000000, y: 60.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    []
-- !<SceneObject/34992733-b9da-404f-563b-8e911bd0d763>
-  PrefabRemaps:
-    []
-  Name: Clownfish_joint2_01
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: -0.000000, y: 0.000000, z: -8.000000}
-    Rotation: {x: 1.533774, y: 20.234686, z: -2.395375}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> f5526209-1d0d-44e4-756a-6fcd85c0eb7d
-  Components:
-    []
-- !<SceneObject/40f2634d-7b15-46b6-7b0c-f67ac1e361e4>
-  PrefabRemaps:
-    []
-  Name: Clownfish_joint9_07
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: -1.310960, z: 3.647986}
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
     Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
   Children:
-    - !<own> 42f41f6b-9497-4053-68bf-a7e45f888501
-    - !<own> 24be40a2-397e-4a41-6e16-97b98ca7f383
+    - !<own> b20aa488-f725-46a3-442a-a9d9073a7f8e
+    - !<own> 874c3f68-8c21-4dac-7267-a5a3a3d3eb75
   Components:
     []
-- !<SceneObject/42f41f6b-9497-4053-68bf-a7e45f888501>
-  PrefabRemaps:
-    []
-  Name: Clownfish_joint10_08
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 1.115487, y: -1.458447, z: 4.369441}
-    Rotation: {x: -0.026464, y: 7.889984, z: 0.091130}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    []
-- !<SceneObject/4a856899-8bdb-4c19-615c-e87a151aa671>
-  PrefabRemaps:
-    []
-  Name: Clownfish_sine1Handle
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 9.415270, z: -20.674854}
-    Rotation: {x: -97.674606, y: 0.000000, z: 0.000000}
-    Scale: {x: 14.337402, y: 14.337402, z: 14.337402}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    []
-- !<SceneObject/4aa0b643-ab59-4dee-42ad-dd0dda8b39ad>
-  PrefabRemaps:
-    []
-  Name: Clownfish_cv3
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: -0.000000, y: 14.661067, z: 16.189203}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    []
-- !<SceneObject/4d9ad36b-8401-4fb1-6cf4-4c6505c1b207>
-  PrefabRemaps:
-    []
-  Name: Clownfish_joint7_05
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 4.813245, y: -2.868138, z: -1.049997}
-    Rotation: {x: 0.782646, y: -52.088741, z: -1.771465}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 0699129b-d2bd-4864-416a-aa1d8798670c
-  Components:
-    []
-- !<SceneObject/566a7cb7-27e8-43aa-4770-57f237e7e323>
+- !<SceneObject/1410d667-f7fc-411c-5414-d38b2be5a2db>
   PrefabRemaps:
     []
   Name: Clownfish_cv
@@ -312,285 +142,7 @@
     []
   Components:
     []
-- !<RenderMeshVisual/57cba92e-1eb4-41e5-7285-b090b3b7fde4>
-  PrefabRemaps:
-    []
-  Name: Clownfish_ver2_smooth_blinn2_0
-  Enabled: true
-  RenderOrder: 0
-  StretchMode: Stretch
-  VerticalAlignment: Center
-  HorizontalAlignment: Center
-  MeshShadowMode: None
-  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
-  ShadowDensity: 1.000000
-  Materials:
-    - !<reference> 880798d7-9705-42e2-985f-330403b350e8
-  Mesh: !<reference> e26930a8-9514-4b92-a1bf-a429d270bed5
-  Skin: !<reference> 16203576-21e7-4d4f-6b95-a54bfe9013f5
-  BlendShapesEnabled: true
-  BlendNormals: false
-  BlendShapes:
-    {}
-- !<SceneObject/63c46aca-31eb-4969-5c9a-adfc1fa6a761>
-  PrefabRemaps:
-    []
-  Name: Clownfish_cv
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 9ba9754b-8ef7-4be9-584e-5649609bd889
-  Components:
-    []
-- !<SceneObject/66df2e2f-e76e-4d48-601e-919189aa6a45>
-  PrefabRemaps:
-    []
-  Name: Object_9
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    - !<own> 57cba92e-1eb4-41e5-7285-b090b3b7fde4
-- !<SceneObject/6e277fb6-850e-4d1a-7a03-c41785154872>
-  PrefabRemaps:
-    []
-  Name: Object_2
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> aad23c7f-5cdb-4445-5ead-65c85dde5f29
-  Components:
-    []
-- !<SceneObject/6f80b87b-6e47-488e-66f1-1207f20fb4ed>
-  PrefabRemaps:
-    []
-  Name: Sketchfab_model
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: -90.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 78fe94e7-7ee6-48b5-43b1-efecfd3f3250
-  Components:
-    []
-- !<SceneObject/7618f41b-795c-40c1-6011-e991f81b9b80>
-  PrefabRemaps:
-    []
-  Name: clownfish
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 100.000000, y: 100.000000, z: 100.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 0d24328b-4921-4ad4-6a5f-567d0520479f
-  Components:
-    []
-- !<SceneObject/78fe94e7-7ee6-48b5-43b1-efecfd3f3250>
-  PrefabRemaps:
-    []
-  Name: ba2195af91d94830ae85d52f6e9d1d8f.fbx
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 90.000000, y: -0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 6e277fb6-850e-4d1a-7a03-c41785154872
-  Components:
-    []
-- !<SceneObject/7fa31143-9401-4737-5332-52b474251974>
-  PrefabRemaps:
-    []
-  Name: Clownfish_ikHandle1
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: -1.539341, y: 9.724503, z: -19.433048}
-    Rotation: {x: -0.069610, y: -14.228590, z: 4.488890}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    []
-- !<SceneObject/8756606f-163e-46ae-6f9e-6f6d7f77f0e7>
-  PrefabRemaps:
-    []
-  Name: Clownfish_joint_00
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 13.415558, z: 8.000000}
-    Rotation: {x: -1.321385, y: -7.889983, z: 0.091130}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 34992733-b9da-404f-563b-8e911bd0d763
-    - !<own> 4d9ad36b-8401-4fb1-6cf4-4c6505c1b207
-    - !<own> 40f2634d-7b15-46b6-7b0c-f67ac1e361e4
-    - !<own> 97ddc76d-f1de-47d8-7067-ac034f0cd912
-  Components:
-    []
-- !<SceneObject/8f72fe0a-d268-40b3-47f8-678870d54270>
-  PrefabRemaps:
-    []
-  Name: Clownfish_cv2
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: -0.000000, y: 10.831770, z: 16.155802}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    []
-- !<SceneObject/97cec2ad-0332-4ea4-4e29-0d8cba061f95>
-  PrefabRemaps:
-    []
-  Name: Clownfish_splineIK_CV
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    []
-- !<SceneObject/97ddc76d-f1de-47d8-7067-ac034f0cd912>
-  PrefabRemaps:
-    []
-  Name: Clownfish_joint12_010
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: -4.813250, y: -2.868158, z: -1.050000}
-    Rotation: {x: 2.126277, y: 67.855286, z: 3.128127}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> a9330dc7-67fa-4f0a-74cd-53c5a9e89b41
-  Components:
-    []
-- !<SceneObject/9ba9754b-8ef7-4be9-584e-5649609bd889>
-  PrefabRemaps:
-    []
-  Name: Object_6
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> d6659a82-45ed-4460-5d53-acc8ac48461b
-    - !<own> 66df2e2f-e76e-4d48-601e-919189aa6a45
-    - !<own> fab2e7a3-de96-4bc5-79aa-9ad1e84e084f
-    - !<own> 566a7cb7-27e8-43aa-4770-57f237e7e323
-    - !<own> 2e1a9520-98b6-45ec-4ce0-f0802f10f910
-    - !<own> 8f72fe0a-d268-40b3-47f8-678870d54270
-    - !<own> 4aa0b643-ab59-4dee-42ad-dd0dda8b39ad
-    - !<own> 97cec2ad-0332-4ea4-4e29-0d8cba061f95
-    - !<own> 7fa31143-9401-4737-5332-52b474251974
-    - !<own> 4a856899-8bdb-4c19-615c-e87a151aa671
-  Components:
-    []
-- !<ObjectPrefabAssetData/a2493225-1837-4ce8-bc20-a8b96924a81c>
-  Prototype: !<ObjectOwner/1cdaa032-20da-4130-89a3-510fbdd8f395>
-    PackagePath: ""
-    objects:
-      - !<own> 7618f41b-795c-40c1-6011-e991f81b9b80
-- !<SceneObject/a9330dc7-67fa-4f0a-74cd-53c5a9e89b41>
-  PrefabRemaps:
-    []
-  Name: Clownfish_joint13_011
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: -1.731190, y: -3.054410, z: -6.245371}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    []
-  Components:
-    []
-- !<SceneObject/aad23c7f-5cdb-4445-5ead-65c85dde5f29>
-  PrefabRemaps:
-    []
-  Name: RootNode
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> f8fd37cb-1173-44b3-7b42-4e2ee7ebac4a
-    - !<own> 63c46aca-31eb-4969-5c9a-adfc1fa6a761
-  Components:
-    []
-- !<SceneObject/d6659a82-45ed-4460-5d53-acc8ac48461b>
-  PrefabRemaps:
-    []
-  Name: _rootJoint
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 8756606f-163e-46ae-6f9e-6f6d7f77f0e7
-  Components:
-    []
-- !<SceneObject/e78b9d13-51dd-40b1-7937-aa5844905571>
-  PrefabRemaps:
-    []
-  Name: Clownfish_joint4_03
-  Enabled: true
-  Layers: 1
-  LocalTransform: !<TransformEntity>
-    Position: {x: 0.000000, y: -1.369997, z: -7.125157}
-    Rotation: {x: -5.047288, y: -40.506828, z: 12.284660}
-    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
-    HasSegmentScaleCompensation: false
-  Children:
-    - !<own> 1f6a7214-ad80-43aa-6d74-a838bb5254c3
-  Components:
-    []
-- !<AnimationPlayer/f4280024-f7c3-4c6b-5c35-7e71b1de479a>
+- !<AnimationPlayer/20f9ee6c-184b-4b4f-7a9d-28dac74a40ba>
   PrefabRemaps:
     []
   Name: component_1
@@ -611,7 +163,122 @@
       BlendMode: Default
       ScaleMode: Multiply
       PlaybackMode: Loop
-- !<SceneObject/f5526209-1d0d-44e4-756a-6fcd85c0eb7d>
+- !<SceneObject/29e2cfc4-462d-4fc5-48b3-fbe0818e91a4>
+  PrefabRemaps:
+    []
+  Name: Object_6
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 0aa1387b-8797-448c-5023-5d48d539f202
+    - !<own> 733539a7-52d4-4fac-4c21-161743e62ea8
+    - !<own> 35206f18-ec75-4ca0-5eee-e2c5997b37e0
+    - !<own> 1410d667-f7fc-411c-5414-d38b2be5a2db
+    - !<own> 4c3346bc-9c7e-4dd5-68f6-018600f380ea
+    - !<own> 50e5ca22-5896-4aba-4a61-487c4bec480f
+    - !<own> 43b19eee-0442-42c3-662a-6e395fad831b
+    - !<own> f7c0492b-de20-4496-4de3-d31278faaf8f
+    - !<own> 4c4cc67b-4fd6-4f05-7a41-84829ff628f6
+    - !<own> 3dc76a18-55e7-41df-52bd-4f15550c6b3c
+  Components:
+    []
+- !<SceneObject/2b3995f1-2013-4f6d-4880-9ef0c6e375ce>
+  PrefabRemaps:
+    []
+  Name: Clownfish_joint11_09
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 1.126105, y: 2.369083, z: 4.489986}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/35206f18-ec75-4ca0-5eee-e2c5997b37e0>
+  PrefabRemaps:
+    []
+  Name: Object_8
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/36ab6939-6f26-4b20-63a4-69e5cce36280>
+  PrefabRemaps:
+    []
+  Name: Clownfish_joint4_03
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: -1.369997, z: -7.125157}
+    Rotation: {x: -5.047288, y: -40.506828, z: 12.284660}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 02387bcf-d174-452f-45c3-a4c2bc695b94
+  Components:
+    []
+- !<SceneObject/37a2cf53-967c-4759-5960-743994f074aa>
+  PrefabRemaps:
+    []
+  Name: Clownfish_joint9_07
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: -1.310960, z: 3.647986}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 45968e4d-3e3b-46c3-6ba3-143ad1a03659
+    - !<own> 2b3995f1-2013-4f6d-4880-9ef0c6e375ce
+  Components:
+    []
+- !<SceneObject/3dc76a18-55e7-41df-52bd-4f15550c6b3c>
+  PrefabRemaps:
+    []
+  Name: Clownfish_sine1Handle
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 9.415270, z: -20.674854}
+    Rotation: {x: -97.674606, y: 0.000000, z: 0.000000}
+    Scale: {x: 14.337402, y: 14.337402, z: 14.337402}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/3dcadd39-f729-4a93-7c6f-9384843667f5>
+  PrefabRemaps:
+    []
+  Name: ba2195af91d94830ae85d52f6e9d1d8f.fbx
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 90.000000, y: -0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 796a49c1-29d3-4d82-7ada-0a49d977e8f8
+  Components:
+    []
+- !<SceneObject/43345e8a-5dfd-42eb-5277-a7a03e9a0cea>
   PrefabRemaps:
     []
   Name: Clownfish_joint3_02
@@ -619,14 +286,219 @@
   Layers: 1
   LocalTransform: !<TransformEntity>
     Position: {x: -0.000000, y: -0.784526, z: -6.000000}
-    Rotation: {x: -0.639797, y: 14.321813, z: -2.851024}
+    Rotation: {x: -0.639797, y: 14.321814, z: -2.851024}
     Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
     HasSegmentScaleCompensation: false
   Children:
-    - !<own> e78b9d13-51dd-40b1-7937-aa5844905571
+    - !<own> 36ab6939-6f26-4b20-63a4-69e5cce36280
   Components:
     []
-- !<SceneObject/f8fd37cb-1173-44b3-7b42-4e2ee7ebac4a>
+- !<SceneObject/43b19eee-0442-42c3-662a-6e395fad831b>
+  PrefabRemaps:
+    []
+  Name: Clownfish_cv3
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.000000, y: 14.661067, z: 16.189203}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/45968e4d-3e3b-46c3-6ba3-143ad1a03659>
+  PrefabRemaps:
+    []
+  Name: Clownfish_joint10_08
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 1.115487, y: -1.458447, z: 4.369441}
+    Rotation: {x: -0.026464, y: 7.889983, z: 0.091130}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/4a82a819-24c9-433e-4c21-8d8c1a5e3181>
+  PrefabRemaps:
+    []
+  Name: Clownfish_joint12_010
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -4.813250, y: -2.868158, z: -1.050000}
+    Rotation: {x: 2.126277, y: 67.855278, z: 3.128127}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 54821e0d-a38e-41ac-6690-9ae5518adff9
+  Components:
+    []
+- !<SceneObject/4c3346bc-9c7e-4dd5-68f6-018600f380ea>
+  PrefabRemaps:
+    []
+  Name: Clownfish_cv1
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -4.813250, y: 10.523496, z: 7.017756}
+    Rotation: {x: 0.000000, y: 60.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/4c4cc67b-4fd6-4f05-7a41-84829ff628f6>
+  PrefabRemaps:
+    []
+  Name: Clownfish_ikHandle1
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -1.539341, y: 9.724503, z: -19.433048}
+    Rotation: {x: -0.069610, y: -14.228590, z: 4.488890}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/50e5ca22-5896-4aba-4a61-487c4bec480f>
+  PrefabRemaps:
+    []
+  Name: Clownfish_cv2
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.000000, y: 10.831770, z: 16.155802}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/54821e0d-a38e-41ac-6690-9ae5518adff9>
+  PrefabRemaps:
+    []
+  Name: Clownfish_joint13_011
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -1.731190, y: -3.054410, z: -6.245371}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/679959af-604d-4a66-5d62-9584e54bcf7e>
+  PrefabRemaps:
+    []
+  Name: Clownfish_joint2_01
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: -0.000000, y: 0.000000, z: -8.000000}
+    Rotation: {x: 1.533774, y: 20.234686, z: -2.395375}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 43345e8a-5dfd-42eb-5277-a7a03e9a0cea
+  Components:
+    []
+- !<RenderMeshVisual/6ad8ad06-bac9-460f-7021-6da3da369ea7>
+  PrefabRemaps:
+    []
+  Name: Clownfish_ver2_smooth_blinn2_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 880798d7-9705-42e2-985f-330403b350e8
+  Mesh: !<reference> e26930a8-9514-4b92-a1bf-a429d270bed5
+  Skin: !<reference> b349e5c4-5223-4628-6312-82bbd965983b
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/733539a7-52d4-4fac-4c21-161743e62ea8>
+  PrefabRemaps:
+    []
+  Name: Object_9
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 6ad8ad06-bac9-460f-7021-6da3da369ea7
+- !<SceneObject/77cc0956-d4b7-476b-7acb-e6c530a9627a>
+  PrefabRemaps:
+    []
+  Name: Clownfish_joint7_05
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 4.813245, y: -2.868138, z: -1.049997}
+    Rotation: {x: 0.782646, y: -52.088745, z: -1.771465}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> bff1ddba-709a-42a1-7e53-d065b7a13161
+  Components:
+    []
+- !<SceneObject/796a49c1-29d3-4d82-7ada-0a49d977e8f8>
+  PrefabRemaps:
+    []
+  Name: Object_2
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 0f0040e1-fd6f-4427-62b6-1612acda26a7
+  Components:
+    []
+- !<SceneObject/874c3f68-8c21-4dac-7267-a5a3a3d3eb75>
+  PrefabRemaps:
+    []
+  Name: Clownfish_cv
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 29e2cfc4-462d-4fc5-48b3-fbe0818e91a4
+  Components:
+    []
+- !<ObjectPrefabAssetData/a2493225-1837-4ce8-bc20-a8b96924a81c>
+  Prototype: !<ObjectOwner/1cdaa032-20da-4130-89a3-510fbdd8f395>
+    PackagePath: ""
+    objects:
+      - !<own> c9986816-4e40-48e9-4a7d-0b5c9b8d9d9f
+- !<SceneObject/b20aa488-f725-46a3-442a-a9d9073a7f8e>
   PrefabRemaps:
     []
   Name: Clownfish_ver2_smooth
@@ -641,10 +513,123 @@
     []
   Components:
     []
-- !<SceneObject/fab2e7a3-de96-4bc5-79aa-9ad1e84e084f>
+- !<SceneObject/b2bb1788-eb49-44fe-5a91-5183417a2aa9>
   PrefabRemaps:
     []
-  Name: Object_8
+  Name: Scenes
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> f30aa869-ae13-4f0d-4a14-d13351b1190f
+  Components:
+    []
+- !<Skin/b349e5c4-5223-4628-6312-82bbd965983b>
+  PrefabRemaps:
+    []
+  Name: component_2
+  Enabled: true
+  skinBones:
+    Clownfish_cv: !<reference> 1410d667-f7fc-411c-5414-d38b2be5a2db
+    Clownfish_cv1: !<reference> 4c3346bc-9c7e-4dd5-68f6-018600f380ea
+    Clownfish_cv2: !<reference> 50e5ca22-5896-4aba-4a61-487c4bec480f
+    Clownfish_cv3: !<reference> 43b19eee-0442-42c3-662a-6e395fad831b
+    Clownfish_ikHandle1: !<reference> 4c4cc67b-4fd6-4f05-7a41-84829ff628f6
+    Clownfish_joint10_08: !<reference> 45968e4d-3e3b-46c3-6ba3-143ad1a03659
+    Clownfish_joint11_09: !<reference> 2b3995f1-2013-4f6d-4880-9ef0c6e375ce
+    Clownfish_joint12_010: !<reference> 4a82a819-24c9-433e-4c21-8d8c1a5e3181
+    Clownfish_joint13_011: !<reference> 54821e0d-a38e-41ac-6690-9ae5518adff9
+    Clownfish_joint2_01: !<reference> 679959af-604d-4a66-5d62-9584e54bcf7e
+    Clownfish_joint3_02: !<reference> 43345e8a-5dfd-42eb-5277-a7a03e9a0cea
+    Clownfish_joint4_03: !<reference> 36ab6939-6f26-4b20-63a4-69e5cce36280
+    Clownfish_joint7_05: !<reference> 77cc0956-d4b7-476b-7acb-e6c530a9627a
+    Clownfish_joint8_06: !<reference> bff1ddba-709a-42a1-7e53-d065b7a13161
+    Clownfish_joint9_07: !<reference> 37a2cf53-967c-4759-5960-743994f074aa
+    Clownfish_joint_00: !<reference> f79e6966-34a6-44f0-5809-81d90e6fde43
+    Clownfish_sine1Handle: !<reference> 3dc76a18-55e7-41df-52bd-4f15550c6b3c
+    Clownfish_splineIK_CV: !<reference> f7c0492b-de20-4496-4de3-d31278faaf8f
+    Clownfish_ver2_smooth: !<reference> b20aa488-f725-46a3-442a-a9d9073a7f8e
+    Object_2: !<reference> 796a49c1-29d3-4d82-7ada-0a49d977e8f8
+    Object_6: !<reference> 29e2cfc4-462d-4fc5-48b3-fbe0818e91a4
+    Object_8: !<reference> 35206f18-ec75-4ca0-5eee-e2c5997b37e0
+    Object_9: !<reference> 733539a7-52d4-4fac-4c21-161743e62ea8
+    RootNode: !<reference> 0f0040e1-fd6f-4427-62b6-1612acda26a7
+    Sketchfab_model: !<reference> fe6c5493-952e-45a3-490f-ccb7030e93ab
+    _rootJoint: !<reference> 0aa1387b-8797-448c-5023-5d48d539f202
+    ba2195af91d94830ae85d52f6e9d1d8f.fbx: !<reference> 3dcadd39-f729-4a93-7c6f-9384843667f5
+    joint5_04: !<reference> 02387bcf-d174-452f-45c3-a4c2bc695b94
+- !<SceneObject/bff1ddba-709a-42a1-7e53-d065b7a13161>
+  PrefabRemaps:
+    []
+  Name: Clownfish_joint8_06
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 1.731191, y: -3.054428, z: -6.245374}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    []
+- !<SceneObject/c9986816-4e40-48e9-4a7d-0b5c9b8d9d9f>
+  PrefabRemaps:
+    []
+  Name: clownfish
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 100.000000, y: 100.000000, z: 100.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> b2bb1788-eb49-44fe-5a91-5183417a2aa9
+  Components:
+    []
+- !<SceneObject/f30aa869-ae13-4f0d-4a14-d13351b1190f>
+  PrefabRemaps:
+    []
+  Name: Sketchfab_Scene
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> fe6c5493-952e-45a3-490f-ccb7030e93ab
+  Components:
+    - !<own> 20f9ee6c-184b-4b4f-7a9d-28dac74a40ba
+    - !<own> b349e5c4-5223-4628-6312-82bbd965983b
+- !<SceneObject/f79e6966-34a6-44f0-5809-81d90e6fde43>
+  PrefabRemaps:
+    []
+  Name: Clownfish_joint_00
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 13.415558, z: 8.000000}
+    Rotation: {x: -1.321385, y: -7.889982, z: 0.091130}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 679959af-604d-4a66-5d62-9584e54bcf7e
+    - !<own> 77cc0956-d4b7-476b-7acb-e6c530a9627a
+    - !<own> 37a2cf53-967c-4759-5960-743994f074aa
+    - !<own> 4a82a819-24c9-433e-4c21-8d8c1a5e3181
+  Components:
+    []
+- !<SceneObject/f7c0492b-de20-4496-4de3-d31278faaf8f>
+  PrefabRemaps:
+    []
+  Name: Clownfish_splineIK_CV
   Enabled: true
   Layers: 1
   LocalTransform: !<TransformEntity>
@@ -654,5 +639,20 @@
     HasSegmentScaleCompensation: false
   Children:
     []
+  Components:
+    []
+- !<SceneObject/fe6c5493-952e-45a3-490f-ccb7030e93ab>
+  PrefabRemaps:
+    []
+  Name: Sketchfab_model
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: -90.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 3dcadd39-f729-4a93-7c6f-9384843667f5
   Components:
     []

@@ -1,20 +1,20 @@
-- !<AssetImportMetadata/9ac1207b-d652-4637-8b92-a4f6852c25cc>
+- !<AssetImportMetadata/b85cdb1a-82d2-43be-8869-ad4fafeac5f5>
   ImportedAssetIds:
-    TypeScriptAsset: !<reference> 02a84204-1fd3-46aa-a3e5-6bc9885889a5
+    TypeScriptAsset: !<reference> 1fc3b136-00a8-40c1-ab11-1d78b0ccba02
   ImporterName: TypeScriptAssetImporter
-  PrimaryAsset: !<reference> 02a84204-1fd3-46aa-a3e5-6bc9885889a5
+  PrimaryAsset: !<reference> 1fc3b136-00a8-40c1-ab11-1d78b0ccba02
   PackageType: NotAPackage
   LegacyPackagePolicy: ~
   ExtraData:
     {}
   AssetDataMap:
-    TypeScriptAsset: !<own> 0f5155d4-1a21-4126-b94f-98472d570bf2
+    TypeScriptAsset: !<own> c805fc02-b5b4-42a4-82f6-5ffc79ad49b9
   DependentFiles:
     []
   ImporterSettings: !<AssetImporterSettings>
     {}
   CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
-- !<TypeScriptAssetData/0f5155d4-1a21-4126-b94f-98472d570bf2>
+- !<TypeScriptAssetData/c805fc02-b5b4-42a4-82f6-5ffc79ad49b9>
   SvgIcon: ""
   SetupScript:
     code: ""
@@ -22,20 +22,38 @@
   VersionMajor: 0
   VersionMinor: 0
   VersionPatch: 0
-  ComponentUid: 126b4198-bd05-42e3-818d-cea3daa8bca6
+  ComponentUid: 4cabfcad-a0eb-4121-bbcb-b7b6534e3114
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
     afterPlacingAudio: false
+    billboardOverfishing: false
+    billboardPinchCoral: false
+    billboardTemperature: false
+    billboardThankYou: false
+    billboardTrash: false
     clownfishCircling: false
+    endingAudio: false
+    enterButton: false
+    enterButtonColor: false
     introFrame: false
+    introFrameColor: false
+    muteHeadsetOnDevice: false
+    overfishingPush: false
+    overfishingScenarios: false
     placedVisuals: false
     placingAudio: false
     platform: false
     surfacePlacement: false
+    surfacePlacementColor: false
     temperatureExplainAudio: false
+    temperatureFactsFrame: false
+    temperatureKnowledgeFrame: false
+    temperatureScenarios: false
     temperatureSlider: false
     temperatureWater: false
+    trashPickup: false
+    trashScenarios: false
     welcomeAudio: false
   ScriptTypesHidden:
     {}
@@ -47,32 +65,68 @@
     []
   DefaultScriptInputs:
     - introFrame: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      enterButton: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       surfacePlacement: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
       placedVisuals: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       clownfishCircling: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       platform: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      temperatureScenarios: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       temperatureSlider: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      temperatureFactsFrame: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      temperatureKnowledgeFrame: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       temperatureWater: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
+      trashScenarios: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      trashPickup: !<MappingBased.AssignableType_2> 00000000-0000-0000-0000-000000000000
+      overfishingScenarios: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      overfishingPush: !<MappingBased.AssignableType_3> 00000000-0000-0000-0000-000000000000
+      billboardPinchCoral: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      billboardTemperature: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      billboardTrash: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      billboardOverfishing: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      billboardThankYou: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      introFrameColor: !<Vec4> {x: 0.050000, y: 0.320000, z: 0.360000, w: 1.000000}
+      surfacePlacementColor: !<Vec4> {x: 0.050000, y: 0.320000, z: 0.360000, w: 1.000000}
+      enterButtonColor: !<Vec4> {x: 0.000000, y: 0.706000, z: 0.894000, w: 1.000000}
       welcomeAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
       placingAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
       afterPlacingAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
       temperatureExplainAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      endingAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      muteHeadsetOnDevice: true
   ScriptTypes:
     -
       {}
   InputLines:
     - '// @ui {"widget":"group_start", "label":"Scene Flow"}'
     - '// @input SceneObject introFrame {"hint":"Intro UI frame shown at lens start"}'
+    - '// @input SceneObject enterButton {"hint":"ENTER CapsuleButton on the intro (EnterButton)"}'
     - '// @input AssignableType surfacePlacement {"hint":"SurfacePlacement Example component (autoStart should be off)"}'
     - '// @input SceneObject placedVisuals {"hint":"Content root enabled after successful placement (VisualParent)"}'
     - '// @input SceneObject clownfishCircling {"hint":"Clownfish orbit group, hidden until all corals are placed"}'
     - '// @input SceneObject platform {"hint":"Placement surface hidden after After Placing VO finishes"}'
+    - '// @input SceneObject temperatureScenarios {"hint":"Tempature Scenarios group. Keep this OFF in the editor; children stay ON."}'
     - '// @input SceneObject temperatureSlider {"hint":"Temperature UI shown after After Placing VO finishes"}'
-    - '// @input AssignableType_1 temperatureWater {"hint":"Drives WaterBase color from the temperature slider"}'
+    - '// @input SceneObject temperatureFactsFrame {"hint":"Facts panel shown with the temperature slider"}'
+    - '// @input SceneObject temperatureKnowledgeFrame {"hint":"Knowledge panel shown with the temperature slider"}'
+    - '// @input AssignableType_1 temperatureWater {"hint":"Temperature challenge (water tint / VO). Mesh tint is optional."}'
+    - '// @input SceneObject trashScenarios {"hint":"Trash Scenarios group. Disabled until temperature Solve VO finishes."}'
+    - '// @input AssignableType_2 trashPickup {"hint":"TrashPickupManager on Trash Scenarios"}'
+    - '// @input SceneObject overfishingScenarios {"hint":"Overfishing Scenarios group. Keep OFF in the editor; children stay ON."}'
+    - '// @input AssignableType_3 overfishingPush {"hint":"OverfishingBoatPushManager on Overfishing Scenarios"}'
+    - '// @input SceneObject billboardPinchCoral {"hint":"Billboard copy group Pinch_Coral. Keep OFF in the editor; children stay ON."}'
+    - '// @input SceneObject billboardTemperature {"hint":"Billboard copy group Temperature. Keep OFF in the editor; children stay ON."}'
+    - '// @input SceneObject billboardTrash {"hint":"Billboard copy group Trash. Keep OFF in the editor; children stay ON."}'
+    - '// @input SceneObject billboardOverfishing {"hint":"Billboard copy group Overfishing. Keep OFF in the editor; children stay ON."}'
+    - '// @input SceneObject billboardThankYou {"hint":"Billboard copy group Thank you. Keep OFF in the editor; children stay ON. Shown with EndingVO."}'
+    - '// @input vec4 introFrameColor = {0.05,0.32,0.36,1} {"hint":"Intro Frame plate color. Default is deep ocean teal.", "widget":"color"}'
+    - '// @input vec4 surfacePlacementColor = {0.05,0.32,0.36,1} {"hint":"Surface placement ring, dashed line, and glow. Default matches intro teal.", "widget":"color"}'
+    - '// @input vec4 enterButtonColor = {0,0.706,0.894,1} {"hint":"ENTER button fill. Hover/press auto-lighten and darken. Default is OceanX cyan.", "widget":"color"}'
     - '// @ui {"widget":"group_end"}'
     - '// @ui {"widget":"group_start", "label":"Audio"}'
     - '// @input Component.AudioComponent welcomeAudio {"hint":"Welcome voice-over played during intro"}'
     - '// @input Component.AudioComponent placingAudio {"hint":"Instruction VO played after the user places the surface"}'
-    - '// @input Component.AudioComponent afterPlacingAudio {"hint":"VO played once all four corals are placed on snap points"}'
+    - '// @input Component.AudioComponent afterPlacingAudio {"hint":"VO played once the required number of corals are placed"}'
     - '// @input Component.AudioComponent temperatureExplainAudio {"hint":"VO played when the temperature slider appears"}'
+    - '// @input Component.AudioComponent endingAudio {"hint":"Ending VO after OverfishingIssueSolveVO finishes. Do not stop()/pause()."}'
+    - '// @input bool muteHeadsetOnDevice = true {"hint":"On Specs, mute glasses speakers so mics do not echo Mix-to-Snap. Lens Studio preview still plays. Uncheck to hear VO live on device."}'
     - '// @ui {"widget":"group_end"}'

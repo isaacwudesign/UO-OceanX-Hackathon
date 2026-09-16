@@ -26,7 +26,9 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
+    alwaysReturnHome: false
     coralHolder: false
+    homeSnapDistance: false
     manipulation: false
     snapManager: false
   ScriptTypesHidden:
@@ -41,10 +43,16 @@
     - snapManager: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
       manipulation: !<MappingBased.AssignableType_1> 00000000-0000-0000-0000-000000000000
       coralHolder: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      alwaysReturnHome: true
+      homeSnapDistance: !<float> 80.000000
   ScriptTypes:
     -
       {}
   InputLines:
     - '// @input AssignableType snapManager {"hint":"Shared manager on WaterBase"}'
     - '// @input AssignableType_1 manipulation {"hint":"Drag component on this coral"}'
-    - '// @input SceneObject coralHolder {"hint":"Re-parent here when picked up from a snap point (e.g. VisualParent — not Platform)"}'
+    - '// @input SceneObject coralHolder {"hint":"Re-parent here when picked up from the tank floor (e.g. VisualParent — not Platform)"}'
+    - '// @ui {"widget":"group_start", "label":"Platform Home"}'
+    - "// @input bool alwaysReturnHome = true {\"hint\":\"If the drop misses the tank, always ease back to this coral's platform spot (no floating).\"}"
+    - '// @input float homeSnapDistance = 80 {"hint":"World-space range to snap home when Always Return Home is OFF. Ignored when that is ON."}'
+    - '// @ui {"widget":"group_end"}'

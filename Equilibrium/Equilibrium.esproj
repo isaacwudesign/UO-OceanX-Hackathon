@@ -13,7 +13,7 @@ metaInfo:
     []
   tags:
     []
-  lensName: OceanX Hack
+  lensName: Equilibrium
   lensDescriptors:
     []
   lensApplicability:
@@ -22,7 +22,7 @@ metaInfo:
   lensClientCompatibilities:
     - Spectacles
   platformBundlesEnabled: false
-  iconHash: ""
+  iconHash: cab6123c3cfdb76495d0c229ff740f93
   videoPreviewHash: ""
   fromTemplateName: Spectacles
   fromTemplateUrl: Lens Studio 5.15.4.26022322

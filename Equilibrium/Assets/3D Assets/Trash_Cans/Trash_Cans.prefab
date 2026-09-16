@@ -1,0 +1,166 @@
+- !<ObjectPrefab/3c4758e4-049c-4de4-be88-de5e52a122a3>
+  PackagePath: ""
+  objects:
+    - !<own> 1695bb6e-5f85-42dd-8dea-2700571d9574
+  LazyLoading: false
+  RetainAssets: true
+- !<SceneObject/1695bb6e-5f85-42dd-8dea-2700571d9574>
+  PrefabRemaps:
+    - 1695bb6e-5f85-42dd-8dea-2700571d9574: 1695bb6e-5f85-42dd-7215-d8ffa8e26a8b
+    - 30228587-462a-4eda-acfe-11a5cc462353: 30228587-462a-4eda-5301-ee5a33b9dcac
+    - 5ef8e8ad-d5ee-4d40-bc97-43a268871b59: 5ef8e8ad-d5ee-4d40-4368-bc5d9778e4a6
+    - 5f21f533-6b67-4a64-a0eb-4c32de7391c3: 5f21f533-6b67-4a64-5f14-b3cd218c6e3c
+    - 94740638-ba86-4b20-9f41-c12c2a34249f: 94740638-ba86-4b20-60be-3ed3d5cbdb60
+    - a92badb2-fa7f-4259-bb9b-66fb0752a88c: a92badb2-fa7f-4259-4464-9904f8ad5773
+    - ad93c1b0-d0cf-4d97-ac21-669888c6fe2d: ad93c1b0-d0cf-4d97-53de-9967773901d2
+    - d4c1ee5f-5b8e-4d63-91e9-e096bb873962: d4c1ee5f-5b8e-4d63-6e16-1f694478c69d
+    - e3ddb907-d9dd-4bae-9b9c-6fb04a2463ef: e3ddb907-d9dd-4bae-6463-904fb5db9c10
+  Name: Trash_Cans
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 100.000000, y: 100.000000, z: 100.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> a92badb2-fa7f-4259-bb9b-66fb0752a88c
+  Components:
+    []
+- !<RenderMeshVisual/30228587-462a-4eda-acfe-11a5cc462353>
+  PrefabRemaps:
+    []
+  Name: Cylinder.002
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 143ced53-eb0d-45ce-8706-2b6fc1ddd5c1
+  Mesh: !<reference> c4b59834-54f8-4abb-8d0f-60565bb26137
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/5ef8e8ad-d5ee-4d40-bc97-43a268871b59>
+  PrefabRemaps:
+    []
+  Name: Scene
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> e3ddb907-d9dd-4bae-9b9c-6fb04a2463ef
+    - !<own> 94740638-ba86-4b20-9f41-c12c2a34249f
+    - !<own> ad93c1b0-d0cf-4d97-ac21-669888c6fe2d
+  Components:
+    []
+- !<RenderMeshVisual/5f21f533-6b67-4a64-a0eb-4c32de7391c3>
+  PrefabRemaps:
+    []
+  Name: Cylinder.001
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 143ced53-eb0d-45ce-8706-2b6fc1ddd5c1
+  Mesh: !<reference> f4ef5f32-31de-4d60-b853-816c89684b51
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/94740638-ba86-4b20-9f41-c12c2a34249f>
+  PrefabRemaps:
+    []
+  Name: Trash_Can_02
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> d4c1ee5f-5b8e-4d63-91e9-e096bb873962
+- !<SceneObject/a92badb2-fa7f-4259-bb9b-66fb0752a88c>
+  PrefabRemaps:
+    []
+  Name: Scenes
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 5ef8e8ad-d5ee-4d40-bc97-43a268871b59
+  Components:
+    []
+- !<SceneObject/ad93c1b0-d0cf-4d97-ac21-669888c6fe2d>
+  PrefabRemaps:
+    []
+  Name: Trash_Can_01
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 5f21f533-6b67-4a64-a0eb-4c32de7391c3
+- !<RenderMeshVisual/d4c1ee5f-5b8e-4d63-91e9-e096bb873962>
+  PrefabRemaps:
+    []
+  Name: Cube.001
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 143ced53-eb0d-45ce-8706-2b6fc1ddd5c1
+  Mesh: !<reference> 8736d48b-bde0-455f-8071-3015844e74af
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/e3ddb907-d9dd-4bae-9b9c-6fb04a2463ef>
+  PrefabRemaps:
+    []
+  Name: Trash_Can_03
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 30228587-462a-4eda-acfe-11a5cc462353

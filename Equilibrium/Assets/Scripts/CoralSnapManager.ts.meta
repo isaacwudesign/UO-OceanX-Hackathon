@@ -26,9 +26,13 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
+    floorHalfExtentX: false
+    floorHalfExtentZ: false
+    floorLocalY: false
+    floorOutsideMargin: false
+    requiredPlacements: false
     sceneManager: false
     snapBubbleSfx: false
-    snapDistance: false
     snapDuration: false
     waterBase: false
   ScriptTypesHidden:
@@ -43,18 +47,26 @@
     - waterBase: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
       sceneManager: !<MappingBased.AssignableType> 00000000-0000-0000-0000-000000000000
       snapBubbleSfx: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
-      snapDistance: !<float> 30.000000
       snapDuration: 0.350000
+      requiredPlacements: !<float> 4.000000
+      floorLocalY: -12.780000
+      floorHalfExtentX: !<float> 95.000000
+      floorHalfExtentZ: !<float> 80.000000
+      floorOutsideMargin: !<float> 20.000000
   ScriptTypes:
     -
       {}
   InputLines:
     - '// @ui {"widget":"group_start", "label":"References"}'
-    - '// @input SceneObject waterBase {"hint":"Parent object whose children are SnapPoint_1 … SnapPoint_4"}'
-    - '// @input AssignableType sceneManager {"hint":"Notifies SceneManager when snap slot occupancy changes"}'
-    - '// @input Component.AudioComponent snapBubbleSfx {"hint":"Bubble SFX played when a coral snaps onto a snap point"}'
+    - '// @input SceneObject waterBase {"hint":"Tank root used for floor-stick local space (TouchTank)"}'
+    - '// @input AssignableType sceneManager {"hint":"Notifies SceneManager when floor occupancy changes"}'
+    - '// @input Component.AudioComponent snapBubbleSfx {"hint":"Drag the hierarchy Water_Bubble_SFX Audio component here."}'
     - '// @ui {"widget":"group_end"}'
-    - '// @ui {"widget":"group_start", "label":"Snap Settings"}'
-    - '// @input float snapDistance = 12 {"hint":"Max world-space distance from a snap point to accept placement"}'
-    - '// @input float snapDuration = 0.35 {"hint":"Seconds for the coral to ease into the slot"}'
+    - '// @ui {"widget":"group_start", "label":"Floor Stick (no physics)"}'
+    - '// @input float snapDuration = 0.35 {"hint":"Seconds for the coral to ease onto the floor"}'
+    - '// @input float requiredPlacements = 8 {"hint":"How many corals must sit on the floor to finish placement (reef pieces only, not tank decorations)"}'
+    - '// @input float floorLocalY = -12.78 {"hint":"Tank-local floor height (Y). Same value previously measured from SnapHints."}'
+    - '// @input float floorHalfExtentX = 95 {"hint":"Tank-local half-width (X). Drop must land inside this rectangle."}'
+    - '// @input float floorHalfExtentZ = 80 {"hint":"Tank-local half-depth (Z). Drop must land inside this rectangle."}'
+    - "// @input float floorOutsideMargin = 20 {\"hint\":\"Extra tank-local margin outside the rectangle that still counts as 'over the tank'\"}"
     - '// @ui {"widget":"group_end"}'

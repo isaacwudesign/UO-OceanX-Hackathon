@@ -1,0 +1,29 @@
+---
+description: Never trigger Lens Studio scene YAML rewrite / Inconsistent Project
+alwaysApply: true
+---
+
+# Do not unload Scene.scene
+
+This project’s Lens Studio scene saver writes illegal YAML (`{}` as a map key). That unloads `Assets/Scene.scene` and shows **Inconsistent Project**. We have recovered this multiple times. Do not cause it again.
+
+## Never
+
+- Call `CompileWithLogsTool` / any compile-trigger that writes `compile_trigger.ts` (or similar) under `Assets/`
+- Create, edit, or delete `Assets/compile_trigger.ts`
+- Edit `Equilibrium/Assets/Scene.scene` except emergency recovery of the `{}` parse failure
+- Fold, reformat, or “touch” the scene file to force a reimport
+- Change Inspector Volume by rewriting scene YAML
+- Spawn extra Scene 2 or create a new scene
+
+## Compile / verify
+
+- Let the user compile in Lens Studio, or wait for their existing watch compile
+- Do not poke the compiler from the agent to “check that it works”
+- Script edits are fine; the user saving in LS may still rewrite the scene — that is their save, not ours. Do not add extra compiles on top.
+
+## If Inconsistent Project appears anyway
+
+- Tell them: **Don't Save** if hierarchy is empty; **Save** only if Camera Object / SceneManager are visible
+- Fold same-indent `{}` in `Scene.scene` only as recovery, then stop
+- Double-click **Scene**, not Scene 2

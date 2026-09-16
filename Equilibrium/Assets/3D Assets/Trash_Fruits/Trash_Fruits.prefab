@@ -1,0 +1,166 @@
+- !<ObjectPrefab/3aeaad10-12a8-41bf-a0f1-beeb1644bfea>
+  PackagePath: ""
+  objects:
+    - !<own> 8ed2f307-a8db-42e4-ae29-391967b67530
+  LazyLoading: false
+  RetainAssets: true
+- !<RenderMeshVisual/0531737d-3f56-4ee7-a4f4-c946f16ec932>
+  PrefabRemaps:
+    []
+  Name: Orange_Peel_GEO_OrganicWaste_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> ec5c292f-f6bd-453e-8e4b-cd6809d3a7e1
+  Mesh: !<reference> 152484f0-9869-43cd-bb0c-2e5a0af662f3
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/09485a7a-495b-4a64-b2e1-09ceca0424c7>
+  PrefabRemaps:
+    []
+  Name: Scene
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 6763f16d-3986-4cc2-84bf-766f947c9d97
+    - !<own> 65548a44-1ec8-40e1-9317-fa44dfef2553
+    - !<own> 4abeed9b-8998-459a-af48-0ad59e4699ee
+  Components:
+    []
+- !<SceneObject/4abeed9b-8998-459a-af48-0ad59e4699ee>
+  PrefabRemaps:
+    []
+  Name: Trash_Fruits_03
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 0531737d-3f56-4ee7-a4f4-c946f16ec932
+- !<RenderMeshVisual/61adfed0-0905-4792-8ed6-e32cb87ee1b7>
+  PrefabRemaps:
+    []
+  Name: Apple_Rotten_GEO_OrganicWaste_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> ec5c292f-f6bd-453e-8e4b-cd6809d3a7e1
+  Mesh: !<reference> e501961c-6603-41ba-83db-8f584257851c
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/65548a44-1ec8-40e1-9317-fa44dfef2553>
+  PrefabRemaps:
+    []
+  Name: Trash_Fruits_02
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> ac3b1e16-0bf4-4646-a075-6c041ec449a2
+- !<SceneObject/6763f16d-3986-4cc2-84bf-766f947c9d97>
+  PrefabRemaps:
+    []
+  Name: Trash_Fruits_01
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 61adfed0-0905-4792-8ed6-e32cb87ee1b7
+- !<SceneObject/8462b8b7-0444-4a6b-a050-b5e006419217>
+  PrefabRemaps:
+    []
+  Name: Scenes
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 09485a7a-495b-4a64-b2e1-09ceca0424c7
+  Components:
+    []
+- !<SceneObject/8ed2f307-a8db-42e4-ae29-391967b67530>
+  PrefabRemaps:
+    - 0531737d-3f56-4ee7-a4f4-c946f16ec932: 0531737d-3f56-4ee7-5b0b-36b90e9136cd
+    - 09485a7a-495b-4a64-b2e1-09ceca0424c7: 09485a7a-495b-4a64-4d1e-f63135fbdb38
+    - 4abeed9b-8998-459a-af48-0ad59e4699ee: 4abeed9b-8998-459a-50b7-f52a61b96611
+    - 61adfed0-0905-4792-8ed6-e32cb87ee1b7: 61adfed0-0905-4792-7129-1cd347811e48
+    - 65548a44-1ec8-40e1-9317-fa44dfef2553: 65548a44-1ec8-40e1-6ce8-05bb2010daac
+    - 6763f16d-3986-4cc2-84bf-766f947c9d97: 6763f16d-3986-4cc2-7b40-89906b836268
+    - 8462b8b7-0444-4a6b-a050-b5e006419217: 8462b8b7-0444-4a6b-5faf-4a1ff9be6de8
+    - 8ed2f307-a8db-42e4-ae29-391967b67530: 8ed2f307-a8db-42e4-51d6-c6e698498acf
+    - ac3b1e16-0bf4-4646-a075-6c041ec449a2: ac3b1e16-0bf4-4646-5f8a-93fbe13bb65d
+  Name: Trash_Fruits
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 100.000000, y: 100.000000, z: 100.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 8462b8b7-0444-4a6b-a050-b5e006419217
+  Components:
+    []
+- !<RenderMeshVisual/ac3b1e16-0bf4-4646-a075-6c041ec449a2>
+  PrefabRemaps:
+    []
+  Name: Banana_Peel_GEO_OrganicWaste_0
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> ec5c292f-f6bd-453e-8e4b-cd6809d3a7e1
+  Mesh: !<reference> 9ac7e230-cd40-48a3-b55e-cbeaf79c9f2e
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}

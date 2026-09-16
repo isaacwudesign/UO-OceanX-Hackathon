@@ -15,3 +15,7 @@ Equilibrium/.vscode/
 Equilibrium/jsconfig.json
 Equilibrium/tsconfig.json
 Equilibrium/*.lock
+
+# Live Lens Studio MCP auth tokens — never commit
+Equilibrium/.mcp.json
+Equilibrium/.cursor/mcp.json

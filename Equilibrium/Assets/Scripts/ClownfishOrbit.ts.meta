@@ -26,7 +26,6 @@
   ExportUid: 00000000-0000-0000-0000-000000000000
   PackagePolicy: CanBeUnpacked
   ScriptInputsHidden:
-    clockwise: false
     orbitSpeed: false
     visibilityRoot: false
   ScriptTypesHidden:
@@ -39,7 +38,6 @@
     []
   DefaultScriptInputs:
     - orbitSpeed: !<float> 18.000000
-      clockwise: true
       visibilityRoot: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
   ScriptTypes:
     -
@@ -47,6 +45,5 @@
   InputLines:
     - '// @ui {"widget":"group_start", "label":"Orbit"}'
     - '// @input float orbitSpeed = 18 {"hint":"Orbit speed in degrees per second", "widget":"slider", "min":1, "max":120, "step":1}'
-    - '// @input bool clockwise = true {"hint":"When enabled, orbits clockwise (viewed from above)"}'
     - '// @input SceneObject visibilityRoot {"hint":"Optional: pause orbit while this object is disabled (e.g. VisualParent)"}'
     - '// @ui {"widget":"group_end"}'

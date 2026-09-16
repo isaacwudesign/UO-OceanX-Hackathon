@@ -1,0 +1,117 @@
+- !<AssetImportMetadata/d6d081d7-df03-477a-8c6a-5ca2078bb561>
+  ImportedAssetIds:
+    TypeScriptAsset: !<reference> d27540bd-61d6-4eb8-9450-96601affccbd
+  ImporterName: TypeScriptAssetImporter
+  PrimaryAsset: !<reference> d27540bd-61d6-4eb8-9450-96601affccbd
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    TypeScriptAsset: !<own> af575b94-8c43-46d0-b2cb-3fdb28d150b3
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<TypeScriptAssetData/af575b94-8c43-46d0-b2cb-3fdb28d150b3>
+  SvgIcon: ""
+  SetupScript:
+    code: ""
+  Description: ""
+  VersionMajor: 0
+  VersionMinor: 0
+  VersionPatch: 0
+  ComponentUid: 862644b9-bcb7-4389-8ecd-b76efbb40c66
+  ExportUid: 00000000-0000-0000-0000-000000000000
+  PackagePolicy: CanBeUnpacked
+  ScriptInputsHidden:
+    bobHeight: false
+    doneSfx: false
+    doneSfxTrack: false
+    exitMargin: false
+    explainAudio: false
+    factsFrame: false
+    floatOnSurface: false
+    floatSpeed: false
+    hullSeparation: false
+    inwardAccel: false
+    knowledgeFrame: false
+    maxSpeed: false
+    palmFollow: false
+    pushRadius: false
+    rockAngle: false
+    shoveSfx: false
+    shoveSfxTrack: false
+    solveAudio: false
+    tankHalfExtentX: false
+    tankHalfExtentZ: false
+    tankRoot: false
+    waterDrag: false
+  ScriptTypesHidden:
+    {}
+  ReadMe: !<reference> 00000000-0000-0000-0000-000000000000
+  DeclarationFile: !<reference> 00000000-0000-0000-0000-000000000000
+  Tags:
+    []
+  Attachments:
+    []
+  DefaultScriptInputs:
+    - explainAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      solveAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      shoveSfx: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      shoveSfxTrack: !<reference.AudioTrackAsset> 00000000-0000-0000-0000-000000000000
+      doneSfx: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
+      doneSfxTrack: !<reference.AudioTrackAsset> 00000000-0000-0000-0000-000000000000
+      tankRoot: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      tankHalfExtentX: !<float> 95.000000
+      tankHalfExtentZ: !<float> 80.000000
+      exitMargin: !<float> 25.000000
+      pushRadius: !<float> 42.000000
+      palmFollow: 0.320000
+      maxSpeed: !<float> 36.000000
+      waterDrag: 2.400000
+      inwardAccel: !<float> 16.000000
+      hullSeparation: !<float> 22.000000
+      factsFrame: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      knowledgeFrame: !<reference.SceneObject> 00000000-0000-0000-0000-000000000000
+      floatOnSurface: true
+      bobHeight: !<float> 2.000000
+      rockAngle: !<float> 6.000000
+      floatSpeed: 0.400000
+  ScriptTypes:
+    -
+      {}
+  InputLines:
+    - '// @ui {"widget":"group_start", "label":"Audio"}'
+    - '// @input Component.AudioComponent explainAudio {"hint":"OverfishingIssueExplain. Do not stop()/pause()."}'
+    - '// @input Component.AudioComponent solveAudio {"hint":"OverfishingIssueSolveVO. Plays after all boats leave the tank."}'
+    - '// @input Component.AudioComponent shoveSfx {"hint":"Fishboats_shovingSFX. Plays on each new palm contact. Do not stop()/pause()."}'
+    - '// @input Asset.AudioTrackAsset shoveSfxTrack {"hint":"Fishboats_shovingSFX.mp3 — assigned onto shove voices."}'
+    - '// @input Component.AudioComponent doneSfx {"hint":"Fishboats_Shoving_Done_SFX. Plays when a boat leaves the tank. Do not stop()/pause()."}'
+    - '// @input Asset.AudioTrackAsset doneSfxTrack {"hint":"Fishboats_Shoving_Done_SFX.mp3 — assigned onto done voices."}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Tank"}'
+    - '// @input SceneObject tankRoot {"hint":"TouchTank — boats stay on this water plane and leave in tank-local XZ."}'
+    - '// @input float tankHalfExtentX = 160 {"hint":"Tank-local half-width. Match CoralSnapManager (TouchTank is scaled 0.2)."}'
+    - '// @input float tankHalfExtentZ = 160 {"hint":"Tank-local half-depth. Match CoralSnapManager (TouchTank is scaled 0.2)."}'
+    - '// @input float exitMargin = 25 {"hint":"Extra tank-local distance past the rectangle that counts as off the water."}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Palm shove (heavy water)"}'
+    - '// @input float pushRadius = 22 {"hint":"cm. Palm must be this close to the hull — not a wide magnet bubble."}'
+    - '// @input float palmFollow = 0.32 {"hint":"While touching, boat matches this fraction of palm speed (lower = heavier)."}'
+    - '// @input float maxSpeed = 36 {"hint":"Max slide speed in cm/s. Stops teleport flicks."}'
+    - '// @input float waterDrag = 2.4 {"hint":"Water drag (1/s). Higher = boats die sooner after a sweep."}'
+    - '// @input float inwardAccel = 16 {"hint":"Pull toward tank center / reef (cm/s²). They creep in unless you sweep them out."}'
+    - '// @input float hullSeparation = 22 {"hint":"World-cm hull radius. Not multiplied by boat scale (scale 2.3 would yeet them off the tank)."}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Frames"}'
+    - '// @input SceneObject factsFrame {"hint":"Overfishing facts frame, hidden after Solve VO finishes"}'
+    - '// @input SceneObject knowledgeFrame {"hint":"Overfishing knowledge frame, hidden after Solve VO finishes"}'
+    - '// @ui {"widget":"group_end"}'
+    - '// @ui {"widget":"group_start", "label":"Surface Float"}'
+    - '// @input bool floatOnSurface = true {"hint":"Gentle bob and rock so boats read as sitting on the water."}'
+    - '// @input float bobHeight = 2 {"hint":"World-Y bob height in cm. 1.5–3 is a small swell on this tank.", "widget":"slider", "min":0, "max":10, "step":0.25}'
+    - '// @input float rockAngle = 6 {"hint":"Pitch/roll in degrees. Keep under ~10 so shove still feels solid.", "widget":"slider", "min":0, "max":20, "step":0.5}'
+    - '// @input float floatSpeed = 0.4 {"hint":"How fast the surface motion cycles, in waves per second.", "widget":"slider", "min":0.1, "max":1.5, "step":0.05}'
+    - '// @ui {"widget":"group_end"}'
