@@ -1,8 +1,8 @@
 - !<Material/0d43b8f3-cf0d-4e70-904e-82ccbf1177f7>
   PackagePath: ""
   PassesInfo:
-    - !<own> 19c72f48-5784-4eb6-936c-be1db7ca2674
-- !<PassInfo/19c72f48-5784-4eb6-936c-be1db7ca2674>
+    - !<own> 73c0f2a4-6b8d-4e1c-95af-0b3c6d8e1f4a
+- !<PassInfo/73c0f2a4-6b8d-4e1c-95af-0b3c6d8e1f4a>
   CachedProperties:
     - Port_Depth_N004:
         typeIdx: 1
@@ -25,6 +25,12 @@
     - Port_GSplatScale_N004:
         typeIdx: 4
         value: {x: 0.000000, y: 0.000000, z: 0.000000}
+    - Port_LODValue_N001:
+        typeIdx: 1
+        value: 0.000000
+    - Port_Normal_N006:
+        typeIdx: 4
+        value: {x: 0.000000, y: 1.000000, z: 0.000000}
     - Port_PrevWorldPosition_N004:
         typeIdx: 4
         value: {x: 0.000000, y: 0.000000, z: 0.000000}
@@ -34,6 +40,9 @@
     - Port_RayOrigin_N004:
         typeIdx: 4
         value: {x: 0.000000, y: 0.000000, z: 0.000000}
+    - Port_UVCoord_N001:
+        typeIdx: 3
+        value: {x: 0.000000, y: 0.000000}
     - Port_WorldNormal_N004:
         typeIdx: 4
         value: {x: 0.000000, y: 1.000000, z: 0.000000}
@@ -43,12 +52,6 @@
     - Port_WorldTangent_N004:
         typeIdx: 4
         value: {x: 0.000000, y: 0.000000, z: 1.000000}
-    - alpha:
-        typeIdx: 1
-        value: 0.000000
-    - selfIllum:
-        typeIdx: 1
-        value: 0.000000
   DepthWrite: true
   DepthTest: true
   DepthFunction: LessEqual
@@ -60,42 +63,28 @@
   FrustumCullPad: 0.000000
   InstanceCount: 1
   Defines:
-    - ENABLE_DIFFUSE_LIGHTING
-    - ENABLE_DIRECT_LIGHTS
-    - ENABLE_ENVIRONMENT_MAP
-    - ENABLE_LIGHTING
-    - ENABLE_SPECULAR_LIGHTING
-    - ENABLE_TONE_MAPPING
-    - ENABLE_VERTEX_COLOR_NONE
-    - baseTexUV 0
-    - emissiveTexUV 0
-    - materialParamsTexUV 0
-    - normalTexUV 0
-    - opacityTexUV 0
-    - rimColorTexUV 0
-    - NODE_13_DROPLIST_ITEM 0
-    - NODE_181_DROPLIST_ITEM 0
-    - NODE_184_DROPLIST_ITEM 0
-    - NODE_221_DROPLIST_ITEM 0
-    - NODE_228_DROPLIST_ITEM 0
-    - NODE_27_DROPLIST_ITEM 0
-    - NODE_315_DROPLIST_ITEM 0
-    - NODE_38_DROPLIST_ITEM 0
-    - NODE_49_DROPLIST_ITEM 0
-    - NODE_69_DROPLIST_ITEM 0
-    - NODE_76_DROPLIST_ITEM 0
+    - ENABLE_BASE_TEX
   BlendMode: Disabled
   Properties:
+    Port_AO_N006:
+      typeIdx: 4
+      value: {x: 1.000000, y: 1.000000, z: 1.000000}
+    Port_Emissive_N006:
+      typeIdx: 4
+      value: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Port_SpecularAO_N006:
+      typeIdx: 4
+      value: {x: 1.000000, y: 1.000000, z: 1.000000}
     PreviewEnabled:
       typeIdx: 0
       value: 0
     baseColor:
       typeIdx: 5
       value: {x: 0.290196, y: 0.290196, z: 0.282353, w: 1.000000}
-    materialParamsTex:
+    baseTex:
       typeIdx: 9
       value:
-        id: a8779d5b-a4c6-4b0d-a2bc-f7c68c108aac
+        id: 06834bab-0721-4986-b855-e1efcfef41e6
         sampler:
           filteringMode: Bilinear
           wrapModeU: ClampToEdge
@@ -110,16 +99,4 @@
     roughness:
       typeIdx: 1
       value: 1.000000
-    uv2Offset:
-      typeIdx: 3
-      value: {x: 1.000000, y: 1.000000}
-    uv2Scale:
-      typeIdx: 3
-      value: {x: 1.000000, y: 1.000000}
-    uv3Offset:
-      typeIdx: 3
-      value: {x: 1.000000, y: 1.000000}
-    uv3Scale:
-      typeIdx: 3
-      value: {x: 1.000000, y: 1.000000}
-  Pass: !<reference> 071d459d-0017-4473-9969-dac91a572bed
+  Pass: !<reference> 0e5ecb70-1cb8-4404-98e4-60ccdcd90e37

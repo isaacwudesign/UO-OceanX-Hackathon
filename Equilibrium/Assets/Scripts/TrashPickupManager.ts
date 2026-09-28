@@ -1,12 +1,17 @@
 /**
- * Plastic-pollution beat: pinch-to-collect after heat is solved.
- * Kinematic only (no physics bodies). One 2D SFX voice. Locked until Explain ends.
+ * Plastic-pollution beat: pinch a piece, carry it into the Bin, then it fades out.
+ * A miss returns the piece to the water. Kinematic only. Locked until Explain ends.
  */
 import {Interactable} from "SpectaclesInteractionKit.lspkg/Components/Interaction/Interactable/Interactable"
 import {InteractableManipulation} from "SpectaclesInteractionKit.lspkg/Components/Interaction/InteractableManipulation/InteractableManipulation"
 import {applyMuteMix, applyPlayMix, applySfxMix} from "./SnapAudio"
 
-const PIECE_PREFIXES = ["Trash_Bottle", "Trash_Can", "Trash_Fruits"]
+const PIECE_PREFIXES = ["Trash_Bottle", "Trash_Can"]
+const BIN_NAME = "Bin"
+/** Capture radius as a multiple of the bin's world scale. */
+const BIN_REACH = 2
+const FADE_TIME = 0.45
+const RETURN_TIME = 0.35
 /** Mix-to-Snap treats SFX volume as the Snap level. 1 is still quieter than VO. */
 const PICK_SFX_GAIN = 4
 
@@ -21,6 +26,21 @@ interface TrashFloatState {
   yawFreq: number
 }
 
+interface TrashFade {
+  piece: SceneObject
+  transform: Transform
+  age: number
+  startScale: vec3
+  startPos: vec3
+}
+
+interface TrashReturn {
+  state: TrashFloatState
+  age: number
+  startPos: vec3
+  startRot: quat
+}
+
 @component
 export class TrashPickupManager extends BaseScriptComponent {
   @ui.group_start("Audio")
@@ -33,12 +53,12 @@ export class TrashPickupManager extends BaseScriptComponent {
   solveAudio: AudioComponent
 
   @input
-  @hint("Drag the hierarchy Trash_Picking_SFX Audio component here.")
+  @hint("Drag the hierarchy Task_Done_SFX Audio component here.")
   pickSfx: AudioComponent
 
   @input
   @allowUndefined
-  @hint("Trash_Picking_SFX.mp3 — assigned onto pickSfx at runtime (one 2D voice).")
+  @hint("Task_Done_SFX.mp3 — assigned onto pickSfx at runtime (one 2D voice).")
   pickSfxTrack: AudioTrackAsset
   @ui.group_end
 
@@ -78,6 +98,10 @@ export class TrashPickupManager extends BaseScriptComponent {
   private pieces: SceneObject[] = []
   private floatStates: TrashFloatState[] = []
   private pickedIds = new Set<string>()
+  private heldIds = new Set<string>()
+  private fades: TrashFade[] = []
+  private returns: TrashReturn[] = []
+  private bin: SceneObject | null = null
   private explainFinished = false
   private started = false
   private solved = false
@@ -94,6 +118,7 @@ export class TrashPickupManager extends BaseScriptComponent {
 
   private onStart(): void {
     this.collectPieces()
+    this.findBin()
     this.preparePieces()
     this.cacheHeadsetVolume(this.explainAudio)
     this.cacheHeadsetVolume(this.solveAudio)
@@ -129,9 +154,13 @@ export class TrashPickupManager extends BaseScriptComponent {
     }
     this.started = true
     this.collectPieces()
+    this.findBin()
     this.preparePieces()
     this.preparePickVoices()
     this.pickedIds.clear()
+    this.heldIds.clear()
+    this.fades = []
+    this.returns = []
     this.explainFinished = false
     this.solved = false
     this.setInteractionLocked(true)
@@ -150,7 +179,7 @@ export class TrashPickupManager extends BaseScriptComponent {
       return
     }
     if (!this.pickSfx) {
-      print("TrashPickupManager: drag Trash_Picking_SFX onto pickSfx")
+      print("TrashPickupManager: drag Task_Done_SFX onto pickSfx")
     }
 
     this.armAudio(this.explainAudio)
@@ -172,10 +201,10 @@ export class TrashPickupManager extends BaseScriptComponent {
     }
     this.pickVoices.push(this.pickSfx)
     const names = [
-      "Trash_Picking_SFX_Voice2",
-      "Trash_Picking_SFX_Voice3",
-      "Trash_Picking_SFX_Voice4",
-      "Trash_Picking_SFX_Voice5",
+      "Task_Done_SFX_Voice2",
+      "Task_Done_SFX_Voice3",
+      "Task_Done_SFX_Voice4",
+      "Task_Done_SFX_Voice5",
     ]
     for (let i = 0; i < names.length; i++) {
       const extra = this.cloneSfxVoice(this.pickSfx, names[i])
@@ -282,7 +311,10 @@ export class TrashPickupManager extends BaseScriptComponent {
     }
     if (manipulation) {
       manipulation.onManipulationStart.add(() => {
-        this.collectPiece(piece)
+        this.onGrab(piece)
+      })
+      manipulation.onManipulationEnd.add(() => {
+        this.onRelease(piece)
       })
     }
 
@@ -302,6 +334,11 @@ export class TrashPickupManager extends BaseScriptComponent {
   }
 
   private onUpdate(): void {
+    const dt = getDeltaTime()
+    this.updateFades(dt)
+    this.updateReturns(dt)
+    this.checkHeldInBin()
+
     if (!this.floatOnSurface || !this.started || this.solved) {
       return
     }
@@ -314,7 +351,13 @@ export class TrashPickupManager extends BaseScriptComponent {
     for (let i = 0; i < this.floatStates.length; i++) {
       const state = this.floatStates[i]
       const piece = state.piece
-      if (!piece.enabled || this.pickedIds.has(piece.uniqueIdentifier)) {
+      const id = piece.uniqueIdentifier
+      if (
+        !piece.enabled ||
+        this.pickedIds.has(id) ||
+        this.heldIds.has(id) ||
+        this.isReturning(id)
+      ) {
         continue
       }
 
@@ -337,7 +380,7 @@ export class TrashPickupManager extends BaseScriptComponent {
     }
   }
 
-  private collectPiece(piece: SceneObject): void {
+  private onGrab(piece: SceneObject): void {
     if (!this.explainFinished || this.solved) {
       return
     }
@@ -345,11 +388,218 @@ export class TrashPickupManager extends BaseScriptComponent {
     if (this.pickedIds.has(id)) {
       return
     }
+    this.heldIds.add(id)
+    this.cancelReturn(id)
+  }
+
+  private onRelease(piece: SceneObject): void {
+    const id = piece.uniqueIdentifier
+    this.heldIds.delete(id)
+    if (!this.explainFinished || this.solved || this.pickedIds.has(id)) {
+      return
+    }
+    if (this.isInsideBin(piece)) {
+      this.beginFade(piece)
+      return
+    }
+    this.beginReturn(piece)
+  }
+
+  /** Deposit as soon as a held piece reaches the bin, before the pinch lets go. */
+  private checkHeldInBin(): void {
+    if (!this.explainFinished || this.solved) {
+      return
+    }
+    for (let i = 0; i < this.pieces.length; i++) {
+      const piece = this.pieces[i]
+      const id = piece.uniqueIdentifier
+      if (!this.heldIds.has(id) || this.pickedIds.has(id)) {
+        continue
+      }
+      if (this.isInsideBin(piece)) {
+        this.beginFade(piece)
+      }
+    }
+  }
+
+  private beginFade(piece: SceneObject): void {
+    const id = piece.uniqueIdentifier
+    if (this.pickedIds.has(id)) {
+      return
+    }
     this.pickedIds.add(id)
-    piece.enabled = false
+    this.heldIds.delete(id)
+    this.cancelReturn(id)
+
+    const manipulation = piece.getComponent(
+      InteractableManipulation.getTypeName()
+    ) as InteractableManipulation
+    const interactable = piece.getComponent(
+      Interactable.getTypeName()
+    ) as Interactable
+    if (manipulation) {
+      manipulation.enabled = false
+    }
+    if (interactable) {
+      interactable.enabled = false
+    }
+
+    const transform = piece.getTransform()
+    const scale = transform.getLocalScale()
+    const pos = transform.getWorldPosition()
+    this.fades.push({
+      piece: piece,
+      transform: transform,
+      age: 0,
+      startScale: new vec3(scale.x, scale.y, scale.z),
+      startPos: new vec3(pos.x, pos.y, pos.z),
+    })
     this.playPickSfx()
     if (this.pickedIds.size >= this.pieces.length) {
       this.onAllCollected()
+    }
+  }
+
+  private updateFades(dt: number): void {
+    for (let i = this.fades.length - 1; i >= 0; i--) {
+      const fade = this.fades[i]
+      fade.age += dt
+      const u = fade.age / FADE_TIME
+      const eased = u >= 1 ? 1 : u * u
+      const binPos = this.binWorldPosition()
+      fade.transform.setWorldPosition(vec3.lerp(fade.startPos, binPos, eased))
+      const remain = 1 - eased
+      fade.transform.setLocalScale(
+        new vec3(
+          fade.startScale.x * remain,
+          fade.startScale.y * remain,
+          fade.startScale.z * remain
+        )
+      )
+      if (u >= 1) {
+        fade.piece.enabled = false
+        this.fades.splice(i, 1)
+      }
+    }
+  }
+
+  private beginReturn(piece: SceneObject): void {
+    const state = this.floatStateFor(piece)
+    if (!state) {
+      return
+    }
+    const id = piece.uniqueIdentifier
+    this.cancelReturn(id)
+    const pos = state.transform.getLocalPosition()
+    const rot = state.transform.getLocalRotation()
+    this.returns.push({
+      state: state,
+      age: 0,
+      startPos: new vec3(pos.x, pos.y, pos.z),
+      startRot: new quat(rot.w, rot.x, rot.y, rot.z),
+    })
+  }
+
+  private updateReturns(dt: number): void {
+    for (let i = this.returns.length - 1; i >= 0; i--) {
+      const trip = this.returns[i]
+      const id = trip.state.piece.uniqueIdentifier
+      if (this.heldIds.has(id) || this.pickedIds.has(id)) {
+        this.returns.splice(i, 1)
+        continue
+      }
+      trip.age += dt
+      const u = trip.age / RETURN_TIME
+      const eased = u >= 1 ? 1 : u * u * (3 - 2 * u)
+      trip.state.transform.setLocalPosition(vec3.lerp(trip.startPos, trip.state.restPos, eased))
+      trip.state.transform.setLocalRotation(quat.slerp(trip.startRot, trip.state.restRot, eased))
+      if (u >= 1) {
+        this.returns.splice(i, 1)
+      }
+    }
+  }
+
+  private isInsideBin(piece: SceneObject): boolean {
+    if (!this.bin) {
+      this.findBin()
+    }
+    if (!this.bin) {
+      return false
+    }
+    const binPos = this.bin.getTransform().getWorldPosition()
+    const trashPos = piece.getTransform().getWorldPosition()
+    const scale = this.bin.getTransform().getWorldScale()
+    const reach = Math.max(scale.x, Math.max(scale.y, scale.z)) * BIN_REACH
+    const dx = trashPos.x - binPos.x
+    const dy = trashPos.y - binPos.y
+    const dz = trashPos.z - binPos.z
+    return dx * dx + dy * dy + dz * dz <= reach * reach
+  }
+
+  private binWorldPosition(): vec3 {
+    if (!this.bin) {
+      return vec3.zero()
+    }
+    return this.bin.getTransform().getWorldPosition()
+  }
+
+  private findBin(): void {
+    if (this.bin) {
+      return
+    }
+    this.bin = this.findNamed(this.getSceneObject(), BIN_NAME)
+    if (this.bin) {
+      return
+    }
+    const count = global.scene.getRootObjectsCount()
+    for (let i = 0; i < count; i++) {
+      const found = this.findNamed(global.scene.getRootObject(i), BIN_NAME)
+      if (found) {
+        this.bin = found
+        return
+      }
+    }
+    print("TrashPickupManager: Bin not found")
+  }
+
+  private findNamed(root: SceneObject, name: string): SceneObject | null {
+    if (root.name === name) {
+      return root
+    }
+    const childCount = root.getChildrenCount()
+    for (let i = 0; i < childCount; i++) {
+      const found = this.findNamed(root.getChild(i), name)
+      if (found) {
+        return found
+      }
+    }
+    return null
+  }
+
+  private floatStateFor(piece: SceneObject): TrashFloatState | null {
+    const id = piece.uniqueIdentifier
+    for (let i = 0; i < this.floatStates.length; i++) {
+      if (this.floatStates[i].piece.uniqueIdentifier === id) {
+        return this.floatStates[i]
+      }
+    }
+    return null
+  }
+
+  private isReturning(id: string): boolean {
+    for (let i = 0; i < this.returns.length; i++) {
+      if (this.returns[i].state.piece.uniqueIdentifier === id) {
+        return true
+      }
+    }
+    return false
+  }
+
+  private cancelReturn(id: string): void {
+    for (let i = this.returns.length - 1; i >= 0; i--) {
+      if (this.returns[i].state.piece.uniqueIdentifier === id) {
+        this.returns.splice(i, 1)
+      }
     }
   }
 

@@ -70,7 +70,9 @@
       mesh: None Compression
       png: Performance Compression
     Overrides:
-      {}
+      Textures/texture: Performance Compression
+      Textures/texture 3: Performance Compression
+      Textures/texture 6: Performance Compression
 - !<SceneObject/0477ea87-ee3e-4be7-641a-ec6b57ca96ba>
   PrefabRemaps:
     []

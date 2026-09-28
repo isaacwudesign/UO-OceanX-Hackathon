@@ -6,6 +6,7 @@ import {Interactable} from "SpectaclesInteractionKit.lspkg/Components/Interactio
 import {InteractableManipulation} from "SpectaclesInteractionKit.lspkg/Components/Interaction/InteractableManipulation/InteractableManipulation"
 import {HandInputData} from "SpectaclesInteractionKit.lspkg/Providers/HandInputData/HandInputData"
 import {applyMuteMix, applyPlayMix, applySfxMix} from "./SnapAudio"
+import {AppearFade} from "./AppearFade"
 
 const BOAT_PREFIX = "Fishboat_"
 const HAND_NAMES: Array<"left" | "right"> = ["left", "right"]
@@ -49,12 +50,12 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
 
   @input
   @allowUndefined
-  @hint("Fishboats_Shoving_Done_SFX. Plays when a boat leaves the tank. Do not stop()/pause().")
+  @hint("Task_Done_SFX. Plays when a boat leaves the tank. Do not stop()/pause().")
   doneSfx: AudioComponent
 
   @input
   @allowUndefined
-  @hint("Fishboats_Shoving_Done_SFX.mp3 — assigned onto done voices.")
+  @hint("Task_Done_SFX.mp3 — assigned onto done voices.")
   doneSfxTrack: AudioTrackAsset
   @ui.group_end
 
@@ -150,6 +151,8 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
   private doneVoices: AudioComponent[] = []
   private lastDoneVoice: AudioComponent | null = null
   private headsetVolume = new Map<AudioComponent, number>()
+  private boatFade = new AppearFade()
+  private waterLockFrames = 0
 
   onAwake(): void {
     this.createEvent("OnStartEvent").bind(this.onStart.bind(this))
@@ -201,6 +204,8 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
     this.prepareSfx()
     this.setPushEnabled(false)
     this.setFramesVisible(true)
+    this.waterLockFrames = 2
+    this.fadeBoatsIn()
 
     if (this.explainAudio) {
       this.explainAudio.setOnFinish(this.onExplainFinished.bind(this))
@@ -312,11 +317,26 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
     this.pushEnabled = enabled
   }
 
+  private fadeBoatsIn(): void {
+    const roots: SceneObject[] = []
+    for (let i = 0; i < this.boats.length; i++) {
+      roots.push(this.boats[i].obj)
+    }
+    this.boatFade.play(roots)
+  }
+
   private onUpdate(): void {
+    const dt = getDeltaTime()
+    if (dt > 0) {
+      this.boatFade.tick(dt)
+    }
     if (!this.started || this.solved) {
       return
     }
-    const dt = getDeltaTime()
+    if (this.waterLockFrames > 0) {
+      this.waterLockFrames -= 1
+      this.refreshWaterHeight()
+    }
     if (dt <= 0) {
       return
     }
@@ -550,6 +570,21 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
       transform.setWorldPosition(pos)
       const rock = quat.fromEulerAngles(pitch, yaw, roll)
       transform.setLocalRotation(rock.multiply(boat.restRot))
+    }
+  }
+
+  /** World matrices are stale on the frame the group is enabled. */
+  private refreshWaterHeight(): void {
+    for (let i = 0; i < this.boats.length; i++) {
+      const boat = this.boats[i]
+      if (boat.gone || !boat.obj.enabled) {
+        continue
+      }
+      const world = boat.obj.getTransform().getWorldPosition()
+      boat.waterWorldY = world.y
+      if (this.isOffTank(world)) {
+        this.placeOnWater(boat)
+      }
     }
   }
 

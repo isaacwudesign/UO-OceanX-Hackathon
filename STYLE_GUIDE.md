@@ -88,6 +88,51 @@ To apply a real font later: import a `.ttf` / `.otf` into `Equilibrium/Assets/`,
 
 ---
 
+## Exhibit cards
+
+Locked 2026-09-27. Knowledge and facts posters share one flat-vector museum panel. Reference posters: **WHEN PLASTIC HITS THE REEF** and **WHEN THE FISH DISAPPEAR**.
+
+| Token | Decided |
+|---|---|
+| Canvas | `1080×1620` PNG, portrait 2:3 |
+| Shape | One rounded rectangle, large soft corner radius. No sharp corners. |
+| Outside the card | True transparent PNG. No mat, no gray, no black fill. |
+| Panel fill | Opaque navy `#0A2540` |
+| Outline | Thin cyan `#00B4E4`, following the rounded silhouette |
+| Headlines | White, bold condensed geometric sans-serif, all caps |
+| Supporting lines | Cyan `#00B4E4`, condensed sans-serif, all caps, smaller than the headline |
+| Footer sentence | Cyan bold, then one smaller white line. Facts timelines have no footer sentence. |
+| Icons | Simple flat marine icons. Not photos, not 3D, not a full-color illustration. |
+| Empty space | About 25–35% of the card stays empty navy. Do not scale type or icons to fill it. |
+
+### Header
+
+Large white title, small cyan subtitle, then a generous navy gap before the first row. Decoration stays sparse: three small diagonal cyan bars at the upper left, one thin cyan line, four tiny dots at the upper right, and one small three-bar accent under the subtitle.
+
+### Rows
+
+Knowledge cards use **3** rows. Facts cards use **4** rows. Each row is a rounded cyan outline with padding, and a clear navy gap between rows.
+
+Every row has three columns:
+
+| Column | Width | Content |
+|---|---|---|
+| Left | ~30% | One medium icon, with navy space around it |
+| Center | ~35% | Large white step title |
+| Right | ~35% | Short cyan explanation |
+
+Thin vertical cyan dividers separate the columns. Dividers do not touch the top or bottom of the row. Text and icons do not touch dividers, borders, or each other.
+
+### Footer
+
+Knowledge cards end with a short cyan recovery line and one smaller white condition. Facts cards do not add a sentence. Both may have a shallow strip of flat cyan coral, tiny fish, and a few bubbles along the bottom edge only. No dense garden, wreath, gold, or pearls.
+
+### Do not use
+
+Number circles, paragraphs, separate fact boxes, glass, photoreal or 3D art, heavy glow, charts, sliders, logos, watermarks, or any sentence that was not supplied.
+
+---
+
 ## UIKit styles in use
 
 | Object | Component | Style / appearance |
@@ -105,7 +150,7 @@ To apply a real font later: import a `.ttf` / `.otf` into `Equilibrium/Assets/`,
 | 2026-08-26 | Intro panel tinted deep ocean teal (`#0C525C`) via SceneManager overlay | |
 | 2026-08-28 | Surface placement ring/dots tinted from SceneManager (no package unpack) | |
 | 2026-09-13 | Temperature slider track/fill/knob tinted OceanX navy + cyan (no UIKit unpack) | |
-| | | |
+| 2026-09-27 | Exhibit card style locked: 1080×1620 navy rounded panel, cyan rows, spacious three-column layout | |
 
 ---
 

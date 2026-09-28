@@ -5,6 +5,7 @@
 import { Example } from "SurfacePlacement.lspkg/Example";
 import { CircleAnimation } from "SurfacePlacement.lspkg/Scripts/CircleAnimation";
 import { Interactable } from "SpectaclesInteractionKit.lspkg/Components/Interaction/Interactable/Interactable";
+import { InteractionPlane } from "SpectaclesInteractionKit.lspkg/Components/Interaction/InteractionPlane/InteractionPlane";
 import { InteractableManipulation } from "SpectaclesInteractionKit.lspkg/Components/Interaction/InteractableManipulation/InteractableManipulation";
 import { CapsuleButton } from "SpectaclesUIKit.lspkg/Scripts/Components/Button/CapsuleButton";
 import { Frame } from "SpectaclesUIKit.lspkg/Scripts/Components/Frame/Frame";
@@ -13,6 +14,7 @@ import {
   RoundedRectangle,
 } from "SpectaclesUIKit.lspkg/Scripts/Visuals/RoundedRectangle/RoundedRectangle";
 import { RoundedRectangleVisual } from "SpectaclesUIKit.lspkg/Scripts/Visuals/RoundedRectangle/RoundedRectangleVisual";
+import { AppearFade } from "./AppearFade";
 import { TemperatureWaterController } from "./TemperatureWaterController";
 import { CoralSnapPiece } from "./CoralSnapPiece";
 import { TrashPickupManager } from "./TrashPickupManager";
@@ -198,6 +200,9 @@ export class SceneManager extends BaseScriptComponent {
   private trashPhaseStarted = false;
   private overfishingPhaseStarted = false;
   private headsetVolume = new Map<AudioComponent, number>();
+  private fishFade = new AppearFade();
+  private nextTargetingLockTime = 0;
+  private targetingLockLogged = false;
 
   onAwake(): void {
     if (this.placingAudio) {
@@ -212,6 +217,10 @@ export class SceneManager extends BaseScriptComponent {
       );
     }
     this.createEvent("OnStartEvent").bind(this.onStart.bind(this));
+    this.createEvent("UpdateEvent").bind(() => {
+      this.fishFade.tick(getDeltaTime());
+      this.tickHandsOnlyTargeting();
+    });
     bindSnapCaptureMute(this);
   }
 
@@ -263,6 +272,7 @@ export class SceneManager extends BaseScriptComponent {
     }
     this.applyIntroFrameTint();
     this.applyEnterButtonTint();
+    this.lockHandsOnlyTargeting();
     this.enterIntro();
   }
 
@@ -865,6 +875,68 @@ export class SceneManager extends BaseScriptComponent {
     }
   }
 
+  /**
+   * UIKit frames set TargetingMode.All when they initialize, which turns the
+   * far ray back on. IntroFrame keeps that cast. Everything else stays Direct.
+   */
+  private tickHandsOnlyTargeting(): void {
+    const now = getTime();
+    if (now < this.nextTargetingLockTime) {
+      return;
+    }
+    this.nextTargetingLockTime = now + 0.25;
+    this.lockHandsOnlyTargeting();
+  }
+
+  private lockHandsOnlyTargeting(): void {
+    const rootCount = global.scene.getRootObjectsCount();
+    for (let i = 0; i < rootCount; i++) {
+      this.lockTargetingOnObject(global.scene.getRootObject(i), false);
+    }
+    if (!this.targetingLockLogged) {
+      this.targetingLockLogged = true;
+      print("[SceneManager] intro frame keeps the ray; the rest is hands only");
+    }
+  }
+
+  private lockTargetingOnObject(obj: SceneObject, underIntro: boolean): void {
+    const keepRay =
+      underIntro || (!!this.introFrame && obj.isSame(this.introFrame));
+    if (keepRay) {
+      const interactable = obj.getComponent(
+        Interactable.getTypeName()
+      ) as Interactable;
+      if (interactable) {
+        interactable.targetingMode = 3;
+      }
+      const plane = obj.getComponent(
+        InteractionPlane.getTypeName()
+      ) as InteractionPlane;
+      if (plane) {
+        plane.targetingVisual = 1;
+      }
+    } else {
+      const interactable = obj.getComponent(
+        Interactable.getTypeName()
+      ) as Interactable;
+      if (interactable) {
+        interactable.targetingMode = 1;
+        interactable.targetingVisual = 0;
+      }
+      const plane = obj.getComponent(
+        InteractionPlane.getTypeName()
+      ) as InteractionPlane;
+      if (plane) {
+        plane.targetingVisual = 0;
+      }
+    }
+
+    const childCount = obj.getChildrenCount();
+    for (let i = 0; i < childCount; i++) {
+      this.lockTargetingOnObject(obj.getChild(i), keepRay);
+    }
+  }
+
   /** Match reef coral pinch: close-hand Direct only, no ray. */
   private applyDirectTargeting(root: SceneObject): void {
     if (!root) {
@@ -944,7 +1016,15 @@ export class SceneManager extends BaseScriptComponent {
     if (!this.clownfishCircling) {
       return;
     }
-    this.clownfishCircling.enabled = visible;
+    if (!visible) {
+      this.clownfishCircling.enabled = false;
+      return;
+    }
+    const wasHidden = !this.clownfishCircling.enabled;
+    this.clownfishCircling.enabled = true;
+    if (wasHidden) {
+      this.fishFade.play([this.clownfishCircling]);
+    }
   }
 
   private startOceanAmbient(): void {

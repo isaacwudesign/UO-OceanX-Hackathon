@@ -3,8 +3,9 @@
  * Tints TankGlass on Tank_Body. Ocean_Water_Wave is left alone (wave shader).
  */
 import { Slider } from "SpectaclesUIKit.lspkg/Scripts/Components/Slider/Slider";
+import { Frame } from "SpectaclesUIKit.lspkg/Scripts/Components/Frame/Frame";
 import { Interactable } from "SpectaclesInteractionKit.lspkg/Components/Interaction/Interactable/Interactable";
-import { GradientParameters } from "SpectaclesUIKit.lspkg/Scripts/Visuals/RoundedRectangle/RoundedRectangle";
+import { GradientParameters, RoundedRectangle } from "SpectaclesUIKit.lspkg/Scripts/Visuals/RoundedRectangle/RoundedRectangle";
 import { RoundedRectangleVisual } from "SpectaclesUIKit.lspkg/Scripts/Visuals/RoundedRectangle/RoundedRectangleVisual";
 import { ClownfishOrbit } from "./ClownfishOrbit";
 import { applyMuteMix, applyPlayMix, applySfxMix } from "./SnapAudio";
@@ -91,12 +92,12 @@ export class TemperatureWaterController extends BaseScriptComponent {
   @ui.group_start("Correct Temperature Feedback")
   @input
   @allowUndefined
-  @hint("SFX played when the slider reaches the middle (correct) range")
+  @hint("SFX played when the slider reaches the middle. Uses Task_Done_SFX.")
   welldoneSfx: AudioComponent;
 
   @input
   @allowUndefined
-  @hint("WelldoneSFX.mp3 assigned onto welldoneSfx at runtime if the Audio slot is empty.")
+  @hint("Task_Done_SFX.mp3 assigned onto welldoneSfx at runtime if the Audio slot is empty.")
   welldoneSfxTrack: AudioTrackAsset;
 
   @input
@@ -115,6 +116,12 @@ export class TemperatureWaterController extends BaseScriptComponent {
   private coralsReady = false;
   private sliderBound = false;
   private sliderDirectBound = false;
+  private sliderRollingAudio: AudioComponent | null = null;
+  private sliderRollingBound = false;
+  private sliderRollingOn = false;
+  private suppressSliderRolling = false;
+  private lastRollingValue = -1;
+  private lastSliderMoveTime = 0;
   private temperaturePhaseActive = false;
   private temperatureSolved = false;
   private welldoneSfxPlaying = false;
@@ -124,6 +131,11 @@ export class TemperatureWaterController extends BaseScriptComponent {
   private onSolveVoFinishedCallback: (() => void) | null = null;
   private onTemperatureSolvedCallback: (() => void) | null = null;
   private headsetVolume = new Map<AudioComponent, number>();
+  /** Last value pushed to the tank. The 3D knob reads this when it is not being dragged. */
+  private shownValue = DEFAULT_SLIDER_VALUE;
+  private temperatureReadout: Text | null = null;
+  private temperatureFramePlateApplied = false;
+  private temperaturePlate: RoundedRectangle | null = null;
 
   onAwake() {
     this.setupTankGlassMaterial();
@@ -148,6 +160,11 @@ export class TemperatureWaterController extends BaseScriptComponent {
       this.setupTankGlassMaterial();
       this.setupCoralMaterials();
       this.bindSliderIfNeeded();
+      this.ensureTemperatureBackground();
+    });
+    this.createEvent("LateUpdateEvent").bind(() => {
+      this.ensureTemperatureBackground();
+      this.tickSliderRolling();
     });
   }
 
@@ -179,17 +196,21 @@ export class TemperatureWaterController extends BaseScriptComponent {
   }
 
   private pushHighDefault(): void {
+    this.suppressSliderRolling = true;
     const slider = this.getSlider();
     if (slider) {
       slider.currentValue = DEFAULT_SLIDER_VALUE;
     }
     this.applySliderValue(DEFAULT_SLIDER_VALUE);
+    this.lastRollingValue = DEFAULT_SLIDER_VALUE;
+    this.suppressSliderRolling = false;
   }
 
   /** Reset when leaving the post-placement / temperature flow (e.g. coral removed). */
   public resetTemperatureChallenge(): void {
     this.safeStopIfPlaying(this.welldoneSfx, "welldoneSfx");
     this.safeStopIfPlaying(this.temperatureSolveVo, "temperatureSolveVo");
+    this.stopSliderRolling();
     this.temperaturePhaseActive = false;
     this.temperatureSolved = false;
     this.welldoneSfxPlaying = false;
@@ -220,6 +241,8 @@ export class TemperatureWaterController extends BaseScriptComponent {
       });
     }
 
+    this.bindSliderRolling(slider);
+
     this.sliderBound = true;
     this.applyDirectTargetingToSlider();
     this.applyOceanXSliderTint();
@@ -239,6 +262,9 @@ export class TemperatureWaterController extends BaseScriptComponent {
       return;
     }
     this.applySliderValue(value);
+    if (!this.suppressSliderRolling) {
+      this.noteSliderMove(value);
+    }
     this.checkMiddleSolution(value);
   }
 
@@ -266,6 +292,7 @@ export class TemperatureWaterController extends BaseScriptComponent {
       return;
     }
     this.temperatureSolved = true;
+    this.stopSliderRolling();
     this.setClownfishVisible(true);
     if (this.onTemperatureSolvedCallback) {
       this.onTemperatureSolvedCallback();
@@ -379,6 +406,38 @@ export class TemperatureWaterController extends BaseScriptComponent {
     this.sliderInputEnabled = enabled;
     this.explainVoFinished = enabled;
     this.applySliderInputLock();
+  }
+
+  /** True after the temperature explanation finishes, until the middle band is found. */
+  public isTemperatureAdjustable(): boolean {
+    return (
+      this.sliderInputEnabled &&
+      this.temperaturePhaseActive &&
+      !this.temperatureSolved
+    );
+  }
+
+  /** 0 is the cold end, 1 is the hot end, 0.5 is the safe band. */
+  public getShownTemperature(): number {
+    return this.shownValue;
+  }
+
+  /**
+   * Drive the tank from the 3D knob. Same path as the UIKit slider.
+   */
+  public setTemperatureFromKnob(value: number): void {
+    const t = value < 0 ? 0 : value > 1 ? 1 : value;
+    if (!this.isTemperatureAdjustable()) {
+      return;
+    }
+    const slider = this.getSlider();
+    if (slider) {
+      this.ignoringLockedSlider = true;
+      slider.currentValue = t;
+      this.ignoringLockedSlider = false;
+    }
+    this.applySliderValue(t);
+    this.checkMiddleSolution(t);
   }
 
   private applySliderInputLock(): void {
@@ -574,6 +633,7 @@ export class TemperatureWaterController extends BaseScriptComponent {
   private applySliderValue(normalizedValue: number): void {
     const t =
       normalizedValue < 0 ? 0 : normalizedValue > 1 ? 1 : normalizedValue;
+    this.shownValue = t;
 
     if (this.tankGlassMaterial) {
       this.applyGlassTint(this.desaturate(this.temperatureToColor(t)));
@@ -582,6 +642,7 @@ export class TemperatureWaterController extends BaseScriptComponent {
     this.applyCoralStress(
       this.temperaturePhaseActive ? t : TARGET_TEMPERATURE
     );
+    this.updateTemperatureReadout(t);
 
     const stress = this.temperaturePhaseActive
       ? Math.abs(t - TARGET_TEMPERATURE) * 2
@@ -701,10 +762,55 @@ export class TemperatureWaterController extends BaseScriptComponent {
   }
 
   private temperatureToColor(t: number): vec3 {
-    if (t <= 0.5) {
-      return vec3.lerp(COLOR_COLD, COLOR_MIDDLE, t * 2);
+    // Green algae only builds on the hot side. Cold stress stays blue.
+    if (t <= 0.35) {
+      return vec3.lerp(COLOR_COLD, COLOR_MIDDLE, t / 0.35);
     }
-    return vec3.lerp(COLOR_MIDDLE, COLOR_HIGH, (t - 0.5) * 2);
+    if (t <= 0.65) {
+      return COLOR_MIDDLE;
+    }
+    return vec3.lerp(COLOR_MIDDLE, COLOR_HIGH, (t - 0.65) / 0.35);
+  }
+
+  /**
+   * Slider 0 is 16°C (cold stress, below 18). The solve band 0.35–0.65 is 23–27°C.
+   * Slider 1 is 29°C, where bleaching and the green bloom start.
+   */
+  private valueToCelsius(t: number): number {
+    if (t <= 0.35) {
+      return 16 + (t / 0.35) * (23 - 16);
+    }
+    if (t <= 0.65) {
+      return 23 + ((t - 0.35) / 0.3) * (27 - 23);
+    }
+    return 27 + ((t - 0.65) / 0.35) * (29 - 27);
+  }
+
+  private updateTemperatureReadout(t: number): void {
+    const readout = this.getTemperatureReadout();
+    if (!readout) {
+      return;
+    }
+    readout.text = Math.round(this.valueToCelsius(t)) + "\u00B0C";
+  }
+
+  private getTemperatureReadout(): Text | null {
+    if (this.temperatureReadout && !isNull(this.temperatureReadout)) {
+      return this.temperatureReadout;
+    }
+    if (!this.temperatureSlider) {
+      return null;
+    }
+    const childCount = this.temperatureSlider.getChildrenCount();
+    for (let i = 0; i < childCount; i++) {
+      const child = this.temperatureSlider.getChild(i);
+      if (child.name !== "Title") {
+        continue;
+      }
+      this.temperatureReadout = child.getComponent("Component.Text") as Text;
+      return this.temperatureReadout;
+    }
+    return null;
   }
 
   private applyWelldoneTrack(): void {
@@ -776,6 +882,9 @@ export class TemperatureWaterController extends BaseScriptComponent {
 
   private setTemperatureSliderVisible(visible: boolean): void {
     this.setObjectEnabled(this.temperatureSlider, visible);
+    if (visible) {
+      this.ensureTemperatureBackground();
+    }
     this.setObjectEnabled(this.temperatureFactsFrame, visible);
     this.setObjectEnabled(this.temperatureKnowledgeFrame, visible);
   }
@@ -785,6 +894,79 @@ export class TemperatureWaterController extends BaseScriptComponent {
       return;
     }
     obj.enabled = visible;
+  }
+
+  /**
+   * The coral picture stays at the scale set on Temperature_Slider_Photo.
+   * Inner Size only changes the blue frame behind it.
+   */
+  private ensureTemperatureBackground(): void {
+    if (!this.temperatureSlider) {
+      return;
+    }
+    const frame = this.temperatureSlider.getComponent(
+      Frame.getTypeName()
+    ) as Frame;
+    if (!frame) {
+      return;
+    }
+    frame.autoShowHide = false;
+    if (frame.roundedRectangle && frame.roundedRectangle.renderMeshVisual) {
+      frame.roundedRectangle.renderMeshVisual.enabled = false;
+    }
+    if (!this.temperatureFramePlateApplied) {
+      const photo = this.findChildByName(
+        this.temperatureSlider,
+        "Temperature_Slider_Photo"
+      );
+      const photoPosition = photo
+        ? photo.getTransform().getLocalPosition()
+        : vec3.zero();
+      const plateObject = global.scene.createSceneObject("TemperatureFramePlate");
+      plateObject.layer = this.temperatureSlider.layer;
+      plateObject.setParent(this.temperatureSlider);
+      plateObject
+        .getTransform()
+        .setLocalPosition(
+          new vec3(photoPosition.x, photoPosition.y, photoPosition.z + 0.05)
+        );
+      const plate = plateObject.createComponent(
+        RoundedRectangle.getTypeName()
+      ) as RoundedRectangle;
+      plate.initialize();
+      plate.cornerRadius = 1.2;
+      plate.backgroundColor = new vec4(0.039216, 0.145098, 0.25098, 1);
+      plate.renderMeshVisual.renderOrder = 0;
+      this.temperaturePlate = plate;
+      this.temperatureFramePlateApplied = true;
+    }
+    if (this.temperaturePlate) {
+      const panel = frame.roundedRectangle ? frame.totalSize : frame.innerSize;
+      this.temperaturePlate.size = panel;
+      this.temperaturePlate.backgroundColor = new vec4(
+        0.039216,
+        0.145098,
+        0.25098,
+        1
+      );
+    }
+  }
+
+  private findChildByName(root: SceneObject, name: string): SceneObject | null {
+    if (!root) {
+      return null;
+    }
+    if (root.name === name) {
+      return root;
+    }
+    const childCount = root.getChildrenCount();
+    for (let i = 0; i < childCount; i++) {
+      const found = this.findChildByName(root.getChild(i), name);
+      if (found) {
+        return found;
+      }
+    }
+    return null;
   }
 
   private setClownfishVisible(visible: boolean): void {
@@ -805,6 +987,96 @@ export class TemperatureWaterController extends BaseScriptComponent {
     if (orbit) {
       orbit.setMotionScale(scale);
     }
+  }
+
+  /**
+   * Loop only while the knob value is changing. A pause or a release mutes it.
+   * The next slide unmutes the same loop, so it starts again immediately.
+   */
+  private bindSliderRolling(slider: Slider): void {
+    if (this.sliderRollingBound || !slider.interactable) {
+      return;
+    }
+    const release = () => {
+      this.stopSliderRolling();
+    };
+    slider.interactable.onTriggerEnd.add(release);
+    slider.interactable.onTriggerEndOutside.add(release);
+    slider.interactable.onTriggerCanceled.add(release);
+    slider.interactable.onDragEnd.add(release);
+    this.sliderRollingBound = true;
+  }
+
+  private noteSliderMove(value: number): void {
+    if (this.temperatureSolved) {
+      this.lastRollingValue = value;
+      return;
+    }
+    if (Math.abs(value - this.lastRollingValue) < 0.0005) {
+      return;
+    }
+    this.lastRollingValue = value;
+    this.lastSliderMoveTime = getTime();
+    this.startSliderRolling();
+  }
+
+  private tickSliderRolling(): void {
+    if (!this.sliderRollingBound) {
+      const slider = this.getSlider();
+      if (slider) {
+        this.bindSliderRolling(slider);
+      }
+    }
+    if (!this.sliderRollingOn) {
+      return;
+    }
+    if (getTime() - this.lastSliderMoveTime > 0.12) {
+      this.stopSliderRolling();
+    }
+  }
+
+  private startSliderRolling(): void {
+    const audio = this.ensureSliderRollingAudio();
+    if (!audio) {
+      return;
+    }
+    this.ensureAudioEnabled(audio);
+    applySfxMix(audio, 1);
+    if (!this.sliderRollingOn) {
+      print("[TemperatureWater] slider rolling on");
+    }
+    if (!audio.isPlaying()) {
+      audio.play(-1);
+    }
+    this.sliderRollingOn = true;
+  }
+
+  private stopSliderRolling(): void {
+    this.sliderRollingOn = false;
+    if (!this.sliderRollingAudio) {
+      return;
+    }
+    applyMuteMix(this.sliderRollingAudio);
+  }
+
+  private ensureSliderRollingAudio(): AudioComponent | null {
+    if (this.sliderRollingAudio) {
+      return this.sliderRollingAudio;
+    }
+    const track = requireAsset(
+      "../Audio/Slider_Rolling_SFX.mp3"
+    ) as AudioTrackAsset;
+    if (!track) {
+      print("[TemperatureWater] Slider_Rolling_SFX not found");
+      return null;
+    }
+    const owner = global.scene.createSceneObject("SliderRollingSFX");
+    const audio = owner.createComponent("Component.AudioComponent") as AudioComponent;
+    audio.audioTrack = track;
+    audio.playbackMode = Audio.PlaybackMode.LowLatency;
+    applyMuteMix(audio);
+    this.sliderRollingAudio = audio;
+    return audio;
   }
 
   private ensureAudioEnabled(audio: AudioComponent): void {

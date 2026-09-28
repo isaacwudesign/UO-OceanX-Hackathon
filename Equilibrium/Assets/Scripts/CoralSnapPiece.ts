@@ -6,6 +6,14 @@ import animate, {CancelSet} from "SpectaclesInteractionKit.lspkg/Utils/animate"
 import {Interactable} from "SpectaclesInteractionKit.lspkg/Components/Interaction/Interactable/Interactable"
 import {InteractableManipulation} from "SpectaclesInteractionKit.lspkg/Components/Interaction/InteractableManipulation/InteractableManipulation"
 import {CoralSnapManager} from "./CoralSnapManager"
+import {applySfxMix} from "./SnapAudio"
+
+const PICK_HINT_NAME = "Pick_Hint_SFX"
+/** OceanX cyan mark while the coral is in hand. Texture still shows through. */
+const PICK_MARK = new vec4(0.25, 0.78, 1, 1)
+
+let pickHintAudio: AudioComponent | null = null
+let pickHintSearched = false
 
 @component
 export class CoralSnapPiece extends BaseScriptComponent {
@@ -42,6 +50,9 @@ export class CoralSnapPiece extends BaseScriptComponent {
   private homeWorldRotation: quat = quat.quatIdentity()
   private homeWorldScale: vec3 = new vec3(1, 1, 1)
   private homeTweenCancel = new CancelSet()
+  private highlightMaterial: Material | null = null
+  private savedFactor: vec4 | null = null
+  private highlighted = false
 
   onAwake(): void {
     this.sceneObj = this.getSceneObject()
@@ -97,6 +108,7 @@ export class CoralSnapPiece extends BaseScriptComponent {
       return
     }
     this.interactionLocked = true
+    this.clearPickHighlight()
     if (this.manipulation) {
       this.manipulation.enabled = false
     }
@@ -125,6 +137,8 @@ export class CoralSnapPiece extends BaseScriptComponent {
 
     this.homeTweenCancel()
     this.snapManager?.cancelActiveSnapTween(this.sceneObj)
+    this.playPickHint()
+    this.showPickHighlight()
 
     if (!this.isSnapped) {
       return
@@ -147,6 +161,7 @@ export class CoralSnapPiece extends BaseScriptComponent {
   }
 
   private onRelease(): void {
+    this.clearPickHighlight()
     if (this.interactionLocked || !this.snapManager) {
       return
     }
@@ -220,6 +235,125 @@ export class CoralSnapPiece extends BaseScriptComponent {
     transform.setLocalRotation(this.homeLocalRotation)
     transform.setLocalScale(this.homeLocalScale)
     this.isSnapped = false
+  }
+
+  private playPickHint(): void {
+    const audio = this.getPickHintAudio()
+    if (!audio) {
+      return
+    }
+    audio.enabled = true
+    const owner = audio.getSceneObject()
+    if (owner) {
+      owner.enabled = true
+    }
+    applySfxMix(audio, 1)
+    audio.playbackMode = Audio.PlaybackMode.LowLatency
+    audio.play(1)
+  }
+
+  private getPickHintAudio(): AudioComponent | null {
+    if (pickHintSearched) {
+      return pickHintAudio
+    }
+    pickHintSearched = true
+    const owner = this.findSceneObjectByName(PICK_HINT_NAME)
+    if (!owner) {
+      print("[CoralSnapPiece] Pick_Hint_SFX not found")
+      return null
+    }
+    pickHintAudio = owner.getComponent(
+      "Component.AudioComponent"
+    ) as AudioComponent
+    if (!pickHintAudio) {
+      print("[CoralSnapPiece] Pick_Hint_SFX has no AudioComponent")
+    }
+    return pickHintAudio
+  }
+
+  private showPickHighlight(): void {
+    const visual = this.sceneObj.getComponent(
+      "Component.RenderMeshVisual"
+    ) as RenderMeshVisual
+    if (!visual || !visual.mainMaterial) {
+      return
+    }
+    if (!this.highlightMaterial) {
+      this.highlightMaterial = visual.mainMaterial.clone()
+      visual.mainMaterial = this.highlightMaterial
+    }
+    const pass = this.highlightMaterial.mainPass
+    if (!this.savedFactor) {
+      this.savedFactor = this.readFactor(pass)
+    }
+    const mark = new vec4(
+      PICK_MARK.x,
+      PICK_MARK.y,
+      PICK_MARK.z,
+      this.savedFactor.w
+    )
+    this.writeFactor(pass, mark)
+    this.highlighted = true
+  }
+
+  private clearPickHighlight(): void {
+    if (!this.highlighted || !this.highlightMaterial || !this.savedFactor) {
+      return
+    }
+    this.writeFactor(this.highlightMaterial.mainPass, this.savedFactor)
+    this.highlighted = false
+  }
+
+  private readFactor(pass: Pass): vec4 {
+    const keys = ["baseColorFactor", "baseColor", "mainColor"]
+    for (let i = 0; i < keys.length; i++) {
+      try {
+        const value = pass[keys[i]] as vec4
+        if (value) {
+          return new vec4(value.x, value.y, value.z, value.w)
+        }
+      } catch (_error) {
+        // This shader uses a different color property.
+      }
+    }
+    return new vec4(1, 1, 1, 1)
+  }
+
+  private writeFactor(pass: Pass, color: vec4): void {
+    const rgb = new vec3(color.x, color.y, color.z)
+    const keys = ["baseColorFactor", "baseColor", "mainColor", "Port_Albedo_N405"]
+    for (let i = 0; i < keys.length; i++) {
+      try {
+        pass[keys[i]] = keys[i] === "Port_Albedo_N405" ? rgb : color
+      } catch (_error) {
+        // Property is not on this shader.
+      }
+    }
+  }
+
+  private findSceneObjectByName(name: string): SceneObject | null {
+    const rootCount = global.scene.getRootObjectsCount()
+    for (let i = 0; i < rootCount; i++) {
+      const found = this.findNamedChild(global.scene.getRootObject(i), name)
+      if (found) {
+        return found
+      }
+    }
+    return null
+  }
+
+  private findNamedChild(obj: SceneObject, name: string): SceneObject | null {
+    if (obj.name === name) {
+      return obj
+    }
+    const childCount = obj.getChildrenCount()
+    for (let i = 0; i < childCount; i++) {
+      const found = this.findNamedChild(obj.getChild(i), name)
+      if (found) {
+        return found
+      }
+    }
+    return null
   }
 
   private getHomeWorldPosition(): vec3 {

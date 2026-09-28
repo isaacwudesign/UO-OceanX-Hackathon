@@ -1,0 +1,101 @@
+- !<AssetImportMetadata/3c0f2520-db22-42da-bfc6-8b8915e33889>
+  ImportedAssetIds:
+    ObjectPrefab: !<reference> 914d2008-92fe-4a89-a307-9bdf47169ef8
+  ImporterName: ObjectPrefabImporter
+  PrimaryAsset: !<reference> 914d2008-92fe-4a89-a307-9bdf47169ef8
+  PackageType: NotAPackage
+  LegacyPackagePolicy: ~
+  ExtraData:
+    {}
+  AssetDataMap:
+    ObjectPrefab: !<own> 429058fe-b0f5-45e4-9312-a2710fc49939
+  DependentFiles:
+    []
+  ImporterSettings: !<AssetImporterSettings>
+    {}
+  CompressionSettings: !<own> 00000000-0000-0000-0000-000000000000
+- !<ObjectPrefabAssetData/429058fe-b0f5-45e4-9312-a2710fc49939>
+  Prototype: !<ObjectOwner/8d38235e-49d5-4a64-92dd-cdf7378cb65a>
+    PackagePath: ""
+    objects:
+      - !<own> 9c59612d-ce25-438f-537d-3560450d54fb
+- !<RenderMeshVisual/79973f96-cbb0-4c6b-653f-de3a050f0e53>
+  PrefabRemaps:
+    []
+  Name: TemperatureKnob
+  Enabled: true
+  RenderOrder: 0
+  StretchMode: Stretch
+  VerticalAlignment: Center
+  HorizontalAlignment: Center
+  MeshShadowMode: None
+  ShadowColor: {x: 1.000000, y: 1.000000, z: 1.000000, w: 1.000000}
+  ShadowDensity: 1.000000
+  Materials:
+    - !<reference> 1c0f8a5c-b420-49d5-bb68-d5e8677a4293
+  Mesh: !<reference> 604a7795-dbe6-4abd-a50e-7adeb8507629
+  Skin: !<reference> 00000000-0000-0000-0000-000000000000
+  BlendShapesEnabled: true
+  BlendNormals: false
+  BlendShapes:
+    {}
+- !<SceneObject/8246d3d5-75f6-45ec-4923-f4e59f716e07>
+  PrefabRemaps:
+    []
+  Name: Scenes
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> c84bc6f4-f0a1-4a77-5432-88e87e5cc77c
+  Components:
+    []
+- !<SceneObject/991cd024-82cf-40c9-7428-73d1a565631f>
+  PrefabRemaps:
+    []
+  Name: TemperatureKnob_Body
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    []
+  Components:
+    - !<own> 79973f96-cbb0-4c6b-653f-de3a050f0e53
+- !<SceneObject/9c59612d-ce25-438f-537d-3560450d54fb>
+  PrefabRemaps:
+    []
+  Name: Knob
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 100.000000, y: 100.000000, z: 100.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 8246d3d5-75f6-45ec-4923-f4e59f716e07
+  Components:
+    []
+- !<SceneObject/c84bc6f4-f0a1-4a77-5432-88e87e5cc77c>
+  PrefabRemaps:
+    []
+  Name: Scene
+  Enabled: true
+  Layers: 1
+  LocalTransform: !<TransformEntity>
+    Position: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Rotation: {x: 0.000000, y: 0.000000, z: 0.000000}
+    Scale: {x: 1.000000, y: 1.000000, z: 1.000000}
+    HasSegmentScaleCompensation: false
+  Children:
+    - !<own> 991cd024-82cf-40c9-7428-73d1a565631f
+  Components:
+    []
