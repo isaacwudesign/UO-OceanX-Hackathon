@@ -1,5 +1,6 @@
 /**
  * Plastic-pollution beat: pinch a piece, carry it into the Bin, then it fades out.
+ * A low toss into the bin still counts. Letting go above the opening drops in too.
  * A miss returns the piece to the water. Kinematic only. Locked until Explain ends.
  */
 import {Interactable} from "SpectaclesInteractionKit.lspkg/Components/Interaction/Interactable/Interactable"
@@ -10,6 +11,8 @@ const PIECE_PREFIXES = ["Trash_Bottle", "Trash_Can"]
 const BIN_NAME = "Bin"
 /** Capture radius as a multiple of the bin's world scale. */
 const BIN_REACH = 2
+/** How many capture-radii above the bin center still count as a drop into the mouth. */
+const BIN_DROP_HEIGHT = 3
 const FADE_TIME = 0.45
 const RETURN_TIME = 0.35
 /** Mix-to-Snap treats SFX volume as the Snap level. 1 is still quieter than VO. */
@@ -107,6 +110,7 @@ export class TrashPickupManager extends BaseScriptComponent {
   private solved = false
   private bound = false
   private onExplainFinishedCallback: (() => void) | null = null
+  private onCollectedCallback: (() => void) | null = null
   private onSolveFinishedCallback: (() => void) | null = null
   private headsetVolume = new Map<AudioComponent, number>()
   private pickVoices: AudioComponent[] = []
@@ -130,6 +134,11 @@ export class TrashPickupManager extends BaseScriptComponent {
   /** SceneManager shows trash billboard copy after Explain ends. */
   public setOnExplainFinished(callback: () => void): void {
     this.onExplainFinishedCallback = callback
+  }
+
+  /** SceneManager hides the trash title when the last piece is collected. */
+  public setOnCollected(callback: () => void): void {
+    this.onCollectedCallback = callback
   }
 
   /** SceneManager starts overfishing after TrashIssueSolveVO finishes. */
@@ -398,7 +407,7 @@ export class TrashPickupManager extends BaseScriptComponent {
     if (!this.explainFinished || this.solved || this.pickedIds.has(id)) {
       return
     }
-    if (this.isInsideBin(piece)) {
+    if (this.isInsideBin(piece) || this.isAboveBin(piece)) {
       this.beginFade(piece)
       return
     }
@@ -520,20 +529,49 @@ export class TrashPickupManager extends BaseScriptComponent {
   }
 
   private isInsideBin(piece: SceneObject): boolean {
+    const sample = this.binSample(piece)
+    if (!sample) {
+      return false
+    }
+    return (
+      sample.dx * sample.dx + sample.dy * sample.dy + sample.dz * sample.dz <=
+      sample.reach * sample.reach
+    )
+  }
+
+  /** Release over the mouth, above the close-in sphere. Still holding does not steal it. */
+  private isAboveBin(piece: SceneObject): boolean {
+    const sample = this.binSample(piece)
+    if (!sample) {
+      return false
+    }
+    const flat = sample.dx * sample.dx + sample.dz * sample.dz
+    const dropTop = sample.reach * BIN_DROP_HEIGHT
+    return flat <= sample.reach * sample.reach && sample.dy > 0 && sample.dy <= dropTop
+  }
+
+  private binSample(piece: SceneObject): {
+    dx: number
+    dy: number
+    dz: number
+    reach: number
+  } | null {
     if (!this.bin) {
       this.findBin()
     }
     if (!this.bin) {
-      return false
+      return null
     }
     const binPos = this.bin.getTransform().getWorldPosition()
     const trashPos = piece.getTransform().getWorldPosition()
     const scale = this.bin.getTransform().getWorldScale()
     const reach = Math.max(scale.x, Math.max(scale.y, scale.z)) * BIN_REACH
-    const dx = trashPos.x - binPos.x
-    const dy = trashPos.y - binPos.y
-    const dz = trashPos.z - binPos.z
-    return dx * dx + dy * dy + dz * dz <= reach * reach
+    return {
+      dx: trashPos.x - binPos.x,
+      dy: trashPos.y - binPos.y,
+      dz: trashPos.z - binPos.z,
+      reach: reach,
+    }
   }
 
   private binWorldPosition(): vec3 {
@@ -607,6 +645,9 @@ export class TrashPickupManager extends BaseScriptComponent {
     if (this.solved) {
       return
     }
+    if (this.onCollectedCallback) {
+      this.onCollectedCallback()
+    }
     this.solved = true
     this.setInteractionLocked(true)
     if (this.explainAudio) {
@@ -616,8 +657,15 @@ export class TrashPickupManager extends BaseScriptComponent {
       this.onSolveFinished()
       return
     }
-    this.armAudio(this.solveAudio)
-    this.solveAudio.play(1)
+    const delay = this.createEvent("DelayedCallbackEvent")
+    delay.bind(() => {
+      if (!this.solved) {
+        return
+      }
+      this.armAudio(this.solveAudio)
+      this.solveAudio.play(1)
+    })
+    delay.reset(1)
   }
 
   private armAudio(audio: AudioComponent): void {

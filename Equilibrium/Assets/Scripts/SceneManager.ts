@@ -199,6 +199,7 @@ export class SceneManager extends BaseScriptComponent {
   private introFrameTintApplied = false;
   private trashPhaseStarted = false;
   private overfishingPhaseStarted = false;
+  private endingStarted = false;
   private headsetVolume = new Map<AudioComponent, number>();
   private fishFade = new AppearFade();
   private nextTargetingLockTime = 0;
@@ -241,31 +242,31 @@ export class SceneManager extends BaseScriptComponent {
     this.setObjectEnabled(this.overfishingScenarios, false);
     this.setBillboardBeat("none");
     if (this.temperatureWater) {
-      this.temperatureWater.setOnTemperatureSolved(
-        this.onTemperatureInteractionFinished.bind(this)
-      );
-      this.temperatureWater.setOnSolveVoFinished(
-        this.beginTrashScenario.bind(this)
-      );
+      this.temperatureWater.setOnSolveVoFinished(() => {
+        this.setTemperatureSliderVisible(false);
+        this.setBillboardBeat("none");
+        this.runAfterDelay(1, () => this.beginTrashScenario());
+      });
     }
     if (this.trashPickup) {
       this.trashPickup.setOnExplainFinished(
         this.onTrashExplainFinished.bind(this)
       );
-      this.trashPickup.setOnSolveFinished(
-        this.beginOverfishingScenario.bind(this)
-      );
+      this.trashPickup.setOnSolveFinished(() => {
+        this.setObjectEnabled(this.trashScenarios, false);
+        this.setBillboardBeat("none");
+        this.runAfterDelay(1, () => this.beginOverfishingScenario());
+      });
     }
     if (this.overfishingPush) {
       this.overfishingPush.setOnExplainFinished(
         this.onOverfishingExplainFinished.bind(this)
       );
-      this.overfishingPush.setOnBoatsCleared(
-        this.onOverfishingBoatsCleared.bind(this)
-      );
-      this.overfishingPush.setOnSolveFinished(
-        this.onOverfishingSolveFinished.bind(this)
-      );
+      this.overfishingPush.setOnSolveFinished(() => {
+        this.setObjectEnabled(this.overfishingScenarios, false);
+        this.setBillboardBeat("none");
+        this.runAfterDelay(1, () => this.onOverfishingSolveFinished());
+      });
     }
     if (this.endingAudio) {
       this.endingAudio.setOnFinish(this.onEndingVoFinished.bind(this));
@@ -329,8 +330,20 @@ export class SceneManager extends BaseScriptComponent {
     // (Previously this set enabled = true on every refresh, so unchecking it had no effect.)
 
     if (!this.introFrame || this.introFrame.enabled) {
-      this.playAudio(this.welcomeAudio);
+      this.playWelcomeAfterDelay();
     }
+  }
+
+  /** Welcome VO was starting on the first frame. Give the user a moment to see the intro. */
+  private playWelcomeAfterDelay(): void {
+    const delay = this.createEvent("DelayedCallbackEvent");
+    delay.bind(() => {
+      if (this.phase !== ScenePhase.Intro) {
+        return;
+      }
+      this.playAudio(this.welcomeAudio);
+    });
+    delay.reset(2);
   }
 
   /**
@@ -672,9 +685,10 @@ export class SceneManager extends BaseScriptComponent {
         this.onPlacingVoFinished();
         return;
       }
+      this.showVoSubtitle(this.billboardPinchCoral);
       this.playAudio(this.placingAudio);
     });
-    delay.reset(0.6);
+    delay.reset(1);
   }
 
   /**
@@ -721,9 +735,13 @@ export class SceneManager extends BaseScriptComponent {
     this.coralPickEnabled = false;
     this.setCoralsInteractionLocked(true);
     this.setClownfishVisible(true);
-    this.setBillboardBeat("none");
     this.muteAudio(this.placingAudio);
-    this.playAudio(this.afterPlacingAudio);
+    this.runAfterDelay(1, () => {
+      if (!this.afterPlacingVOPlayed || this.experienceFinalized) {
+        return;
+      }
+      this.playAudio(this.afterPlacingAudio);
+    });
   }
 
   private onPlacingVoFinished(): void {
@@ -732,21 +750,33 @@ export class SceneManager extends BaseScriptComponent {
     }
     this.coralPickEnabled = true;
     this.setCoralsInteractionLocked(false);
-    this.setBillboardBeat("coral");
+    this.showTaskCardAfterSubtitle("coral");
   }
 
   private onAfterPlacingVOFinished(): void {
     if (!this.afterPlacingVOPlayed || this.experienceFinalized) {
       return;
     }
-    this.finalizeExperience();
+    this.setPlatformVisible(false);
+    this.setBillboardBeat("none");
+    this.runAfterDelay(1, () => {
+      if (!this.afterPlacingVOPlayed || this.experienceFinalized) {
+        return;
+      }
+      this.finalizeExperience();
+    });
+  }
+
+  private runAfterDelay(seconds: number, action: () => void): void {
+    const delay = this.createEvent("DelayedCallbackEvent");
+    delay.bind(action);
+    delay.reset(seconds);
   }
 
   private finalizeExperience(): void {
     this.experienceFinalized = true;
     this.setPlatformVisible(false);
     this.setCoralsInteractionLocked(true);
-    this.setBillboardBeat("none");
     this.setTemperatureSliderVisible(true);
     if (this.temperatureWater) {
       this.temperatureWater.applyHighDefault();
@@ -760,6 +790,7 @@ export class SceneManager extends BaseScriptComponent {
       return;
     }
     this.muteAudio(this.afterPlacingAudio);
+    this.showVoSubtitle(this.billboardTemperature);
     this.playAudio(this.temperatureExplainAudio);
   }
 
@@ -767,21 +798,17 @@ export class SceneManager extends BaseScriptComponent {
     if (!this.experienceFinalized || this.trashPhaseStarted || this.overfishingPhaseStarted) {
       return;
     }
-    this.setBillboardBeat("temperature");
+    this.showTaskCardAfterSubtitle("temperature");
     if (this.temperatureWater) {
       this.temperatureWater.setSliderInputEnabled(true);
     }
-  }
-
-  private onTemperatureInteractionFinished(): void {
-    this.setBillboardBeat("none");
   }
 
   private onTrashExplainFinished(): void {
     if (!this.trashPhaseStarted) {
       return;
     }
-    this.setBillboardBeat("trash");
+    this.showTaskCardAfterSubtitle("trash");
   }
 
   private beginOverfishingScenario(): void {
@@ -797,7 +824,7 @@ export class SceneManager extends BaseScriptComponent {
     this.setObjectEnabled(this.overfishingScenarios, true);
     this.applyDirectTargeting(this.overfishingScenarios);
     this.applyDirectTargeting(this.billboardOverfishing);
-    this.setBillboardBeat("none");
+    this.showVoSubtitle(this.billboardOverfishing);
     if (this.overfishingPush) {
       this.overfishingPush.begin();
     } else {
@@ -809,14 +836,11 @@ export class SceneManager extends BaseScriptComponent {
     if (!this.overfishingPhaseStarted) {
       return;
     }
-    this.setBillboardBeat("overfishing");
-  }
-
-  private onOverfishingBoatsCleared(): void {
-    this.setBillboardBeat("none");
+    this.showTaskCardAfterSubtitle("overfishing");
   }
 
   private onOverfishingSolveFinished(): void {
+    this.endingStarted = true;
     this.setBillboardBeat("thanks");
     if (this.overfishingPush) {
       this.overfishingPush.muteSolveAudio();
@@ -851,7 +875,7 @@ export class SceneManager extends BaseScriptComponent {
     }
     this.setObjectEnabled(this.overfishingScenarios, false);
     this.setObjectEnabled(this.trashScenarios, true);
-    this.setBillboardBeat("none");
+    this.showVoSubtitle(this.billboardTrash);
     if (this.trashPickup) {
       this.trashPickup.begin();
     } else {
@@ -862,11 +886,73 @@ export class SceneManager extends BaseScriptComponent {
   private setBillboardBeat(
     beat: "none" | "coral" | "temperature" | "trash" | "overfishing" | "thanks"
   ): void {
-    this.setObjectEnabled(this.billboardPinchCoral, beat === "coral");
-    this.setObjectEnabled(this.billboardTemperature, beat === "temperature");
-    this.setObjectEnabled(this.billboardTrash, beat === "trash");
-    this.setObjectEnabled(this.billboardOverfishing, beat === "overfishing");
-    this.setObjectEnabled(this.billboardThankYou, beat === "thanks");
+    this.showFullBillboard(this.billboardPinchCoral, beat === "coral");
+    this.showFullBillboard(this.billboardTemperature, beat === "temperature");
+    this.showFullBillboard(this.billboardTrash, beat === "trash");
+    this.showFullBillboard(this.billboardOverfishing, beat === "overfishing");
+    this.showFullBillboard(this.billboardThankYou, beat === "thanks");
+  }
+
+  /**
+   * VO ends, subtitle stays 1 second, then a 1 second blank, then title and context.
+   */
+  private showTaskCardAfterSubtitle(
+    beat: "coral" | "temperature" | "trash" | "overfishing"
+  ): void {
+    this.runAfterDelay(1, () => {
+      this.setBillboardBeat("none");
+      this.runAfterDelay(1, () => {
+        if (beat === "coral" && this.experienceFinalized) {
+          return;
+        }
+        if (
+          beat === "temperature" &&
+          (this.trashPhaseStarted || this.overfishingPhaseStarted)
+        ) {
+          return;
+        }
+        if (beat === "trash" && this.overfishingPhaseStarted) {
+          return;
+        }
+        if (beat === "overfishing" && this.endingStarted) {
+          return;
+        }
+        this.setBillboardBeat(beat);
+      });
+    });
+  }
+
+  /** Instruction card stays hidden. Only the _Subtitle line is on while the VO plays. */
+  private showVoSubtitle(group: SceneObject): void {
+    this.showFullBillboard(this.billboardPinchCoral, false);
+    this.showFullBillboard(this.billboardTemperature, false);
+    this.showFullBillboard(this.billboardTrash, false);
+    this.showFullBillboard(this.billboardOverfishing, false);
+    this.showFullBillboard(this.billboardThankYou, false);
+    if (!group) {
+      return;
+    }
+    group.enabled = true;
+    const childCount = group.getChildrenCount();
+    for (let i = 0; i < childCount; i++) {
+      const child = group.getChild(i);
+      child.enabled = child.name.indexOf("_Subtitle") >= 0;
+    }
+  }
+
+  private showFullBillboard(group: SceneObject, visible: boolean): void {
+    if (!group) {
+      return;
+    }
+    group.enabled = visible;
+    if (!visible) {
+      return;
+    }
+    const childCount = group.getChildrenCount();
+    for (let i = 0; i < childCount; i++) {
+      const child = group.getChild(i);
+      child.enabled = child.name.indexOf("_Subtitle") < 0;
+    }
   }
 
   private setPlatformVisible(visible: boolean): void {

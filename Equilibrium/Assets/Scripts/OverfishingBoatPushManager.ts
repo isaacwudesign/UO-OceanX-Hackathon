@@ -686,12 +686,19 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
     this.solved = true
     this.pushEnabled = false
     this.muteAudio(this.explainAudio)
-    if (!this.solveAudio) {
-      this.onSolveVoFinished()
-      return
-    }
-    this.armAudio(this.solveAudio)
-    this.solveAudio.play(1)
+    const delay = this.createEvent("DelayedCallbackEvent")
+    delay.bind(() => {
+      if (!this.solved) {
+        return
+      }
+      if (!this.solveAudio) {
+        this.onSolveVoFinished()
+        return
+      }
+      this.armAudio(this.solveAudio)
+      this.solveAudio.play(1)
+    })
+    delay.reset(1)
   }
 
   private prepareSfx(): void {

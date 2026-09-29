@@ -304,7 +304,7 @@ export class TemperatureWaterController extends BaseScriptComponent {
       return;
     }
 
-    this.playAudio(this.temperatureSolveVo, "temperatureSolveVo");
+    this.playSolveVoAfterDelay();
   }
 
   private onWelldoneSfxFinished(): void {
@@ -313,7 +313,18 @@ export class TemperatureWaterController extends BaseScriptComponent {
     }
     this.welldoneSfxPlaying = false;
     this.muteClip(this.welldoneSfx);
-    this.playAudio(this.temperatureSolveVo, "temperatureSolveVo");
+    this.playSolveVoAfterDelay();
+  }
+
+  private playSolveVoAfterDelay(): void {
+    const delay = this.createEvent("DelayedCallbackEvent");
+    delay.bind(() => {
+      if (!this.temperatureSolved) {
+        return;
+      }
+      this.playAudio(this.temperatureSolveVo, "temperatureSolveVo");
+    });
+    delay.reset(1);
   }
 
   private onTemperatureSolveVoFinished(): void {
