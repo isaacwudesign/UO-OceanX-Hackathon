@@ -15,6 +15,7 @@ import {
 } from "SpectaclesUIKit.lspkg/Scripts/Visuals/RoundedRectangle/RoundedRectangle";
 import { RoundedRectangleVisual } from "SpectaclesUIKit.lspkg/Scripts/Visuals/RoundedRectangle/RoundedRectangleVisual";
 import { AppearFade } from "./AppearFade";
+import { DeviceDelay } from "./DeviceDelay";
 import { TemperatureWaterController } from "./TemperatureWaterController";
 import { CoralSnapPiece } from "./CoralSnapPiece";
 import { TrashPickupManager } from "./TrashPickupManager";
@@ -26,7 +27,6 @@ import {
   applySfxMix,
   bindSnapCaptureMute,
   enableMixToSnap,
-  setMuteHeadsetOnDevice,
 } from "./SnapAudio";
 
 const OCEAN_AMBIENT_NAME = "Ocean_Background_SFX";
@@ -183,10 +183,6 @@ export class SceneManager extends BaseScriptComponent {
   @allowUndefined
   @hint("Ending VO after OverfishingIssueSolveVO finishes. Do not stop()/pause().")
   endingAudio: AudioComponent;
-
-  @input
-  @hint("On Specs, mute glasses speakers so mics do not echo Mix-to-Snap. Lens Studio preview still plays. Uncheck to hear VO live on device.")
-  muteHeadsetOnDevice: boolean = true;
   @ui.group_end
 
   private phase: ScenePhase = ScenePhase.Intro;
@@ -202,10 +198,12 @@ export class SceneManager extends BaseScriptComponent {
   private endingStarted = false;
   private headsetVolume = new Map<AudioComponent, number>();
   private fishFade = new AppearFade();
+  private deviceDelay: DeviceDelay;
   private nextTargetingLockTime = 0;
   private targetingLockLogged = false;
 
   onAwake(): void {
+    this.deviceDelay = new DeviceDelay(this);
     if (this.placingAudio) {
       this.placingAudio.setOnFinish(this.onPlacingVoFinished.bind(this));
     }
@@ -226,7 +224,6 @@ export class SceneManager extends BaseScriptComponent {
   }
 
   private onStart(): void {
-    setMuteHeadsetOnDevice(this.muteHeadsetOnDevice);
     this.enableMixToSnapOnScene();
     this.cacheHeadsetVolumes();
     this.startOceanAmbient();
@@ -336,14 +333,12 @@ export class SceneManager extends BaseScriptComponent {
 
   /** Welcome VO was starting on the first frame. Give the user a moment to see the intro. */
   private playWelcomeAfterDelay(): void {
-    const delay = this.createEvent("DelayedCallbackEvent");
-    delay.bind(() => {
+    this.deviceDelay.after(4, () => {
       if (this.phase !== ScenePhase.Intro) {
         return;
       }
       this.playAudio(this.welcomeAudio);
     });
-    delay.reset(2);
   }
 
   /**
@@ -963,7 +958,7 @@ export class SceneManager extends BaseScriptComponent {
 
   /**
    * UIKit frames set TargetingMode.All when they initialize, which turns the
-   * far ray back on. IntroFrame keeps that cast. Everything else stays Direct.
+   * far ray back on. ENTER is poke. Everything else stays close-hand Direct.
    */
   private tickHandsOnlyTargeting(): void {
     const now = getTime();
@@ -981,45 +976,31 @@ export class SceneManager extends BaseScriptComponent {
     }
     if (!this.targetingLockLogged) {
       this.targetingLockLogged = true;
-      print("[SceneManager] intro frame keeps the ray; the rest is hands only");
+      print("[SceneManager] ENTER is poke; the rest is hands only");
     }
   }
 
-  private lockTargetingOnObject(obj: SceneObject, underIntro: boolean): void {
-    const keepRay =
-      underIntro || (!!this.introFrame && obj.isSame(this.introFrame));
-    if (keepRay) {
-      const interactable = obj.getComponent(
-        Interactable.getTypeName()
-      ) as Interactable;
-      if (interactable) {
-        interactable.targetingMode = 3;
-      }
-      const plane = obj.getComponent(
-        InteractionPlane.getTypeName()
-      ) as InteractionPlane;
-      if (plane) {
-        plane.targetingVisual = 1;
-      }
-    } else {
-      const interactable = obj.getComponent(
-        Interactable.getTypeName()
-      ) as Interactable;
-      if (interactable) {
-        interactable.targetingMode = 1;
-        interactable.targetingVisual = 0;
-      }
-      const plane = obj.getComponent(
-        InteractionPlane.getTypeName()
-      ) as InteractionPlane;
-      if (plane) {
-        plane.targetingVisual = 0;
-      }
+  private lockTargetingOnObject(obj: SceneObject, underEnter: boolean): void {
+    const isEnter =
+      underEnter || (!!this.enterButton && obj.isSame(this.enterButton));
+    const interactable = obj.getComponent(
+      Interactable.getTypeName()
+    ) as Interactable;
+    if (interactable) {
+      // 4 = Poke. 1 = Direct. Neither includes the far ray.
+      interactable.targetingMode = isEnter ? 4 : 1;
+      interactable.targetingVisual = 0;
+    }
+    const plane = obj.getComponent(
+      InteractionPlane.getTypeName()
+    ) as InteractionPlane;
+    if (plane) {
+      plane.targetingVisual = 0;
     }
 
     const childCount = obj.getChildrenCount();
     for (let i = 0; i < childCount; i++) {
-      this.lockTargetingOnObject(obj.getChild(i), keepRay);
+      this.lockTargetingOnObject(obj.getChild(i), isEnter);
     }
   }
 

@@ -38,7 +38,6 @@
     enterButtonColor: false
     introFrame: false
     introFrameColor: false
-    muteHeadsetOnDevice: false
     overfishingPush: false
     overfishingScenarios: false
     placedVisuals: false
@@ -92,7 +91,6 @@
       afterPlacingAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
       temperatureExplainAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
       endingAudio: !<reference.AudioComponent> 00000000-0000-0000-0000-000000000000
-      muteHeadsetOnDevice: true
   ScriptTypes:
     -
       {}
@@ -128,5 +126,4 @@
     - '// @input Component.AudioComponent afterPlacingAudio {"hint":"VO played once the required number of corals are placed"}'
     - '// @input Component.AudioComponent temperatureExplainAudio {"hint":"VO played when the temperature slider appears"}'
     - '// @input Component.AudioComponent endingAudio {"hint":"Ending VO after OverfishingIssueSolveVO finishes. Do not stop()/pause()."}'
-    - '// @input bool muteHeadsetOnDevice = true {"hint":"On Specs, mute glasses speakers so mics do not echo Mix-to-Snap. Lens Studio preview still plays. Uncheck to hear VO live on device."}'
     - '// @ui {"widget":"group_end"}'

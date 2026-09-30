@@ -1,9 +1,14 @@
 /**
  * Places corals anywhere on the tank floor (kinematic, no physics).
- * Clamp XZ to the floor rectangle, set Y to floorLocalY, ease, then freeze.
+ * Clamp XZ to the floor rectangle. A drop on another coral slides to the
+ * nearest open patch inside that same rectangle, then eases and freezes.
  */
 import animate, {CancelSet} from "SpectaclesInteractionKit.lspkg/Utils/animate"
 import {SceneManager} from "./SceneManager"
+import {applySfxMix} from "./SnapAudio"
+
+/** Extra cm between collider edges so neighbors sit beside each other without touching. */
+const EDGE_GAP = 4
 
 @component
 export class CoralSnapManager extends BaseScriptComponent {
@@ -49,6 +54,8 @@ export class CoralSnapManager extends BaseScriptComponent {
   @ui.group_end
 
   private floorPlacedIds = new Set<string>()
+  private placedLocal = new Map<string, vec3>()
+  private placedRadius = new Map<string, number>()
   private snapCancels = new Map<string, CancelSet>()
 
   onAwake(): void {
@@ -70,6 +77,8 @@ export class CoralSnapManager extends BaseScriptComponent {
     const key = coral.uniqueIdentifier
     if (this.floorPlacedIds.has(key)) {
       this.floorPlacedIds.delete(key)
+      this.placedLocal.delete(key)
+      this.placedRadius.delete(key)
       this.notifyPlacementChanged()
     }
   }
@@ -117,15 +126,19 @@ export class CoralSnapManager extends BaseScriptComponent {
       return false
     }
 
-    const stuckLocal = new vec3(
+    const key = coral.uniqueIdentifier
+    const radius = this.footprintRadius(coral)
+    const stuckLocal = this.findOpenSpot(
       this.clamp(local.x, -this.floorHalfExtentX, this.floorHalfExtentX),
-      this.floorLocalY,
-      this.clamp(local.z, -this.floorHalfExtentZ, this.floorHalfExtentZ)
+      this.clamp(local.z, -this.floorHalfExtentZ, this.floorHalfExtentZ),
+      key,
+      radius
     )
     const targetPos = tankTransform.getWorldTransform().multiplyPoint(stuckLocal)
 
-    const key = coral.uniqueIdentifier
     this.floorPlacedIds.add(key)
+    this.placedLocal.set(key, stuckLocal)
+    this.placedRadius.set(key, radius)
     this.playSnapBubbleSfx()
     this.notifyPlacementChanged()
     this.animateCoralTo(
@@ -147,6 +160,95 @@ export class CoralSnapManager extends BaseScriptComponent {
       }
     )
     return true
+  }
+
+  /** Nearest floor point where this coral's collider sits beside the others, still inside the tank. */
+  private findOpenSpot(x: number, z: number, selfId: string, selfRadius: number): vec3 {
+    if (this.isSpotClear(x, z, selfId, selfRadius)) {
+      return new vec3(x, this.floorLocalY, z)
+    }
+
+    const step = 8
+    const rings = 24
+    for (let ring = 1; ring <= rings; ring++) {
+      const radius = step * ring
+      const steps = Math.max(8, Math.round((Math.PI * 2 * radius) / step))
+      for (let i = 0; i < steps; i++) {
+        const angle = (i / steps) * Math.PI * 2
+        const sx = this.clamp(
+          x + Math.cos(angle) * radius,
+          -this.floorHalfExtentX,
+          this.floorHalfExtentX
+        )
+        const sz = this.clamp(
+          z + Math.sin(angle) * radius,
+          -this.floorHalfExtentZ,
+          this.floorHalfExtentZ
+        )
+        if (this.isSpotClear(sx, sz, selfId, selfRadius)) {
+          return new vec3(sx, this.floorLocalY, sz)
+        }
+      }
+    }
+
+    return new vec3(x, this.floorLocalY, z)
+  }
+
+  private isSpotClear(x: number, z: number, selfId: string, selfRadius: number): boolean {
+    let clear = true
+    this.placedLocal.forEach((pos, id) => {
+      if (!clear || id === selfId) {
+        return
+      }
+      const otherRadius = this.placedRadius.get(id) ?? selfRadius
+      const need = selfRadius + otherRadius + EDGE_GAP
+      const dx = x - pos.x
+      const dz = z - pos.z
+      if (dx * dx + dz * dz < need * need) {
+        clear = false
+      }
+    })
+    return clear
+  }
+
+  /** Half the coral's width on the floor, in tank-local cm. */
+  private footprintRadius(coral: SceneObject): number {
+    const worldRadius = this.worldFootprint(coral)
+    if (!this.waterBase) {
+      return worldRadius
+    }
+    const scale = this.waterBase.getTransform().getWorldScale()
+    const tank = Math.max(Math.abs(scale.x), Math.abs(scale.z), 0.001)
+    return worldRadius / tank
+  }
+
+  private worldFootprint(root: SceneObject): number {
+    let half = 0
+    this.measureFootprint(root, (radius) => {
+      if (radius > half) {
+        half = radius
+      }
+    })
+    return half > 1 ? half : 25
+  }
+
+  private measureFootprint(root: SceneObject, visit: (radius: number) => void): void {
+    const visualCount = root.getComponentCount("Component.RenderMeshVisual")
+    for (let i = 0; i < visualCount; i++) {
+      const visual = root.getComponentByIndex("Component.RenderMeshVisual", i) as RenderMeshVisual
+      if (!visual) {
+        continue
+      }
+      const min = visual.worldAabbMin()
+      const max = visual.worldAabbMax()
+      const halfX = Math.abs(max.x - min.x) * 0.5
+      const halfZ = Math.abs(max.z - min.z) * 0.5
+      visit(Math.max(halfX, halfZ))
+    }
+    const childCount = root.getChildrenCount()
+    for (let i = 0; i < childCount; i++) {
+      this.measureFootprint(root.getChild(i), visit)
+    }
   }
 
   private cancelCoralSnap(key: string): void {
@@ -217,6 +319,7 @@ export class CoralSnapManager extends BaseScriptComponent {
     if (!this.snapBubbleSfx) {
       return
     }
+    applySfxMix(this.snapBubbleSfx, 1)
     this.snapBubbleSfx.play(1)
   }
 

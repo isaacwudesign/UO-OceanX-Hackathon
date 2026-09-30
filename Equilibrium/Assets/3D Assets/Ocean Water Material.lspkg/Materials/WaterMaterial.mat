@@ -306,7 +306,7 @@
     opacityTextureA:
       typeIdx: 9
       value:
-        id: 05f5792c-f6d0-4d93-99da-eff70511a64b
+        id: c0d4510d-5261-4eb1-a270-b0168995d474
         sampler:
           filteringMode: Trilinear
           wrapModeU: Repeat
@@ -324,7 +324,7 @@
     opacityTextureB:
       typeIdx: 9
       value:
-        id: 05f5792c-f6d0-4d93-99da-eff70511a64b
+        id: c0d4510d-5261-4eb1-a270-b0168995d474
         sampler:
           filteringMode: Trilinear
           wrapModeU: Repeat

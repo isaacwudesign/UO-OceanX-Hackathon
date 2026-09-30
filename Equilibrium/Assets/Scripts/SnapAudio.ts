@@ -1,10 +1,11 @@
 /**
- * Specs always Mix-to-Snap and still records the mics. Speakers next to those
- * mics are the echo in phone footage.
+ * Specs writes the lens mix into the video and also records the mics.
+ * The speakers sit next to those mics, so anything played out loud shows up
+ * again in the video, muffled and late.
  *
- * Voice-overs: mute headset on device; recordingVolume carries the Snap mix.
- * Short SFX: Mix-to-Snap follows volume on these clips, so keep volume at 1
- * or they go missing / whisper-quiet in the recording.
+ * volume is the glasses speakers. recordingVolume is the clear mix in the file.
+ * While a capture is running, every clip keeps its recordingVolume and the
+ * speakers go to 0, so the video only has the experience audio.
  */
 
 type MixAudio = AudioComponent & {
@@ -13,23 +14,26 @@ type MixAudio = AudioComponent & {
 }
 
 let snapRecording = false
-let muteHeadsetOnDevice = true
 const tracked: AudioComponent[] = []
 const sfxClips: AudioComponent[] = []
 const headsetVolume = new Map<AudioComponent, number>()
 
-export function setMuteHeadsetOnDevice(enabled: boolean): void {
-  muteHeadsetOnDevice = enabled
+type HeldSpeaker = {
+  volume: number
+  recordingVolume: number
 }
+const heldSpeakers = new Map<AudioComponent, HeldSpeaker>()
 
 export function bindSnapCaptureMute(script: BaseScriptComponent): void {
   script.createEvent("SnapRecordStartEvent").bind(() => {
     snapRecording = true
+    holdSpeakersForCapture(script)
     applySpeakerGainToTracked()
-    print("[SnapAudio] capture started — VO speakers muted, SFX stay mixed")
+    print("[SnapAudio] capture started — speakers off, mix stays in the recording")
   })
   script.createEvent("SnapRecordStopEvent").bind(() => {
     snapRecording = false
+    releaseHeldSpeakers()
     applySpeakerGainToTracked()
     print("[SnapAudio] capture stopped — speakers restored")
   })
@@ -37,9 +41,6 @@ export function bindSnapCaptureMute(script: BaseScriptComponent): void {
 
 export function speakerGain(volume: number): number {
   if (snapRecording) {
-    return 0
-  }
-  if (muteHeadsetOnDevice && !global.deviceInfoSystem.isEditor()) {
     return 0
   }
   return volume
@@ -57,7 +58,7 @@ export function applyPlayMix(audio: AudioComponent, volume: number): void {
   mix.recordingVolume = 1
 }
 
-/** One-shots. Do not mute volume — Specs records these from volume, not recordingVolume. */
+/** One-shots. recordingVolume carries the file. Speakers use volume, and go quiet during a capture. */
 export function applySfxMix(audio: AudioComponent, volume: number): void {
   if (!audio) {
     return
@@ -68,12 +69,12 @@ export function applySfxMix(audio: AudioComponent, volume: number): void {
   headsetVolume.set(audio, mixLevel)
   const mix = audio as MixAudio
   mix.mixToSnap = true
-  mix.volume = mixLevel
   mix.recordingVolume = 1
+  mix.volume = liveSpeakerLevel(audio, mixLevel)
 }
 
 /**
- * Looping bed. Keep speakers on (not VO-muted) and match Snap mix to the same level.
+ * Looping bed. Same level in the recording mix. Speakers go quiet during a capture.
  */
 export function applyAmbientMix(audio: AudioComponent, volume: number): void {
   if (!audio) {
@@ -85,8 +86,8 @@ export function applyAmbientMix(audio: AudioComponent, volume: number): void {
   headsetVolume.set(audio, mixLevel)
   const mix = audio as MixAudio
   mix.mixToSnap = true
-  mix.volume = mixLevel
   mix.recordingVolume = mixLevel
+  mix.volume = liveSpeakerLevel(audio, mixLevel)
 }
 
 export function applyMuteMix(audio: AudioComponent): void {
@@ -132,6 +133,16 @@ function track(audio: AudioComponent): void {
   tracked.push(audio)
 }
 
+function liveSpeakerLevel(audio: AudioComponent, level: number): number {
+  if (snapRecording) {
+    return 0
+  }
+  if (isSfx(audio)) {
+    return level
+  }
+  return speakerGain(level)
+}
+
 function applySpeakerGainToTracked(): void {
   for (let i = 0; i < tracked.length; i++) {
     const audio = tracked[i]
@@ -144,10 +155,88 @@ function applySpeakerGainToTracked(): void {
       continue
     }
     const cached = headsetVolume.get(audio)
-    if (isSfx(audio)) {
-      mix.volume = cached !== undefined ? cached : 1
+    const level = cached !== undefined ? cached : 0.5
+    mix.volume = liveSpeakerLevel(audio, level)
+  }
+}
+
+function holdSpeakersForCapture(host: BaseScriptComponent): void {
+  const visit = (audio: AudioComponent): void => {
+    if (!audio || heldSpeakers.has(audio)) {
+      return
+    }
+    const mix = audio as MixAudio
+    const volume = mix.volume
+    const recordingVolume = mix.recordingVolume
+    if (volume <= 0 && recordingVolume <= 0) {
+      return
+    }
+    heldSpeakers.set(audio, {volume: volume, recordingVolume: recordingVolume})
+    mix.mixToSnap = true
+    if (recordingVolume <= 0 && volume > 0) {
+      mix.recordingVolume = volume
+    }
+    mix.volume = 0
+  }
+  walkAudio(host, visit)
+}
+
+function releaseHeldSpeakers(): void {
+  const entries: {audio: AudioComponent; saved: HeldSpeaker}[] = []
+  heldSpeakers.forEach((saved, audio) => {
+    entries.push({audio: audio, saved: saved})
+  })
+  heldSpeakers.clear()
+  for (let i = 0; i < entries.length; i++) {
+    const audio = entries[i].audio
+    const saved = entries[i].saved
+    if (!audio) {
       continue
     }
-    mix.volume = speakerGain(cached !== undefined ? cached : 0.5)
+    const mix = audio as MixAudio
+    if (mix.recordingVolume <= 0) {
+      mix.volume = 0
+      continue
+    }
+    mix.recordingVolume = saved.recordingVolume > 0 ? saved.recordingVolume : mix.recordingVolume
+    if (headsetVolume.has(audio)) {
+      continue
+    }
+    mix.volume = saved.volume
+  }
+}
+
+function walkAudio(host: BaseScriptComponent, visit: (audio: AudioComponent) => void): void {
+  const scene = global.scene as unknown as {
+    getRootObjectsCount?: () => number
+    getRootObject?: (index: number) => SceneObject
+  }
+  if (scene.getRootObjectsCount && scene.getRootObject) {
+    const count = scene.getRootObjectsCount()
+    for (let i = 0; i < count; i++) {
+      walkAudioTree(scene.getRootObject(i), visit)
+    }
+    return
+  }
+  let root = host.getSceneObject()
+  let parent = root.getParent()
+  while (parent) {
+    root = parent
+    parent = root.getParent()
+  }
+  walkAudioTree(root, visit)
+}
+
+function walkAudioTree(obj: SceneObject, visit: (audio: AudioComponent) => void): void {
+  if (!obj) {
+    return
+  }
+  const audio = obj.getComponent("Component.AudioComponent") as AudioComponent
+  if (audio) {
+    visit(audio)
+  }
+  const count = obj.getChildrenCount()
+  for (let i = 0; i < count; i++) {
+    walkAudioTree(obj.getChild(i), visit)
   }
 }
