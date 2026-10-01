@@ -5,7 +5,7 @@
 import {Interactable} from "SpectaclesInteractionKit.lspkg/Components/Interaction/Interactable/Interactable"
 import {InteractableManipulation} from "SpectaclesInteractionKit.lspkg/Components/Interaction/InteractableManipulation/InteractableManipulation"
 import {HandInputData} from "SpectaclesInteractionKit.lspkg/Providers/HandInputData/HandInputData"
-import {applyMuteMix, applyPlayMix, applySfxMix} from "./SnapAudio"
+import {applyMuteMix, applyPlayMix, applySfxMix, playCapturedSfx, playCapturedVoice} from "./SnapAudio"
 import {AppearFade} from "./AppearFade"
 
 const BOAT_PREFIX = "Fishboat_"
@@ -149,6 +149,8 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
   private onSolveFinishedCallback: (() => void) | null = null
   private shoveVoices: AudioComponent[] = []
   private doneVoices: AudioComponent[] = []
+  private shoveCursor = 0
+  private doneCursor = 0
   private lastDoneVoice: AudioComponent | null = null
   private headsetVolume = new Map<AudioComponent, number>()
   private boatFade = new AppearFade()
@@ -223,7 +225,7 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
       return
     }
     this.armAudio(this.explainAudio)
-    this.explainAudio.play(1)
+    playCapturedVoice(this.explainAudio, 1)
   }
 
   private onExplainFinished(): void {
@@ -437,7 +439,7 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
     }
 
     if (touching && !boat.palmTouching) {
-      this.playOneShot(this.shoveVoices)
+      this.playOneShot(this.shoveVoices, "shove")
     }
     boat.palmTouching = touching
 
@@ -633,7 +635,7 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
     boat.gone = true
     boat.obj.enabled = false
     boat.palmTouching = false
-    this.lastDoneVoice = this.playOneShot(this.doneVoices)
+    this.lastDoneVoice = this.playOneShot(this.doneVoices, "done")
     let remaining = 0
     for (let i = 0; i < this.boats.length; i++) {
       if (!this.boats[i].gone) {
@@ -696,7 +698,7 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
         return
       }
       this.armAudio(this.solveAudio)
-      this.solveAudio.play(1)
+      playCapturedVoice(this.solveAudio, 1)
     })
     delay.reset(1)
   }
@@ -714,12 +716,8 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
     }
     if (this.shoveVoices.length === 0 && this.shoveSfx) {
       this.shoveVoices.push(this.shoveSfx)
-      const shoveNames = [
-        "Fishboats_shovingSFX_Voice2",
-        "Fishboats_shovingSFX_Voice3",
-      ]
-      for (let i = 0; i < shoveNames.length; i++) {
-        const extra = this.cloneSfxVoice(this.shoveSfx, shoveNames[i])
+      for (let i = 2; i <= 12; i++) {
+        const extra = this.cloneSfxVoice(this.shoveSfx, "Fishboats_shovingSFX_Voice" + i)
         if (extra) {
           this.shoveVoices.push(extra)
         }
@@ -727,12 +725,8 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
     }
     if (this.doneVoices.length === 0 && this.doneSfx) {
       this.doneVoices.push(this.doneSfx)
-      const doneNames = [
-        "Fishboats_Shoving_Done_SFX_Voice2",
-        "Fishboats_Shoving_Done_SFX_Voice3",
-      ]
-      for (let i = 0; i < doneNames.length; i++) {
-        const extra = this.cloneSfxVoice(this.doneSfx, doneNames[i])
+      for (let i = 2; i <= 6; i++) {
+        const extra = this.cloneSfxVoice(this.doneSfx, "Fishboats_Shoving_Done_SFX_Voice" + i)
         if (extra) {
           this.doneVoices.push(extra)
         }
@@ -758,15 +752,26 @@ export class OverfishingBoatPushManager extends BaseScriptComponent {
     return audio
   }
 
-  /** Play on a free voice so a new hit does not cut a clip that is still ringing. */
-  private playOneShot(voices: AudioComponent[]): AudioComponent | null {
-    for (let i = 0; i < voices.length; i++) {
-      const audio = voices[i]
+  /** Each hit uses the next component. Spectacles records only the first play of each one. */
+  private playOneShot(voices: AudioComponent[], which: "shove" | "done"): AudioComponent | null {
+    if (voices.length === 0) {
+      return null
+    }
+    const cursor = which === "shove" ? this.shoveCursor : this.doneCursor
+    const start = cursor % voices.length
+    for (let n = 0; n < voices.length; n++) {
+      const index = (start + n) % voices.length
+      const audio = voices[index]
       if (!audio || audio.isPlaying()) {
         continue
       }
+      if (which === "shove") {
+        this.shoveCursor = index + 1
+      } else {
+        this.doneCursor = index + 1
+      }
       this.armSfx(audio)
-      audio.play(1)
+      playCapturedSfx(audio, 1, 1)
       return audio
     }
     return null

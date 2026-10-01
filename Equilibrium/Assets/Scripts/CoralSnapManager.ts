@@ -5,7 +5,7 @@
  */
 import animate, {CancelSet} from "SpectaclesInteractionKit.lspkg/Utils/animate"
 import {SceneManager} from "./SceneManager"
-import {applySfxMix} from "./SnapAudio"
+import {playCapturedSfx} from "./SnapAudio"
 
 /** Extra cm between collider edges so neighbors sit beside each other without touching. */
 const EDGE_GAP = 4
@@ -319,8 +319,7 @@ export class CoralSnapManager extends BaseScriptComponent {
     if (!this.snapBubbleSfx) {
       return
     }
-    applySfxMix(this.snapBubbleSfx, 1)
-    this.snapBubbleSfx.play(1)
+    playCapturedSfx(this.snapBubbleSfx, 1, 1)
   }
 
   private notifyPlacementChanged(): void {

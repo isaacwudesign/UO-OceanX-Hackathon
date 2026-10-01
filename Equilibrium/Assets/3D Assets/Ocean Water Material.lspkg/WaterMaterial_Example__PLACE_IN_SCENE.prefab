@@ -25,7 +25,7 @@
     []
   Name: Render Mesh Visual
   Enabled: true
-  RenderOrder: -1
+  RenderOrder: 3
   StretchMode: Stretch
   VerticalAlignment: Center
   HorizontalAlignment: Center

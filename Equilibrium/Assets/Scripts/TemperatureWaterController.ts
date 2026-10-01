@@ -8,7 +8,7 @@ import { Interactable } from "SpectaclesInteractionKit.lspkg/Components/Interact
 import { GradientParameters, RoundedRectangle } from "SpectaclesUIKit.lspkg/Scripts/Visuals/RoundedRectangle/RoundedRectangle";
 import { RoundedRectangleVisual } from "SpectaclesUIKit.lspkg/Scripts/Visuals/RoundedRectangle/RoundedRectangleVisual";
 import { ClownfishOrbit } from "./ClownfishOrbit";
-import { applyMuteMix, applyPlayMix, applySfxMix } from "./SnapAudio";
+import { applyMuteMix, isSnapRecording, playCapturedSfx, playCapturedVoice } from "./SnapAudio";
 
 const TARGET_TEMPERATURE = 0.5;
 
@@ -844,19 +844,17 @@ export class TemperatureWaterController extends BaseScriptComponent {
     }
 
     this.ensureAudioEnabled(audio);
-    if (label === "welldoneSfx") {
-      applySfxMix(audio, 1);
-    } else {
-      applyPlayMix(audio, 1);
-    }
     audio.playbackMode = Audio.PlaybackMode.LowLatency;
 
     try {
-      audio.play(1);
       if (label === "welldoneSfx") {
+        playCapturedSfx(audio, 1, 1);
         this.welldoneSfxPlaying = true;
-      } else if (label === "temperatureSolveVo") {
-        this.temperatureSolveVoPlaying = true;
+      } else {
+        playCapturedVoice(audio, 1);
+        if (label === "temperatureSolveVo") {
+          this.temperatureSolveVoPlaying = true;
+        }
       }
     } catch (error) {
       print(`[TemperatureWater] play(${label}) skipped: ${error}`);
@@ -1052,13 +1050,8 @@ export class TemperatureWaterController extends BaseScriptComponent {
       return;
     }
     this.ensureAudioEnabled(audio);
-    applySfxMix(audio, 1);
-    if (!this.sliderRollingOn) {
-      print("[TemperatureWater] slider rolling on");
-    }
-    if (!audio.isPlaying()) {
-      audio.play(-1);
-    }
+    audio.playbackMode = Audio.PlaybackMode.LowLatency;
+    playCapturedSfx(audio, -1, 1);
     this.sliderRollingOn = true;
   }
 
@@ -1068,6 +1061,9 @@ export class TemperatureWaterController extends BaseScriptComponent {
       return;
     }
     applyMuteMix(this.sliderRollingAudio);
+    if (isSnapRecording()) {
+      this.sliderRollingAudio.enabled = false;
+    }
   }
 
   private ensureSliderRollingAudio(): AudioComponent | null {

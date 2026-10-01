@@ -5,7 +5,7 @@
  */
 import {Interactable} from "SpectaclesInteractionKit.lspkg/Components/Interaction/Interactable/Interactable"
 import {InteractableManipulation} from "SpectaclesInteractionKit.lspkg/Components/Interaction/InteractableManipulation/InteractableManipulation"
-import {applyMuteMix, applyPlayMix, applySfxMix} from "./SnapAudio"
+import {applyMuteMix, applyPlayMix, playCapturedSfx, playCapturedVoice} from "./SnapAudio"
 
 const PIECE_PREFIXES = ["Trash_Bottle", "Trash_Can"]
 const BIN_NAME = "Bin"
@@ -114,6 +114,7 @@ export class TrashPickupManager extends BaseScriptComponent {
   private onSolveFinishedCallback: (() => void) | null = null
   private headsetVolume = new Map<AudioComponent, number>()
   private pickVoices: AudioComponent[] = []
+  private pickVoiceCursor = 0
 
   onAwake(): void {
     this.createEvent("OnStartEvent").bind(this.onStart.bind(this))
@@ -192,7 +193,7 @@ export class TrashPickupManager extends BaseScriptComponent {
     }
 
     this.armAudio(this.explainAudio)
-    this.explainAudio.play(1)
+    playCapturedVoice(this.explainAudio, 1)
   }
 
   private applyPickSfxTrack(): void {
@@ -209,14 +210,8 @@ export class TrashPickupManager extends BaseScriptComponent {
       return
     }
     this.pickVoices.push(this.pickSfx)
-    const names = [
-      "Task_Done_SFX_Voice2",
-      "Task_Done_SFX_Voice3",
-      "Task_Done_SFX_Voice4",
-      "Task_Done_SFX_Voice5",
-    ]
-    for (let i = 0; i < names.length; i++) {
-      const extra = this.cloneSfxVoice(this.pickSfx, names[i])
+    for (let i = 2; i <= 8; i++) {
+      const extra = this.cloneSfxVoice(this.pickSfx, "Task_Done_SFX_Voice" + i)
       if (extra) {
         this.pickVoices.push(extra)
       }
@@ -247,7 +242,6 @@ export class TrashPickupManager extends BaseScriptComponent {
     if (owner) {
       owner.enabled = true
     }
-    applySfxMix(audio, PICK_SFX_GAIN)
     audio.playbackMode = Audio.PlaybackMode.LowLatency
   }
 
@@ -663,7 +657,7 @@ export class TrashPickupManager extends BaseScriptComponent {
         return
       }
       this.armAudio(this.solveAudio)
-      this.solveAudio.play(1)
+      playCapturedVoice(this.solveAudio, 1)
     })
     delay.reset(1)
   }
@@ -699,15 +693,32 @@ export class TrashPickupManager extends BaseScriptComponent {
 
   private playPickSfx(): void {
     this.preparePickVoices()
-    for (let i = 0; i < this.pickVoices.length; i++) {
-      const audio = this.pickVoices[i]
+    const audio = this.nextFreeVoice(this.pickVoices, this.pickVoiceCursor)
+    if (!audio) {
+      return
+    }
+    this.pickVoiceCursor = audio.next
+    this.armSfx(audio.component)
+    playCapturedSfx(audio.component, 1, PICK_SFX_GAIN)
+  }
+
+  private nextFreeVoice(
+    voices: AudioComponent[],
+    cursor: number
+  ): {component: AudioComponent; next: number} | null {
+    if (voices.length === 0) {
+      return null
+    }
+    const start = cursor % voices.length
+    for (let n = 0; n < voices.length; n++) {
+      const index = (start + n) % voices.length
+      const audio = voices[index]
       if (!audio || audio.isPlaying()) {
         continue
       }
-      this.armSfx(audio)
-      audio.play(1)
-      return
+      return {component: audio, next: index + 1}
     }
+    return null
   }
 
   private setInteractionLocked(locked: boolean): void {

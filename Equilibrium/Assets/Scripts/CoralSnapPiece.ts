@@ -6,13 +6,16 @@ import animate, {CancelSet} from "SpectaclesInteractionKit.lspkg/Utils/animate"
 import {Interactable} from "SpectaclesInteractionKit.lspkg/Components/Interaction/Interactable/Interactable"
 import {InteractableManipulation} from "SpectaclesInteractionKit.lspkg/Components/Interaction/InteractableManipulation/InteractableManipulation"
 import {CoralSnapManager} from "./CoralSnapManager"
-import {applySfxMix} from "./SnapAudio"
+import {playCapturedSfx} from "./SnapAudio"
 
 const PICK_HINT_NAME = "Pick_Hint_SFX"
+/** One component per pick. Spectacles only records the first play of each AudioComponent. */
+const PICK_HINT_VOICES = 12
 /** OceanX cyan mark while the coral is in hand. Texture still shows through. */
 const PICK_MARK = new vec4(0.25, 0.78, 1, 1)
 
-let pickHintAudio: AudioComponent | null = null
+let pickHintVoices: AudioComponent[] = []
+let pickHintCursor = 0
 let pickHintSearched = false
 
 @component
@@ -238,7 +241,7 @@ export class CoralSnapPiece extends BaseScriptComponent {
   }
 
   private playPickHint(): void {
-    const audio = this.getPickHintAudio()
+    const audio = this.nextPickVoice()
     if (!audio) {
       return
     }
@@ -247,28 +250,68 @@ export class CoralSnapPiece extends BaseScriptComponent {
     if (owner) {
       owner.enabled = true
     }
-    applySfxMix(audio, 1)
     audio.playbackMode = Audio.PlaybackMode.LowLatency
-    audio.play(1)
+    playCapturedSfx(audio, 1, 1)
   }
 
-  private getPickHintAudio(): AudioComponent | null {
+  private nextPickVoice(): AudioComponent | null {
+    this.ensurePickVoices()
+    if (pickHintVoices.length === 0) {
+      return null
+    }
+    const start = pickHintCursor % pickHintVoices.length
+    for (let n = 0; n < pickHintVoices.length; n++) {
+      const index = (start + n) % pickHintVoices.length
+      const audio = pickHintVoices[index]
+      if (!audio || audio.isPlaying()) {
+        continue
+      }
+      pickHintCursor = index + 1
+      return audio
+    }
+    return null
+  }
+
+  private ensurePickVoices(): void {
     if (pickHintSearched) {
-      return pickHintAudio
+      return
     }
     pickHintSearched = true
     const owner = this.findSceneObjectByName(PICK_HINT_NAME)
     if (!owner) {
       print("[CoralSnapPiece] Pick_Hint_SFX not found")
-      return null
+      return
     }
-    pickHintAudio = owner.getComponent(
+    const source = owner.getComponent(
       "Component.AudioComponent"
     ) as AudioComponent
-    if (!pickHintAudio) {
+    if (!source) {
       print("[CoralSnapPiece] Pick_Hint_SFX has no AudioComponent")
+      return
     }
-    return pickHintAudio
+    pickHintVoices.push(source)
+    for (let i = 2; i <= PICK_HINT_VOICES; i++) {
+      const extra = this.clonePickVoice(source, "Pick_Hint_SFX_Voice" + i)
+      if (extra) {
+        pickHintVoices.push(extra)
+      }
+    }
+  }
+
+  private clonePickVoice(source: AudioComponent, name: string): AudioComponent | null {
+    const owner = global.scene.createSceneObject(name)
+    const parent = source.getSceneObject()
+    if (parent) {
+      owner.setParent(parent.getParent())
+    }
+    const audio = owner.createComponent(
+      "Component.AudioComponent"
+    ) as AudioComponent
+    audio.audioTrack = source.audioTrack
+    audio.enabled = true
+    owner.enabled = true
+    audio.playbackMode = Audio.PlaybackMode.LowLatency
+    return audio
   }
 
   private showPickHighlight(): void {

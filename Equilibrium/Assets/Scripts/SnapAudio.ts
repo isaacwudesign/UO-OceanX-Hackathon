@@ -69,8 +69,60 @@ export function applySfxMix(audio: AudioComponent, volume: number): void {
   headsetVolume.set(audio, mixLevel)
   const mix = audio as MixAudio
   mix.mixToSnap = true
-  mix.recordingVolume = 1
+  mix.recordingVolume = Math.min(1, mixLevel)
   mix.volume = liveSpeakerLevel(audio, mixLevel)
+}
+
+/**
+ * Play an SFX into the recording even while the speakers are muted.
+ * A clip started at volume 0 never enters the Spectacles file.
+ * Speakers are silenced again immediately after play() during a capture.
+ */
+export function playCapturedSfx(audio: AudioComponent, loops: number, speakerVolume: number): void {
+  if (!audio) {
+    return
+  }
+  const mixLevel = speakerVolume > 0 ? speakerVolume : 1
+  track(audio)
+  markSfx(audio)
+  headsetVolume.set(audio, mixLevel)
+  const mix = audio as MixAudio
+  mix.mixToSnap = true
+  mix.recordingVolume = Math.min(1, mixLevel)
+  const playing = audio.isPlaying()
+  if (!playing) {
+    mix.volume = mixLevel
+    audio.play(loops)
+    if (snapRecording) {
+      mix.volume = 0
+    }
+    return
+  }
+  if (!snapRecording) {
+    mix.volume = mixLevel
+  }
+}
+
+/** Same arming rule for voice-over. Live speaker level is unchanged after this returns. */
+export function playCapturedVoice(audio: AudioComponent, speakerVolume: number): void {
+  if (!audio) {
+    return
+  }
+  const level = speakerVolume > 0 ? speakerVolume : 1
+  track(audio)
+  headsetVolume.set(audio, level)
+  const mix = audio as MixAudio
+  mix.mixToSnap = true
+  mix.recordingVolume = 1
+  mix.volume = level
+  audio.play(1)
+  if (snapRecording) {
+    mix.volume = 0
+  }
+}
+
+export function isSnapRecording(): boolean {
+  return snapRecording
 }
 
 /**
